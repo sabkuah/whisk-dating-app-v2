@@ -2,7 +2,7 @@
 
 ### Description
 
-An "Experience First" aproach to meeting new people. Experience ideas are listed and people can sign up for a specific idea then those users are matched. Details of experience are released a few days prior. For Dating, meeting new people, exploring the city and more!
+An "Experience First" approach to meeting new people. Experience ideas are listed and people can sign up for a specific idea then those users are matched. Details of experience are released a few days prior. For Dating, meeting new people, exploring the city and more!
 
 ### Names
 
