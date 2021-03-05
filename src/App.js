@@ -2,9 +2,9 @@ import UserState from './context/user/UserState';
 import WhiskState from './context/whisk/WhiskState';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './components/Login';
-import Navigation from './components/Navigation';
-import ChosenWhisks from './assets/layouts/ChosenWhisks';
-import UserProfile from './assets/layouts/UserProfile';
+import ChosenWhisks from './layouts/ChosenWhisks';
+import UserProfile from './layouts/UserProfile';
+import Welcome from './layouts/Welcome';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           </Route>
           <Route path='/'>
             {/* Landing: Experiences for you */}
-            <Navigation />
+            <Welcome />
           </Route>
         </Router>
       </WhiskState>
