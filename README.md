@@ -39,6 +39,8 @@ An "Experience First" aproach to meeting new people. Experience ideas are listed
 - After date questionnaire
 - PWA (progressive web app)
 
+[Figma Prototype](https://www.figma.com/file/dNutQTKExjVcfV2GK0fTsv/Whisk?node-id=0%3A1)
+
 ### Inspirations
 
 - The Adventure Challenge - [Date Ideas](https://ca.theadventurechallenge.com/)
