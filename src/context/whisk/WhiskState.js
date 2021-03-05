@@ -27,8 +27,7 @@ const WhiskState = (props) => {
       value={{
         whisks: state.whisks,
         whisk: state.whisk,
-        loading: state,
-        loading,
+        loading: state.loading,
         scanWhisks,
         getWhisk,
       }}
