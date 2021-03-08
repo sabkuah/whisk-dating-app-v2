@@ -47,3 +47,31 @@
 #title-logo {
   font-family: $brand-font;
 }
+
+//Vertical Card
+.card-vertical {
+  .card {
+    width: 13em;
+    height: 15em;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .avatar {
+    height: 150px;
+    width: 150px;
+    top: -30px;
+    left: 20px;
+    position: absolute;
+  }
+
+  .card-content {
+    bottom: 0;
+    margin-bottom: 2px;
+    position: absolute;
+  }
+
+  .card-text {
+    @include heading-sm;
+  }
+}

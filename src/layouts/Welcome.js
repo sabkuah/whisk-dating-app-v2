@@ -5,6 +5,7 @@ import Search from '../components/landing/Search';
 import Navigation from '../components/Navigation';
 import MenuIcon from '@material-ui/icons/Menu';
 import LandingNav from '../components/landing/LandingNav';
+import CardVertical from '../components/CardVertical';
 
 const Welcome = () => {
   return (
@@ -15,6 +16,7 @@ const Welcome = () => {
         for you
       </h2>
       <Search />
+      <CardVertical />
       <BottomNav />
     </Container>
   );

@@ -7,6 +7,14 @@
   line-height: 1.5;
 }
 
+@mixin heading-sm {
+  font-family: $body-font;
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
 //Brand Buttons
 @mixin brand-button-lg {
   background: $brand-color;
