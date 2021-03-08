@@ -8,7 +8,6 @@ const Welcome = () => {
       <Button variant='contained' className='brand-button-lg'>
         Hello!
       </Button>
-      <Navigation />
     </div>
   );
 };
