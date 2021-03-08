@@ -1,11 +1,11 @@
 import UserState from './context/user/UserState';
 import WhiskState from './context/whisk/WhiskState';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './components/Login';
 import ChosenWhisks from './layouts/ChosenWhisks';
 import UserProfile from './layouts/UserProfile';
 import Welcome from './layouts/Welcome';
 import Navigation from './components/Navigation';
+import { withAuthenticator } from "@aws-amplify/ui-react"
 
 function App() {
   return (
@@ -14,9 +14,9 @@ function App() {
         <Router>
           <Navigation/>
           <Switch>
-            <Route path='/login'>
+            {/* <Route path='/login'>
               <Login />
-            </Route>
+            </Route> */}
             <Route path='/user'>
               {/* User Profile */}
               <UserProfile />
@@ -36,4 +36,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);

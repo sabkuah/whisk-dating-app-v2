@@ -1,6 +1,7 @@
 import React from 'react';
 import {AppBar, Toolbar, Typography} from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
+import { AmplifySignOut } from "@aws-amplify/ui-react"
 
 const Navigation = () => {
   const history = useHistory();
@@ -11,7 +12,7 @@ const Navigation = () => {
         <Typography variant="h3" id="title-logo" onClick={() => history.push("/")}>
           Whisk
         </Typography>
-        <Link to="/login" style={{textDecoration: "none"}}>Login</Link>
+        <AmplifySignOut />
       </Toolbar>
     </AppBar>
   );
