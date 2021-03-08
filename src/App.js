@@ -14,9 +14,6 @@ function App() {
         <Router>
           <Navigation/>
           <Switch>
-            {/* <Route path='/login'>
-              <Login />
-            </Route> */}
             <Route path='/user'>
               {/* User Profile */}
               <UserProfile />
