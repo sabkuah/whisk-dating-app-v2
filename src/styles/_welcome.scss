@@ -1,6 +1,20 @@
 .welcome-page {
-  Button {
-    @include brand-button-lg;
+  // Button {
+  //   @include brand-button-lg;
+  // }
+
+  .sticky-bottom {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .icon {
+    color: $brand-color;
+  }
+
+  .Mui-selected {
+    color: $brand-color;
   }
 }
 
