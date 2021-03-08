@@ -6,6 +6,7 @@ import { Button } from '@material-ui/core';
 const Welcome = () => {
   const [authState, setAuthState] = useState();
   const [user, setUser] = useState();
+  const [login, setLogin] = useState(false);
 
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState, authData) => {
@@ -13,7 +14,7 @@ const Welcome = () => {
       setUser(authData)
     });
   }, []);
-  
+
   return (
     <div className='welcome-page'>
         {
@@ -24,28 +25,34 @@ const Welcome = () => {
             </Button>
           </div>
          :
-          <AmplifyAuthenticator>
-            <AmplifySignIn
-              headerText="Log In"
-              slot="sign-in"
-              usernameAlias="email"
-              // hideSignUp="true"
-              formFields={[
-                {
-                  type: "email",
-                  label: "Email Address",
-                  placeholder: "Enter your email address",
-                  required: true,
-                },
-                {
-                  type: "password",
-                  label: "Password",
-                  placeholder: "Enter your password",
-                  required: true,
-                },
-              ]}
-            />
-          </AmplifyAuthenticator>
+         <>
+         <Button className='brand-button-lg' onClick={() => setLogin(!login)}>Log in</Button>
+         <div style={{display: login ? "block" : "none"}}>
+         <AmplifyAuthenticator>
+          <AmplifySignIn
+            headerText="Log In"
+            slot="sign-in"
+            usernameAlias="email"
+            // hideSignUp="true"
+            formFields={[
+              {
+                type: "email",
+                label: "Email Address",
+                placeholder: "Enter your email address",
+                required: true,
+              },
+              {
+                type: "password",
+                label: "Password",
+                placeholder: "Enter your password",
+                required: true,
+              },
+            ]}
+          />
+        </AmplifyAuthenticator>
+         </div>
+          
+          </>
         }  
     </div>
   );

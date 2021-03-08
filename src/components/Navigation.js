@@ -24,14 +24,15 @@ const Navigation = () => {
           Whisk
         </Typography>
         {
-          authState === AuthState.SignedIn && user &&
+          authState === AuthState.SignedIn && user ?
           <>
             <Button>
               Profile
             </Button>
             <AmplifySignOut />
           </>
-          // :
+          :
+          <Button>About</Button>
           // <AmplifyAuthenticator>
           //   <AmplifySignIn
           //     headerText="Log In"
