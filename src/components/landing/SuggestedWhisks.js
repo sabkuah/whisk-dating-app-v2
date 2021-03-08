@@ -1,58 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+import { GridList, Tab, Tabs } from '@material-ui/core';
 import CardVertical from '../CardVertical';
+import filteredWhisks from './dummyData';
 
 export default function SuggestedWhisks() {
   const classes = useStyles();
+  const [value, setValue] = useState('food');
 
-  const filteredWhisks = [
-    {
-      id: 100,
-      title: 'Coffee Date in Mt. Pleasant',
-      images: [
-        'https://res.cloudinary.com/fittco/image/upload/v1557509574/cshp6bekdicl5v7wqlgq.jpg',
-      ],
-      description:
-        'Enjoy a brief stroll through the Mt.Pleasant neighbourhood while sipping on coffee from local roasters',
-      durationHours: 2,
-      participants: 2,
-    },
-    {
-      id: 101,
-      title: 'Coffee Date in Mt. Pleasant',
-      images: [
-        'https://res.cloudinary.com/fittco/image/upload/v1557509574/cshp6bekdicl5v7wqlgq.jpg',
-      ],
-      description:
-        'Enjoy a brief stroll through the Mt.Pleasant neighbourhood while sipping on coffee from local roasters',
-      durationHours: 2,
-      participants: 2,
-    },
-    {
-      id: 102,
-      title: 'Coffee Date in Mt. Pleasant',
-      images: [
-        'https://res.cloudinary.com/fittco/image/upload/v1557509574/cshp6bekdicl5v7wqlgq.jpg',
-      ],
-      description:
-        'Enjoy a brief stroll through the Mt.Pleasant neighbourhood while sipping on coffee from local roasters',
-      durationHours: 2,
-      participants: 2,
-    },
-  ];
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    console.log('value', value);
+    //add filtering logic
+  }, [value]);
 
   return (
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={2.5}>
-        {filteredWhisks.map((whisk) => (
-          <div key={whisk.id} className={classes.gridTile}>
-            <CardVertical whisk={whisk} />
-          </div>
-        ))}
-      </GridList>
-    </div>
+    <>
+      <div className='suggested-whisks'>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant='fullWidth'
+          indicatorColor='#00d1ff'
+          textColor='#00d1ff'
+          aria-label='icon tabs example'
+          className='tabs'
+        >
+          <Tab label='Food' value='food' />
+          <Tab label='Outdoors' value='outdoor' />
+          <Tab label='Adventure' value='adventure' />
+        </Tabs>
+      </div>
+      <div className={classes.root}>
+        <GridList className={classes.gridList}>
+          {filteredWhisks.map((whisk) => (
+            <div key={whisk.id} className={classes.gridTile}>
+              <CardVertical whisk={whisk} />
+            </div>
+          ))}
+        </GridList>
+      </div>
+    </>
   );
 }
 
@@ -62,15 +53,16 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: '#00d1ff',
-    height: '20em',
+    //backgroundColor: '#00d1ff',
+    height: 'auto',
     alignItems: 'center',
+    color: '#00d1ff',
   },
   gridList: {
     flexWrap: 'nowrap',
     transform: 'translateZ(0)',
     backgroundColor: '#f2f2f2',
-    height: '17em',
+    height: '18em',
   },
   //   gridTile: {
   //     height: '300px',

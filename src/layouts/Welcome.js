@@ -1,11 +1,8 @@
-import { Button, Container, Menu, MenuItem } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Container } from '@material-ui/core';
+
 import BottomNav from '../components/landing/BottomNav';
 import Search from '../components/landing/Search';
-import Navigation from '../components/Navigation';
-import MenuIcon from '@material-ui/icons/Menu';
 import LandingNav from '../components/landing/LandingNav';
-import CardVertical from '../components/CardVertical';
 import SuggestedWhisks from '../components/landing/SuggestedWhisks';
 
 const Welcome = () => {
@@ -18,7 +15,6 @@ const Welcome = () => {
       </h2>
       <Search />
       <SuggestedWhisks />
-
       <BottomNav />
     </Container>
   );

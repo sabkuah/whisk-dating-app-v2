@@ -33,6 +33,12 @@
     }
   }
 
+  //Tabs
+
+  .tabs {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
   // Bottom Nav
   .Mui-selected {
     color: $brand-color;
@@ -62,8 +68,8 @@
   }
 
   .avatar {
-    height: 150px;
-    width: 150px;
+    height: 60%;
+    width: 80%;
     top: -30px;
     left: 20px;
     position: absolute;
@@ -78,8 +84,8 @@
   .card-text {
     @include heading-sm;
   }
-}
 
-.MuiGridListTile-tile {
-  height: 20em;
+  .MuiCard-root {
+    overflow: visible;
+  }
 }
