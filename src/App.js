@@ -5,18 +5,18 @@ import ChosenWhisks from './layouts/ChosenWhisks';
 import UserProfile from './layouts/UserProfile';
 import Welcome from './layouts/Welcome';
 import Navigation from './components/Navigation';
-import { withAuthenticator, AmplifyAuthenticator, AmplifySignIn } from "@aws-amplify/ui-react"
+import { AmplifyAuthenticator, AmplifySignIn } from "@aws-amplify/ui-react"
 
 function App() {
   return (
     <UserState>
       <WhiskState>
-        <AmplifyAuthenticator>
+        {/* <AmplifyAuthenticator>
           <AmplifySignIn
             headerText="Log In"
             slot="sign-in"
             usernameAlias="email"
-            hideSignUp="true"
+            // hideSignUp="true"
             formFields={[
               {
                 type: "email",
@@ -31,10 +31,12 @@ function App() {
                 required: true,
               },
             ]}
-            />
+            /> */}
+          
           <Router>
             <Navigation/>
             <Switch>
+            
               <Route path='/user'>
                 {/* User Profile */}
                 <UserProfile />
@@ -49,7 +51,7 @@ function App() {
               </Route>
             </Switch>
           </Router>
-        </AmplifyAuthenticator>
+          {/* </AmplifyAuthenticator> */}
       </WhiskState>
     </UserState>
   );
