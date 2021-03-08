@@ -1,16 +1,16 @@
-import { Button } from '@material-ui/core';
+import { Button, Container } from '@material-ui/core';
 import React from 'react';
 import BottomNav from '../components/landing/BottomNav';
+import Search from '../components/landing/Search';
 import Navigation from '../components/Navigation';
 
 const Welcome = () => {
   return (
-    <div className='welcome-page'>
-      {/* <Button variant='contained' className='brand-button-lg'>
-        Hello!
-      </Button> */}
+    <Container className='welcome-page'>
+      <h2>Experiences for you</h2>
+      <Search />
       <BottomNav />
-    </div>
+    </Container>
   );
 };
 

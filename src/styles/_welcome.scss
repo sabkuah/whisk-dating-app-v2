@@ -7,14 +7,40 @@
     width: 100%;
     position: fixed;
     bottom: 0;
+    background-color: $bg-color;
   }
 
-  .icon {
-    color: $brand-color;
+  //Search
+  .search-bar {
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    border-radius: 50px;
+    background-color: #efeeee;
+
+    .input {
+      flex: 1;
+    }
+
+    .iconbutton {
+      padding: 10;
+    }
+
+    .divider {
+      height: 28;
+      margin: 4;
+    }
   }
 
+  // Bottom Nav
   .Mui-selected {
     color: $brand-color;
+
+    .icon {
+      color: $brand-color;
+      text-shadow: 0 10px 10px;
+    }
   }
 }
 
