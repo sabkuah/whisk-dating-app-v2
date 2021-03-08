@@ -26,9 +26,9 @@ const Navigation = () => {
         {
           authState === AuthState.SignedIn && user ?
           <>
-            <Button>
+            <Link to="/user">
               Profile
-            </Button>
+            </Link>
             <AmplifySignOut />
           </>
           :

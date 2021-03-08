@@ -7,3 +7,13 @@
   padding: 0.5em 1.5em;
   font-weight: bold;
 }
+
+@mixin secondary-btn {
+  background-color: white;
+  border-radius: 20px;
+  padding: 1em 1.5em;
+  display: block;
+  margin: 1em auto;
+  width: 80%;
+  text-align: inherit;
+}

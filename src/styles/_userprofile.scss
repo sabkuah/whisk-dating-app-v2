@@ -1,0 +1,38 @@
+.profile-page {
+  Button {
+    @include secondary-btn;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+#action-btn {
+  @include brand-button-lg;
+  text-align: center;
+  display: block;
+  padding: 1em 1.5em;
+}
+.about-card {
+  background-color: white;
+  border-radius: 20px;
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  padding: 20px;
+}
+
+#display-photo {
+  width: 10em;
+  height: 10em;
+}
+
+@media (max-width: 768px) {
+  #display-photo {
+    width: 5em;
+    height: 5em;
+  }
+}

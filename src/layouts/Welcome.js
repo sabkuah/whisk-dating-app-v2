@@ -20,7 +20,7 @@ const Welcome = () => {
         {
           authState === AuthState.SignedIn && user ? 
           <div className='welcome-page'>
-            <Button variant='contained' className='brand-button-lg'>
+            <Button>
               Hello!
             </Button>
           </div>
