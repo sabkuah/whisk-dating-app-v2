@@ -1,7 +1,7 @@
 .welcome-page {
-  // Button {
-  //   @include brand-button-lg;
-  // }
+  h2 {
+    @include heading-lg;
+  }
 
   .sticky-bottom {
     width: 100%;
