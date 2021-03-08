@@ -4,10 +4,17 @@
   --amplify-primary-shade: #81e8ff; //$brand-color;
   --amplify-font-family: $body-font;
 }
- 
-// doesn't work 
+
+
+amplify-authenticator {
+  --border-radius: 30px;
+  --box-shadow: none;
+}
+
+
 amplify-sign-in {
-  color: tomato;
+  // --footer-color: tomato; // doesn't work
+ // --footer-font-family: 'Chewy', cursive;// - works //$brand-font - doesn't work
 }
 
 // doesn't work 
