@@ -2,6 +2,17 @@
 .welcome-page Button {
   background: #81e8ff;
   color: white;
+  border-radius: 30px;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
+}
+
+#title-logo {
+  font-family: "Chewy", cursive;
+}
+
+body {
+  background-color: #F2F2F2;
 }
 
 /*# sourceMappingURL=main.css.map */

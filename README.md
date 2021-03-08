@@ -75,3 +75,11 @@ An "Experience First" approach to meeting new people. Experience ideas are liste
 
 - Users can receive notifications from the app
 - Users can select the dates they are available
+
+
+
+##### SASS
+```
+$ sass src/styles/App.scss src/styles/main.css
+$ sass --watch scss:css
+```
