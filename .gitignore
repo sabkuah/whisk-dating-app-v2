@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # for AWS-Amplify
-config.json 
+config.json
+aws-exports.js
