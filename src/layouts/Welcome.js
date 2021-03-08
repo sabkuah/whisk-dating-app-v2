@@ -6,6 +6,7 @@ import Navigation from '../components/Navigation';
 import MenuIcon from '@material-ui/icons/Menu';
 import LandingNav from '../components/landing/LandingNav';
 import CardVertical from '../components/CardVertical';
+import SuggestedWhisks from '../components/landing/SuggestedWhisks';
 
 const Welcome = () => {
   return (
@@ -16,7 +17,8 @@ const Welcome = () => {
         for you
       </h2>
       <Search />
-      <CardVertical />
+      <SuggestedWhisks />
+
       <BottomNav />
     </Container>
   );

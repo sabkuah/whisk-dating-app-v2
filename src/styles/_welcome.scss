@@ -50,6 +50,10 @@
 
 //Vertical Card
 .card-vertical {
+  display: flex;
+  height: 17em;
+  align-items: flex-end;
+
   .card {
     width: 13em;
     height: 15em;
@@ -74,4 +78,8 @@
   .card-text {
     @include heading-sm;
   }
+}
+
+.MuiGridListTile-tile {
+  height: 20em;
 }
