@@ -7,6 +7,7 @@ import UserProfile from './layouts/UserProfile';
 import Welcome from './layouts/Welcome';
 import Navigation from './components/Navigation';
 import { BrowserView } from 'react-device-detect';
+import WhiskDetails from './layouts/WhiskDetails';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
             <Route path='/user/whisks'>
               {/* User's Chosen Whisks */}
               <ChosenWhisks />
+            </Route>
+            <Route path='/whisks/id'>
+              <WhiskDetails />
             </Route>
             <Route exact path='/'>
               {/* Landing: Experiences for you */}

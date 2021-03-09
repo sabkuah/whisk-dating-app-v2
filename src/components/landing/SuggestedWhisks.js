@@ -4,6 +4,7 @@ import { GridList, Tab, Tabs } from '@material-ui/core';
 import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
 import { BrowserView, MobileView } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
 export default function SuggestedWhisks() {
   const classes = useStyles();
@@ -52,9 +53,9 @@ export default function SuggestedWhisks() {
         <BrowserView>
           <div className={classes.browser}>
             {filteredWhisks.map((whisk) => (
-              <div key={whisk.id}>
+              <Link to={`/whisks/${whisk.id}`} key={whisk.id}>
                 <CardVertical whisk={whisk} />
-              </div>
+              </Link>
             ))}
           </div>
         </BrowserView>

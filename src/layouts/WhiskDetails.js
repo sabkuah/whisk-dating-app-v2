@@ -1,0 +1,79 @@
+import React, { useEffect } from 'react';
+import { Avatar, IconButton, Container } from '@material-ui/core';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import Carousel from 'react-material-ui-carousel';
+import { useParams } from 'react-router-dom';
+
+const WhiskDetails = () => {
+  const { id } = useParams();
+
+  useEffect(() => {
+    //Use id for GET request
+  }, []);
+
+  //dummy data:
+  const whisk = {
+    title: 'Beaches & Islands Paddleboard Tour',
+    images: [
+      'https://a0.muscache.com/im/pictures/2b94dbb2-4648-4e3c-9b6f-c0a2e3a7e381.jpg?im_w=1440',
+      'https://a0.muscache.com/im/pictures/c34926e9-fb13-4ad0-880d-f6736021ba98.jpg?im_w=1440',
+      'https://a0.muscache.com/im/pictures/fede252b-1b7d-4df4-a615-10d3192ddc5c.jpg?im_w=1440',
+    ],
+    city: 'Vancouver',
+    neighborhood: 'UBC',
+    description:
+      'Your adventure will begin at a local beach.  You will be whisked away to private beaches with an experienced instructor. Paddleboard and wetsuit rental included.',
+    durationHours: 3,
+    participants: 2,
+    type: 'outdoors',
+    tags: ['Summer', 'Activity', 'Water'],
+    cost: '$$$',
+  };
+
+  return (
+    <Container className='whisk-details'>
+      <div className='top-nav'>
+        <IconButton aria-label='back'>
+          <ArrowBackIosIcon />
+        </IconButton>
+        <IconButton aria-label='back'>
+          <FavoriteBorderIcon />
+        </IconButton>
+      </div>
+      <div className='image-gallery'>
+        <Carousel autoPlay={true} navButtonsAlwaysInvisible={true}>
+          {whisk.images.map((img) => (
+            <Avatar src={img} alt={whisk.title} className='avatar-img' />
+          ))}
+        </Carousel>
+      </div>
+      <div className='info'>
+        <h2 className='whisk-title'>{whisk.title}</h2>
+        <div>
+          <h4>Whisk Details</h4>
+          <div>{whisk.description}</div>
+        </div>
+        <div className='details'>
+          <p>
+            <h4>Cost</h4>
+            {whisk.cost}
+          </p>
+          <p>
+            <h4>Duration</h4>
+            {whisk.durationHours} hours
+          </p>
+          <p>
+            <h4>Participants</h4>
+            {Array(whisk.participants).fill(<EmojiPeopleIcon />)}
+          </p>
+        </div>
+      </div>
+    </Container>
+  );
+};
+
+export default WhiskDetails;
