@@ -4,6 +4,7 @@ import { GridList, Tab, Tabs } from '@material-ui/core';
 import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
 import { BrowserView, MobileView } from 'react-device-detect';
+import WhiskTabs from '../WhiskTabs';
 
 export default function SuggestedWhisks() {
   const classes = useStyles();
@@ -21,19 +22,17 @@ export default function SuggestedWhisks() {
   return (
     <>
       <div className='suggested-whisks'>
-        <Tabs
+        <WhiskTabs
           value={value}
           onChange={handleChange}
           variant='fullWidth'
-          indicatorColor='#00d1ff'
-          textColor='#00d1ff'
           aria-label='whisk categories'
           className='tabs'
         >
           <Tab label='Food' value='food' />
           <Tab label='Outdoors' value='outdoor' />
           <Tab label='Adventure' value='adventure' />
-        </Tabs>
+        </WhiskTabs>
 
         {/* If viewing from Mobile, display horizontal scrolling, one row only */}
         <MobileView>

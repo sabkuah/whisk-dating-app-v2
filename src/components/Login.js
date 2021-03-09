@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles'
-import { Button, Card, CardContent, CardHeader, IconButton, Tab, Tabs, TextField } from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close'
+import { Button, Card, CardContent, Tab, TextField, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
-
+import WhiskTabs from './WhiskTabs';
 import { Auth } from 'aws-amplify'
-import { ContactSupportOutlined } from '@material-ui/icons';
-
+import { isMobile } from 'react-device-detect';
 const Login = () => {
   const [tab, setTab] = useState(0)
   const [username, setUsername] = useState("")
@@ -18,7 +15,6 @@ const Login = () => {
   const handleChange = (event, newValue) => {
     setTab(newValue);
   };
-  const classes = useStyles()
 
   const submitForm = async (e) => {
     e.preventDefault()
@@ -54,47 +50,35 @@ const Login = () => {
   }
 
   return (
-    <Card className={classes.root}>
-      <CardHeader title="Login" action={
-        <IconButton aria-label="close">
-          <CloseIcon />
-        </IconButton>
-      } />
-      <CardContent>
+    <Card id="card-root" elevation={0}>
+      <CardContent style={{maxWidth: "400px"}}>
+        {
+          isMobile &&
+          <Typography variant="h3" id="title-logo" style={{display: "block", textAlign: "center", marginBottom: "1em"}}>
+            Whisk
+          </Typography>
+        }
         <form onSubmit={submitForm}>
-          <Tabs value={tab} onChange={handleChange} aria-label="login tabs">
-            <Tab label="Login" style={{ width: "50%" }} />
-            <Tab label="Register" style={{ width: "50%" }} />
-          </Tabs>
+          <WhiskTabs value={tab} onChange={handleChange} aria-label="login tabs" variant='fullWidth'>
+            <Tab label="Login" style={{fontWeight: "bold"}}/>
+            <Tab label="Sign Up" style={{fontWeight: "bold"}}/>
+          </WhiskTabs>
           <TabPanel value={tab} index={0}>
-            <TextField label="Email" variant="filled" onChange={e => setEmail(e.target.value)} className={classes.field} />
-            <TextField label="Password" onChange={e => setPW(e.target.value)} type="password" variant="filled" className={classes.field} />
-            <Button type="submit" style={{ width: "50%" }}>Login</Button>
+            <TextField label="Email" onChange={e => setEmail(e.target.value)} className="text-field"/>
+            <TextField label="Password" onChange={e => setPW(e.target.value)} type="password" className="text-field" />
+            <Button className="submit-btn" type="submit">Login</Button>
           </TabPanel>
           <TabPanel value={tab} index={1}>
-            <TextField label="Email" variant="filled" onChange={e => setEmail(e.target.value)} className={classes.field} />
-            <TextField label="Username" variant="filled" onChange={e => setUsername(e.target.value)} className={classes.field} />
-            <TextField label="Password" type="password" onChange={e => setPW(e.target.value)} variant="filled" className={classes.field} />
-            <Button type="submit" style={{ width: "50%" }}>Register</Button>
+            <TextField label="Username" onChange={e => setUsername(e.target.value)} className="text-field" />
+            <TextField label="Email" onChange={e => setEmail(e.target.value)} className="text-field" />
+            <TextField label="Password"type="password" onChange={e => setPW(e.target.value)}  className="text-field" />
+            <Button className="submit-btn" type="submit">Sign Up</Button>
           </TabPanel>
         </form>
       </CardContent>
     </Card>
   )
 }
-
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 400,
-    textAlign: "center",
-    display: "block",
-    margin: "0 auto"
-  },
-  field: {
-    width: "100%",
-    marginBottom: "1em"
-  }
-})
 
 TabPanel.propTypes = {
   children: PropTypes.node,
