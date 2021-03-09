@@ -6,7 +6,7 @@
   }
 
   .landing-title {
-    height: 25vh;
+    height: 30vh;
     display: flex;
     align-items: center;
 
@@ -19,12 +19,13 @@
   .search {
     display: flex;
     justify-content: center;
+    //margin: 2%;
 
     .search-bar {
       padding: 2px 4px;
       display: flex;
       align-items: center;
-      width: 90%;
+      width: 100%;
       border-radius: 50px;
       background-color: #efeeee;
 
@@ -45,10 +46,17 @@
 
   //Suggested Whisks
   .suggested-whisks {
+    min-height: 50vh;
+
     //Tabs
     .tabs {
-      margin-top: 5%;
-      margin-bottom: 5%;
+      margin-top: 8%;
+      margin-bottom: 8%;
+
+      .Mui-selected {
+        color: $brand-color;
+        border-bottom: 3px solid $brand-color;
+      }
     }
 
     .mobile {
@@ -75,6 +83,12 @@
         color: $brand-color;
         text-shadow: 0 10px 10px;
       }
+    }
+  }
+  // /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .landing-title {
+      height: 20vh;
     }
   }
 }

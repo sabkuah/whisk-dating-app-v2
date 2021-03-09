@@ -27,38 +27,38 @@ export default function SuggestedWhisks() {
           variant='fullWidth'
           indicatorColor='#00d1ff'
           textColor='#00d1ff'
-          aria-label='icon tabs example'
+          aria-label='whisk categories'
           className='tabs'
         >
           <Tab label='Food' value='food' />
           <Tab label='Outdoors' value='outdoor' />
           <Tab label='Adventure' value='adventure' />
         </Tabs>
-      </div>
 
-      {/* If viewing from Mobile, display horizontal scrolling, one row only */}
-      <MobileView>
-        <div className='mobile'>
-          <GridList className={classes.gridList}>
+        {/* If viewing from Mobile, display horizontal scrolling, one row only */}
+        <MobileView>
+          <div className='mobile'>
+            <GridList className={classes.gridList}>
+              {filteredWhisks.map((whisk) => (
+                <div key={whisk.id}>
+                  <CardVertical whisk={whisk} />
+                </div>
+              ))}
+            </GridList>
+          </div>
+        </MobileView>
+
+        {/* If in browser, display multiple rows, no horizontal scrolling */}
+        <BrowserView>
+          <div className={classes.browser}>
             {filteredWhisks.map((whisk) => (
               <div key={whisk.id}>
                 <CardVertical whisk={whisk} />
               </div>
             ))}
-          </GridList>
-        </div>
-      </MobileView>
-
-      {/* If in browser, display multiple rows, no horizontal scrolling */}
-      <BrowserView>
-        <div className={classes.browser}>
-          {filteredWhisks.map((whisk) => (
-            <div key={whisk.id}>
-              <CardVertical whisk={whisk} />
-            </div>
-          ))}
-        </div>
-      </BrowserView>
+          </div>
+        </BrowserView>
+      </div>
     </>
   );
 }
@@ -74,5 +74,6 @@ const useStyles = makeStyles((theme) => ({
   browser: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
 }));
