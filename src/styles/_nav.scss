@@ -13,3 +13,10 @@
   padding: 1em 2em;
   margin-bottom: 0.5em;
 } 
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  align-items: center;
+}

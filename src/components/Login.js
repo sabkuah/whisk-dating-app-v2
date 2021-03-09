@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types';
 import { Button, Card, CardContent, Tab, TextField, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import WhiskTabs from './WhiskTabs';
 import { Auth } from 'aws-amplify'
 import { isMobile } from 'react-device-detect';
+import UserContext from '../context/user/userContext';
+
 const Login = () => {
   const [tab, setTab] = useState(0)
   const [username, setUsername] = useState("")
   const [password, setPW] = useState("")
   const [email, setEmail] = useState("")
+  const userContext = useContext(UserContext)
   const history = useHistory()
 
   const handleChange = (event, newValue) => {
@@ -39,9 +42,10 @@ const Login = () => {
           attributes: {
             email,
           }
-
         })
-        console.log(user)
+        console.log("user", user.attributes)
+        userContext.loginUser(user.attributes)
+        history.push("/")
       } catch (error) {
         console.log(error)
       }

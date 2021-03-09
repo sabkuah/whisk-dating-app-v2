@@ -6,17 +6,6 @@ import BurgerNav from '../components/landing/BurgerNav';
 import SuggestedWhisks from '../components/landing/SuggestedWhisks';
 
 const Welcome = () => {
-  const [authState, setAuthState] = useState();
-  const [user, setUser] = useState();
-  const [login, setLogin] = useState(false);
-
-  useEffect(() => {
-    return onAuthUIStateChange((nextAuthState, authData) => {
-      setAuthState(nextAuthState);
-      setUser(authData)
-    });
-  }, []);
-
   return (
     <Container className='welcome-page'>
       {isAndroid && <BurgerNav />}

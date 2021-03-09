@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import {AppBar, Button, Toolbar, Typography} from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
-// import { AmplifySignOut } from "@aws-amplify/ui-react"
-// import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
+import UserContext from '../context/user/userContext';
+
 
 const Navigation = () => {
-  // const [authState, setAuthState] = useState();
-  // const [user, setUser] = useState();
   const history = useHistory();
-
-  // useEffect(() => {
-  //   return onAuthUIStateChange((nextAuthState, authData) => {
-  //     setAuthState(nextAuthState);
-  //     setUser(authData)
-  //   });
-  // }, []);
+  const userContext = useContext(UserContext)
 
   return (
     <AppBar position="static" className="nav-container">
@@ -22,39 +14,20 @@ const Navigation = () => {
         <Typography variant="h3" id="title-logo" onClick={() => history.push("/")}>
           Whisk
         </Typography>
-        {/* {
-          authState === AuthState.SignedIn && user ?
-          <>
-            <Link to="/user">
-              Profile
-            </Link>
-            <AmplifySignOut />
-          </>
-          :
-          <Button>About</Button> 
-          // <AmplifyAuthenticator>
-          //   <AmplifySignIn
-          //     headerText="Log In"
-          //     slot="sign-in"
-          //     usernameAlias="email"
-          //     // hideSignUp="true"
-          //     formFields={[
-          //       {
-          //         type: "email",
-          //         label: "Email Address",
-          //         placeholder: "Enter your email address",
-          //         required: true,
-          //       },
-          //       {
-          //         type: "password",
-          //         label: "Password",
-          //         placeholder: "Enter your password",
-          //         required: true,
-          //       },
-          //     ]}
-          //   />
-          // </AmplifyAuthenticator>
-        }*/}
+        <div className="nav-links">
+          {
+            userContext.isAuthenticated ? 
+            <>
+            <Link to="/user">Profile</Link>
+            <Button onClick={() => userContext.logoutUser()}>Logout</Button>
+            </>
+            :
+            <>
+              <Link to="/about">About</Link>
+              <Link to="/login">Login</Link>
+            </>
+          }
+        </div>
       </Toolbar>
     </AppBar>
   );

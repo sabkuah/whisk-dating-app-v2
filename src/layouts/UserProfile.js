@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Avatar, Button, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import UserContext from '../context/user/userContext';
 
 const UserProfile = () => {
   const dp = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-  
+  const userContext = useContext(UserContext)
   return (
     <div className='profile-page'>
       <Typography variant="h4">My profile</Typography>
