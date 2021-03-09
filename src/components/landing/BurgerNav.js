@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
-const LandingNav = () => {
+const BurgerNav = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -20,7 +23,7 @@ const LandingNav = () => {
         aria-haspopup='true'
         onClick={handleClick}
       >
-        <MenuIcon />
+        <MenuIcon className='burger-icon' />
       </Button>
       <Menu
         id='simple-menu'
@@ -29,12 +32,20 @@ const LandingNav = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <HomeIcon />
+          Home
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <FavoriteBorderIcon /> Favourites
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <PersonOutlineIcon />
+          Profile
+        </MenuItem>
       </Menu>
     </>
   );
 };
 
-export default LandingNav;
+export default BurgerNav;
