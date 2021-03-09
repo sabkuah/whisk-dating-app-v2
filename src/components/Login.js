@@ -25,27 +25,25 @@ const Login = () => {
     if (tab === 1) {
       try {
         const { user } = await Auth.signUp({
-          username,
-          email,
+          username: email,
           password,
-
-
+          attributes: {
+            email
+          }
         })
         console.log(user);
       } catch (err) {
-        // this.state({
-        //   errors: {
-        //     ...this.state.errors,
-        //     cognito: error
-        //   }
-        // })
         console.log(err)
       }
     } else {
       try {
         const user = await Auth.signIn({
-          email,
-          password
+          username: email,
+          password,
+          attributes: {
+            email,
+          }
+
         })
         console.log(user)
       } catch (error) {
