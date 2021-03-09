@@ -5,6 +5,9 @@ import { Button, Card, CardContent, CardHeader, IconButton, Tab, Tabs, TextField
 import CloseIcon from '@material-ui/icons/Close'
 import { useHistory } from 'react-router-dom'
 
+import { Auth } from 'aws-amplify'
+import { ContactSupportOutlined } from '@material-ui/icons';
+
 const Login = () => {
   const [tab, setTab] = useState(0)
   const [username, setUsername] = useState("")
@@ -19,48 +22,62 @@ const Login = () => {
 
   const submitForm = async (e) => {
     e.preventDefault()
-    // if (tab === 1 ) {
-    //   // register
-    //   const newUser = await register({email, username, password})
-    //   !!newUser ? setToken(newUser.accessToken) : setToken("")
-    //   history.push(`/`)
-    // } else {
-    //   //login
-    //   const user = await login({email, password})
-    //   if (!!user?.accessToken) {
-    //     setToken(user.accessToken)
-    //     history.push(`/`)
-    //   } else {
-    //     setToken("")
-    //   }
-    // }
+    if (tab === 1) {
+      try {
+        const { user } = await Auth.signUp({
+          username: email,
+          password,
+          attributes: {
+            email
+          }
+        })
+        console.log(user);
+      } catch (err) {
+        console.log(err)
+      }
+    } else {
+      try {
+        const user = await Auth.signIn({
+          username: email,
+          password,
+          attributes: {
+            email,
+          }
+
+        })
+        console.log(user)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
   }
 
   return (
     <Card className={classes.root}>
       <CardHeader title="Login" action={
         <IconButton aria-label="close">
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
-      }/>
+      } />
       <CardContent>
         <form onSubmit={submitForm}>
           <Tabs value={tab} onChange={handleChange} aria-label="login tabs">
-            <Tab label="Login" style={{width: "50%"}}/>
-            <Tab label="Register" style={{width: "50%"}}/>
+            <Tab label="Login" style={{ width: "50%" }} />
+            <Tab label="Register" style={{ width: "50%" }} />
           </Tabs>
           <TabPanel value={tab} index={0}>
-            <TextField label="Email" variant="filled" onChange={e => setEmail(e.target.value)} className={classes.field}/>
-            <TextField label="Password" onChange={e => setPW(e.target.value)} type="password" variant="filled" className={classes.field}/>
-            <Button type="submit" style={{width: "50%"}}>Login</Button>
+            <TextField label="Email" variant="filled" onChange={e => setEmail(e.target.value)} className={classes.field} />
+            <TextField label="Password" onChange={e => setPW(e.target.value)} type="password" variant="filled" className={classes.field} />
+            <Button type="submit" style={{ width: "50%" }}>Login</Button>
           </TabPanel>
           <TabPanel value={tab} index={1}>
-            <TextField label="Email" variant="filled" onChange={e => setEmail(e.target.value)} className={classes.field}/>
-            <TextField label="Username" variant="filled" onChange={e => setUsername(e.target.value)} className={classes.field}/>
-            <TextField label="Password" type="password" onChange={e => setPW(e.target.value)} variant="filled" className={classes.field}/>
-            <Button type="submit" style={{width: "50%"}}>Register</Button>
+            <TextField label="Email" variant="filled" onChange={e => setEmail(e.target.value)} className={classes.field} />
+            <TextField label="Username" variant="filled" onChange={e => setUsername(e.target.value)} className={classes.field} />
+            <TextField label="Password" type="password" onChange={e => setPW(e.target.value)} variant="filled" className={classes.field} />
+            <Button type="submit" style={{ width: "50%" }}>Register</Button>
           </TabPanel>
-          </form>
+        </form>
       </CardContent>
     </Card>
   )
@@ -94,8 +111,8 @@ function TabPanel(props) {
   return (
     <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
       {
-        value === index && 
-        <div style={{paddingTop: "1em"}}>{children}</div>
+        value === index &&
+        <div style={{ paddingTop: "1em" }}>{children}</div>
       }
     </div>
   );
