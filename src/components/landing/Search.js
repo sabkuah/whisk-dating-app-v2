@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -14,11 +13,7 @@ const Search = () => {
           <SearchIcon />
         </IconButton>
         <Divider className='divider' orientation='vertical' />
-        <InputBase
-          className='input'
-          placeholder='Search'
-          inputProps={{ 'aria-label': 'search google maps' }}
-        />
+        <InputBase className='input' placeholder='Search' />
       </Paper>
     </div>
   );

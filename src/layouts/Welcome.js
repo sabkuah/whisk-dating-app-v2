@@ -1,4 +1,4 @@
-import { Container, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { isIOS, isAndroid, isMobile } from 'react-device-detect';
 import BottomNav from '../components/landing/BottomNav';
 import Search from '../components/landing/Search';

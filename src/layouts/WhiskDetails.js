@@ -5,10 +5,10 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Carousel from 'react-material-ui-carousel';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 
 const WhiskDetails = () => {
-  const { id } = useParams();
+  //const { id } = useParams();
   const [liked, setLiked] = useState(false);
 
   const handleLike = () => {
@@ -60,7 +60,12 @@ const WhiskDetails = () => {
           animation='slide'
         >
           {whisk.images.map((img) => (
-            <Avatar src={img} alt={whisk.title} className='avatar-img' />
+            <Avatar
+              src={img}
+              alt={whisk.title}
+              className='avatar-img'
+              key={img}
+            />
           ))}
         </Carousel>
       </div>
@@ -71,18 +76,18 @@ const WhiskDetails = () => {
           <div>{whisk.description}</div>
         </div>
         <div className='details'>
-          <p>
+          <div>
             <h4>Cost</h4>
             {whisk.cost}
-          </p>
-          <p>
+          </div>
+          <div>
             <h4>Duration</h4>
             {whisk.durationHours} hours
-          </p>
-          <p>
+          </div>
+          <div>
             <h4>Participants</h4>
             {Array(whisk.participants).fill(<EmojiPeopleIcon />)}
-          </p>
+          </div>
         </div>
       </div>
       <div className='button'>

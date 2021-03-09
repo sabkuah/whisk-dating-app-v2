@@ -22,18 +22,15 @@ function App() {
               <Login />
             </Route>
             <Route path='/user'>
-              {/* User Profile */}
               <UserProfile />
             </Route>
             <Route path='/user/whisks'>
-              {/* User's Chosen Whisks */}
               <ChosenWhisks />
             </Route>
             <Route path='/whisks/id'>
               <WhiskDetails />
             </Route>
             <Route exact path='/'>
-              {/* Landing: Experiences for you */}
               <Welcome />
             </Route>
           </Switch>
