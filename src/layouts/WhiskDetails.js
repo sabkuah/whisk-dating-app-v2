@@ -38,7 +38,7 @@ const WhiskDetails = () => {
           {liked ? <FavoriteIcon className='icon' /> : <FavoriteBorderIcon />}
         </IconButton>
       </div>
-      <Grid container spacing={2} direction='row'>
+      <Grid container spacing={5} direction='row'>
         <Grid item xs={12} lg={6} className='image-gallery'>
           <MobileView>
             <Carousel
@@ -89,21 +89,29 @@ const WhiskDetails = () => {
           <div>
             <h4>Whisk Details</h4>
             <div>{whisk.description}</div>
+            <br />
           </div>
-          <div className='details'>
-            <div>
+          <Grid
+            container
+            direction='row'
+            justify='space-around'
+            alignItems='center'
+            className='details'
+          >
+            <Grid item xs className='detail'>
               <h4>Cost</h4>
               {whisk.cost}
-            </div>
-            <div>
+            </Grid>
+            <Grid item xs className='detail'>
               <h4>Duration</h4>
               {whisk.durationHours} hours
-            </div>
-            <div>
+            </Grid>
+            <Grid item xs className='detail'>
               <h4>Participants</h4>
-              {Array(whisk.participants).fill(<EmojiPeopleIcon />)}
-            </div>
-          </div>
+              {whisk.participants}
+              {/* {Array(whisk.participants).fill()} */}
+            </Grid>
+          </Grid>
           <div className='button'>
             <Button className='choose-whisk'>Choose Whisk</Button>
           </div>
