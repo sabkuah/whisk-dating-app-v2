@@ -6,13 +6,16 @@ import ChosenWhisks from './layouts/ChosenWhisks';
 import UserProfile from './layouts/UserProfile';
 import Welcome from './layouts/Welcome';
 import Navigation from './components/Navigation';
+import { BrowserView } from 'react-device-detect';
 
 function App() {
   return (
     <UserState>
       <WhiskState>
         <Router>
-          <Navigation/>
+          <BrowserView>
+            <Navigation />
+          </BrowserView>
           <Switch>
             <Route path='/login'>
               <Login />

@@ -1,9 +1,135 @@
 .welcome-page {
-  Button {
-    @include brand-button-lg;
+  //Burger Nav
+  .burger-icon {
+    color: $brand-color;
+    font-size: 30px;
+  }
+
+  .landing-title {
+    height: 30vh;
+    display: flex;
+    align-items: center;
+
+    h1 {
+      @include heading-lg;
+    }
+  }
+
+  //Search
+  .search {
+    display: flex;
+    justify-content: center;
+    //margin: 2%;
+
+    .search-bar {
+      padding: 2px 4px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border-radius: 50px;
+      background-color: #efeeee;
+
+      .input {
+        flex: 1;
+      }
+
+      .iconbutton {
+        padding: 10;
+      }
+
+      .divider {
+        height: 28;
+        margin: 4;
+      }
+    }
+  }
+
+  //Suggested Whisks
+  .suggested-whisks {
+    min-height: 50vh;
+
+    //Tabs
+    .tabs {
+      margin-top: 8%;
+      margin-bottom: 8%;
+
+      .Mui-selected {
+        color: $brand-color;
+        border-bottom: 3px solid $brand-color;
+      }
+    }
+
+    .mobile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      overflow: hidden;
+      height: auto;
+      align-items: center;
+      color: #00d1ff;
+    }
+  }
+
+  // Bottom Nav
+  .bottom-nav {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: $bg-color;
+
+    .Mui-selected {
+      color: $brand-color;
+      .icon {
+        color: $brand-color;
+        text-shadow: 0 10px 10px;
+      }
+    }
+  }
+  // /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .landing-title {
+      height: 20vh;
+    }
   }
 }
 
 #title-logo {
   font-family: $brand-font;
+}
+
+//Vertical Card
+.card-vertical {
+  display: flex;
+  height: 17em;
+  align-items: flex-end;
+  margin: 5%;
+
+  .card {
+    width: 13em;
+    height: 15em;
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .avatar {
+    height: 60%;
+    width: 80%;
+    top: -30px;
+    left: 20px;
+    position: absolute;
+  }
+
+  .card-content {
+    bottom: 0;
+    margin-bottom: 2px;
+    position: absolute;
+  }
+
+  .card-text {
+    @include heading-sm;
+  }
+
+  .MuiCard-root {
+    overflow: visible;
+  }
 }
