@@ -3,6 +3,10 @@
     margin-top: 2%;
     display: flex;
     justify-content: space-between;
+
+    .icon {
+      color: $brand-color;
+    }
   }
 
   .image-gallery {
@@ -26,6 +30,17 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
+    }
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+
+    .choose-whisk {
+      @include brand-button-lg;
+      width: 75%;
+      margin: 5%;
     }
   }
 }

@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
-import { Avatar, IconButton, Container } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Avatar, IconButton, Container, Button } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Carousel from 'react-material-ui-carousel';
 import { useParams } from 'react-router-dom';
 
 const WhiskDetails = () => {
   const { id } = useParams();
+  const [liked, setLiked] = useState(false);
+
+  const handleLike = () => {
+    setLiked(!liked);
+  };
 
   useEffect(() => {
     //Use id for GET request
@@ -40,12 +44,21 @@ const WhiskDetails = () => {
         <IconButton aria-label='back'>
           <ArrowBackIosIcon />
         </IconButton>
-        <IconButton aria-label='back'>
-          <FavoriteBorderIcon />
+        <IconButton aria-label='like' onClick={handleLike}>
+          {liked ? <FavoriteIcon className='icon' /> : <FavoriteBorderIcon />}
         </IconButton>
       </div>
       <div className='image-gallery'>
-        <Carousel autoPlay={true} navButtonsAlwaysInvisible={true}>
+        <Carousel
+          autoPlay={true}
+          navButtonsAlwaysInvisible={true}
+          activeIndicatorIconButtonProps={{
+            style: {
+              color: '#00d1ff',
+            },
+          }}
+          animation='slide'
+        >
           {whisk.images.map((img) => (
             <Avatar src={img} alt={whisk.title} className='avatar-img' />
           ))}
@@ -71,6 +84,9 @@ const WhiskDetails = () => {
             {Array(whisk.participants).fill(<EmojiPeopleIcon />)}
           </p>
         </div>
+      </div>
+      <div className='button'>
+        <Button className='choose-whisk'>Choose Whisk</Button>
       </div>
     </Container>
   );
