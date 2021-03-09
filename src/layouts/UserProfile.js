@@ -7,7 +7,7 @@ const UserProfile = () => {
   
   return (
     <div className='profile-page'>
-      <Typography variant="h4">My Profile</Typography>
+      <Typography variant="h4">My profile</Typography>
       <div className="card-title">
         <span>Personal details</span>
         <span className="blue-font">change</span>
