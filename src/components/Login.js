@@ -11,7 +11,9 @@ const Login = () => {
   const [tab, setTab] = useState(0)
   const [username, setUsername] = useState("")
   const [password, setPW] = useState("")
+  const [confirm, setConfirm] = useState("")
   const [email, setEmail] = useState("")
+  const [errorMsg, setErrorMsg] = useState("")
   const userContext = useContext(UserContext)
   const history = useHistory()
 
@@ -23,16 +25,18 @@ const Login = () => {
     e.preventDefault()
     if (tab === 1) {
       try {
-        const { user } = await Auth.signUp({
+        const user = await Auth.signUp({
           username: email,
           password,
           attributes: {
             email
           }
         })
-        console.log(user);
+        console.log("registered user", user);
+        setErrorMsg("")
       } catch (err) {
         console.log(err)
+        setErrorMsg(err.message)
       }
     } else {
       try {
@@ -45,12 +49,13 @@ const Login = () => {
         })
         console.log("user", user.attributes)
         userContext.loginUser(user.attributes)
+        setErrorMsg("")
         history.push("/")
-      } catch (error) {
-        console.log(error)
+      } catch (err) {
+        console.log(err)
+        setErrorMsg(err.message)
       }
     }
-
   }
 
   return (
@@ -75,7 +80,16 @@ const Login = () => {
           <TabPanel value={tab} index={1}>
             <TextField label="Username" onChange={e => setUsername(e.target.value)} className="text-field" />
             <TextField label="Email" onChange={e => setEmail(e.target.value)} className="text-field" />
-            <TextField label="Password"type="password" onChange={e => setPW(e.target.value)}  className="text-field" />
+            <TextField label="Password" type="password" onChange={e => setPW(e.target.value)}  className="text-field" />
+            <TextField
+              error={!!confirm && password !== confirm || !!errorMsg ? true : false}
+              type="password"
+              id="standard-error-helper-text"
+              label="Confirm Password"
+              helperText={!!confirm && password !== confirm ? "Passwords must match" : !!errorMsg ? errorMsg: ""}
+              className="text-field"
+              onChange={e => setConfirm(e.target.value)}
+            />
             <Button className="submit-btn" type="submit">Sign Up</Button>
           </TabPanel>
         </form>
