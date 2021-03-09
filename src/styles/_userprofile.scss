@@ -1,8 +1,11 @@
 .profile-page {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
   Button {
     @include secondary-btn;
-    display: flex;
-    justify-content: space-between;
+    @include flex-space-bw;
+    width: 100%;
   }
 }
 
@@ -12,10 +15,10 @@
   display: block;
   padding: 1em 1.5em;
 }
+
 .about-card {
   background-color: white;
   border-radius: 20px;
-  width: 80%;
   display: block;
   margin: 0 auto;
 }
@@ -23,11 +26,17 @@
 .wrapper {
   display: flex;
   padding: 20px;
+  text-align: left;
 }
 
 #display-photo {
   width: 10em;
   height: 10em;
+}
+
+.card-title {
+  @include flex-space-bw;
+  padding: 10px 0;
 }
 
 @media (max-width: 768px) {

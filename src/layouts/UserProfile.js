@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button } from '@material-ui/core';
+import { Avatar, Button, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const UserProfile = () => {
@@ -7,6 +7,11 @@ const UserProfile = () => {
   
   return (
     <div className='profile-page'>
+      <Typography variant="h4">My Profile</Typography>
+      <div className="card-title">
+        <span>Personal details</span>
+        <span className="blue-font">change</span>
+      </div>
       <div className="about-card">
         <div className="wrapper">
           <Avatar variant="rounded" src={dp} id="display-photo"/>
