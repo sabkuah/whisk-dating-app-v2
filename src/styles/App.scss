@@ -2,7 +2,19 @@
 @import 'mixins';
 @import 'welcome';
 @import 'login';
+@import 'amplify';
+@import 'userprofile';
+@import 'nav';
 
 body {
   background-color: $bg-color;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.blue-font {
+  @include blue-font;
 }
