@@ -16,7 +16,7 @@ const BottomNav = () => {
     <BottomNavigation
       value={value}
       onChange={handleChange}
-      className='sticky-bottom'
+      className='bottom-nav'
       //className={classes.root}
     >
       <BottomNavigationAction

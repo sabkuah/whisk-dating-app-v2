@@ -1,6 +1,12 @@
 .welcome-page {
+  //Burger Nav
+  .burger-icon {
+    color: $brand-color;
+    font-size: 30px;
+  }
+
   .landing-title {
-    height: 30vh;
+    height: 25vh;
     display: flex;
     align-items: center;
 
@@ -9,55 +15,67 @@
     }
   }
 
-  .sticky-bottom {
+  //Search
+  .search {
+    display: flex;
+    justify-content: center;
+
+    .search-bar {
+      padding: 2px 4px;
+      display: flex;
+      align-items: center;
+      width: 90%;
+      border-radius: 50px;
+      background-color: #efeeee;
+
+      .input {
+        flex: 1;
+      }
+
+      .iconbutton {
+        padding: 10;
+      }
+
+      .divider {
+        height: 28;
+        margin: 4;
+      }
+    }
+  }
+
+  //Suggested Whisks
+  .suggested-whisks {
+    //Tabs
+    .tabs {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    .mobile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      overflow: hidden;
+      height: auto;
+      align-items: center;
+      color: #00d1ff;
+    }
+  }
+
+  // Bottom Nav
+  .bottom-nav {
     width: 100%;
     position: fixed;
     bottom: 0;
     background-color: $bg-color;
-  }
 
-  //Search
-  .search-bar {
-    padding: 2px 4px;
-    display: flex;
-    align-items: center;
-    width: 90%;
-    border-radius: 50px;
-    background-color: #efeeee;
-
-    .input {
-      flex: 1;
-    }
-
-    .iconbutton {
-      padding: 10;
-    }
-
-    .divider {
-      height: 28;
-      margin: 4;
-    }
-  }
-
-  //Tabs
-
-  .tabs {
-    margin-top: 5%;
-    margin-bottom: 5%;
-  }
-  // Bottom Nav
-  .Mui-selected {
-    color: $brand-color;
-    .icon {
+    .Mui-selected {
       color: $brand-color;
-      text-shadow: 0 10px 10px;
+      .icon {
+        color: $brand-color;
+        text-shadow: 0 10px 10px;
+      }
     }
-  }
-
-  //Burger Nav
-  .burger-icon {
-    color: $brand-color;
-    font-size: 30px;
   }
 }
 

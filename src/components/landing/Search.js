@@ -8,17 +8,19 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const Search = () => {
   return (
-    <Paper component='form' className='search-bar'>
-      <IconButton className='iconButton' aria-label='search'>
-        <SearchIcon />
-      </IconButton>
-      <Divider className='divider' orientation='vertical' />
-      <InputBase
-        className='input'
-        placeholder='Search'
-        inputProps={{ 'aria-label': 'search google maps' }}
-      />
-    </Paper>
+    <div className='search'>
+      <Paper component='form' className='search-bar'>
+        <IconButton className='iconButton' aria-label='search'>
+          <SearchIcon />
+        </IconButton>
+        <Divider className='divider' orientation='vertical' />
+        <InputBase
+          className='input'
+          placeholder='Search'
+          inputProps={{ 'aria-label': 'search google maps' }}
+        />
+      </Paper>
+    </div>
   );
 };
 

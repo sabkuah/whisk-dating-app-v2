@@ -38,7 +38,7 @@ export default function SuggestedWhisks() {
 
       {/* If viewing from Mobile, display horizontal scrolling, one row only */}
       <MobileView>
-        <div className={classes.root}>
+        <div className='mobile'>
           <GridList className={classes.gridList}>
             {filteredWhisks.map((whisk) => (
               <div key={whisk.id}>
@@ -63,25 +63,16 @@ export default function SuggestedWhisks() {
   );
 }
 
+//GridList styles not working in SASS
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    //backgroundColor: '#00d1ff',
-    height: 'auto',
-    alignItems: 'center',
-    color: '#00d1ff',
-  },
-  browser: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
   gridList: {
     flexWrap: 'nowrap',
     transform: 'translateZ(0)',
     backgroundColor: '#f2f2f2',
     height: '18em',
+  },
+  browser: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
 }));
