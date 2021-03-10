@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList, Tab, Tabs } from '@material-ui/core';
+import { GridList, Tab, Grid } from '@material-ui/core';
 import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
 import { BrowserView, MobileView } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 import WhiskTabs from '../WhiskTabs';
 
 export default function SuggestedWhisks() {
@@ -49,13 +50,20 @@ export default function SuggestedWhisks() {
 
         {/* If in browser, display multiple rows, no horizontal scrolling */}
         <BrowserView>
-          <div className={classes.browser}>
+          <Grid
+            container
+            justify='flex-start'
+            spacing={2}
+            className={classes.browser}
+          >
             {filteredWhisks.map((whisk) => (
-              <div key={whisk.id}>
-                <CardVertical whisk={whisk} />
-              </div>
+              <Grid item>
+                <Link to={`/whisks/${whisk.id}`} key={whisk.id}>
+                  <CardVertical whisk={whisk} />
+                </Link>
+              </Grid>
             ))}
-          </div>
+          </Grid>
         </BrowserView>
       </div>
     </>
@@ -70,9 +78,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#f2f2f2',
     height: '18em',
   },
-  browser: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
+  // browser: {
+  //   display: 'flex',
+  //   flexWrap: 'wrap',
+  //   justifyContent: 'space-between',
+  // },
 }));

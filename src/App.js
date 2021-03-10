@@ -6,6 +6,8 @@ import UserProfile from './layouts/UserProfile';
 import Welcome from './layouts/Welcome';
 import Navigation from './components/Navigation';
 import { BrowserView } from 'react-device-detect';
+import WhiskDetails from './layouts/WhiskDetails';
+import SearchResults from './layouts/SearchResults';
 import Login from './components/Login';
 // import { AmplifyAuthenticator, AmplifySignIn } from "@aws-amplify/ui-react"
 
@@ -22,15 +24,18 @@ function App() {
               <Login />
             </Route>
             <Route path='/user'>
-              {/* User Profile */}
               <UserProfile />
             </Route>
             <Route path='/user/whisks'>
-              {/* User's Chosen Whisks */}
               <ChosenWhisks />
             </Route>
+            <Route path='/whisks/id'>
+              <WhiskDetails />
+            </Route>
+            <Route path='/whisks/search'>
+              <SearchResults />
+            </Route>
             <Route exact path='/'>
-              {/* Landing: Experiences for you */}
               <Welcome />
             </Route>
           </Switch>

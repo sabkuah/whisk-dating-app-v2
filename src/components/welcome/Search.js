@@ -1,12 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { useHistory } from 'react-router-dom';
 
 const Search = () => {
+  const history = useHistory();
+
   return (
     <div className='search'>
       <Paper component='form' className='search-bar'>
@@ -17,7 +19,9 @@ const Search = () => {
         <InputBase
           className='input'
           placeholder='Search'
-          inputProps={{ 'aria-label': 'search google maps' }}
+          onClick={() => {
+            history.push('/whisks/search');
+          }}
         />
       </Paper>
     </div>
