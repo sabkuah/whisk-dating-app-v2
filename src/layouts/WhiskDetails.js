@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Avatar,
-  IconButton,
-  Container,
-  Button,
-  Card,
-  CardMedia,
-  Grid,
-} from '@material-ui/core';
+import { Avatar, IconButton, Container, Button, Grid } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+//import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Carousel from 'react-material-ui-carousel';
 //import { useParams } from 'react-router-dom';
 import { BrowserView, MobileView } from 'react-device-detect';

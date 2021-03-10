@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React, { useContext } from 'react';
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
@@ -35,16 +34,5 @@ const Navigation = () => {
     </AppBar>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    backgroundColor: 'white',
-    padding: '1em 2em',
-  },
-  title: {
-    flexGrow: 1,
-    color: 'black',
-  },
-}));
 
 export default Navigation;

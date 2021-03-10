@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList, Tab, Tabs } from '@material-ui/core';
+import { GridList, Tab } from '@material-ui/core';
 import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
 import { BrowserView, MobileView } from 'react-device-detect';
