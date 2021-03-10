@@ -56,9 +56,9 @@ export default function SuggestedWhisks() {
             spacing={2}
             className={classes.browser}
           >
-            {filteredWhisks.map((whisk) => (
-              <Grid item>
-                <Link to={`/whisks/${whisk.id}`} key={whisk.id}>
+            {filteredWhisks.map((whisk, i) => (
+              <Grid item key={whisk.id}>
+                <Link to={`/whisks/${whisk.id}`}>
                   <CardVertical whisk={whisk} />
                 </Link>
               </Grid>

@@ -34,6 +34,12 @@ const Login = () => {
         })
         console.log("registered user", user);
         setErrorMsg("")
+        userContext.loginUser({
+          email: email,
+          username: user.user.username,
+          sub: user.userSub,
+        })
+        history.push("/")
       } catch (err) {
         console.log(err)
         setErrorMsg(err.message)

@@ -7,6 +7,10 @@ const Navigation = () => {
   const history = useHistory();
   const userContext = useContext(UserContext);
 
+  const logout = () => {
+    userContext.logoutUser()
+    history.push("/")
+  }
   return (
     <AppBar position='static' className='nav-container'>
       <Toolbar>
@@ -18,17 +22,17 @@ const Navigation = () => {
           Whisk
         </Typography>
         <div className='nav-links'>
-          {userContext.isAuthenticated ? (
+          {userContext.isAuthenticated ? 
             <>
               <Link to='/user'>Profile</Link>
-              <Button onClick={() => userContext.logoutUser()}>Logout</Button>
+              <Button onClick={() => logout() }>Logout</Button>
             </>
-          ) : (
+          : 
             <>
               <Link to='/about'>About</Link>
               <Link to='/login'>Login</Link>
             </>
-          )}
+          }
         </div>
       </Toolbar>
     </AppBar>
