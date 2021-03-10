@@ -1,0 +1,20 @@
+#card-root {
+  text-align: center;
+  margin: auto 2em;
+  background-color: transparent;
+  display: flex;
+  height: 75vh;
+  align-items: center;
+  justify-content: center;
+
+  .submit-btn {
+    @include brand-button-lg;
+    width: 50%;
+    margin-top: 3em;
+  }
+
+  .text-field {
+    width: 100%;
+    margin: 1em 0;
+  }
+}

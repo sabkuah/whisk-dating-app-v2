@@ -1,0 +1,25 @@
+:root {
+  --amplify-primary-color: #81e8ff; //$brand-color; - doesn't work??
+  --amplify-primary-tint: #81e8ff; //$brand-color;
+  --amplify-primary-shade: #81e8ff; //$brand-color;
+  --amplify-font-family: $body-font;
+}
+
+
+amplify-authenticator {
+  --border-radius: 30px;
+  --box-shadow: none;
+}
+
+
+amplify-sign-in {
+  // --footer-color: tomato; // doesn't work
+ // --footer-font-family: 'Chewy', cursive;// - works //$brand-font - doesn't work
+}
+
+// doesn't work 
+.sign-in-form-footer amplify-button button {
+  border-radius: 30px;
+}
+
+// https://docs.amplify.aws/ui/customization/customizing-css/q/framework/react

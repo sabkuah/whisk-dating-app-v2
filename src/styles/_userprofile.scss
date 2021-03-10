@@ -1,0 +1,47 @@
+.profile-page {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  Button {
+    @include secondary-btn;
+    @include flex-space-bw;
+    width: 100%;
+  }
+}
+
+#action-btn {
+  @include brand-button-lg;
+  text-align: center;
+  display: block;
+  padding: 1em 1.5em;
+}
+
+.about-card {
+  background-color: white;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  padding: 20px;
+  text-align: left;
+}
+
+#display-photo {
+  width: 10em;
+  height: 10em;
+}
+
+.card-title {
+  @include flex-space-bw;
+  padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+  #display-photo {
+    width: 5em;
+    height: 5em;
+  }
+}
