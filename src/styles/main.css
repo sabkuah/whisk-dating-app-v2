@@ -1,10 +1,239 @@
 @import url("https://fonts.googleapis.com/css2?family=Chewy&family=Raleway&display=swap");
-.welcome-page Button {
-  background: #81e8ff;
+.welcome-page .burger-icon {
+  color: #00d1ff;
+  font-size: 30px;
+}
+.welcome-page .landing-title {
+  height: 30vh;
+  display: flex;
+  align-items: center;
+}
+.welcome-page .landing-title h1 {
+  font-family: "Raleway", sans-serif;
+  color: black;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.5;
+}
+.welcome-page .suggested-whisks {
+  min-height: 50vh;
+}
+.welcome-page .suggested-whisks .tabs {
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+.welcome-page .suggested-whisks .mobile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: hidden;
+  height: auto;
+  align-items: center;
+  color: #00d1ff;
+}
+.welcome-page .bottom-nav {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #f2f2f2;
+}
+.welcome-page .bottom-nav .Mui-selected {
+  color: #00d1ff;
+}
+.welcome-page .bottom-nav .Mui-selected .icon {
+  color: #00d1ff;
+  text-shadow: 0 10px 10px;
+}
+@media only screen and (min-width: 992px) {
+  .welcome-page .landing-title {
+    height: 20vh;
+  }
+}
+
+#title-logo {
+  font-family: "Chewy", cursive;
+}
+
+.card-vertical {
+  display: flex;
+  height: 17em;
+  align-items: flex-end;
+  margin: 5%;
+}
+.card-vertical .card {
+  width: 13em;
+  height: 15em;
+  border-radius: 20px;
+  position: relative;
+}
+.card-vertical .avatar {
+  height: 60%;
+  width: 80%;
+  top: -30px;
+  left: 20px;
+  position: absolute;
+}
+.card-vertical .card-content {
+  bottom: 0;
+  margin-bottom: 2px;
+  position: absolute;
+}
+.card-vertical .card-text {
+  font-family: "Raleway", sans-serif;
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@media only screen and (max-width: 768px) {
+  .card-vertical .card-text {
+    font-size: 100%;
+  }
+}
+.card-vertical .MuiCard-root {
+  overflow: visible;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+}
+.search .search-bar {
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 50px;
+  background-color: #e3e2e2;
+}
+.search .search-bar .input {
+  flex: 1;
+}
+.search .search-bar .iconbutton {
+  padding: 10;
+}
+.search .search-bar .divider {
+  height: 28;
+  margin: 4;
+}
+
+.whisk-details .top-nav {
+  margin-top: 2%;
+  display: flex;
+  justify-content: space-between;
+}
+.whisk-details .top-nav .icon {
+  color: #00d1ff;
+}
+.whisk-details .image-gallery {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+.whisk-details .image-gallery .avatar-img {
+  height: 12em;
+  width: 12em;
+}
+.whisk-details .image-gallery .browser-carousel-div {
+  width: 100%;
+  height: 60vh;
+  max-height: 60vh;
+}
+.whisk-details .image-gallery .browser-carousel-div .browser-carousel-img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.whisk-details .info .whisk-title {
+  text-align: center;
+  margin-bottom: 5%;
+}
+.whisk-details .info .details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 5%;
+}
+.whisk-details .info .details .detail {
+  text-align: center;
+}
+.whisk-details .button {
+  display: flex;
+  justify-content: center;
+}
+.whisk-details .button .choose-whisk {
+  background: #00d1ff;
   color: white;
   border-radius: 30px;
   padding: 0.5em 1.5em;
   font-weight: bold;
+  width: 75%;
+  margin: 5%;
+}
+
+.search-results .top-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+.search-results .top-nav .search {
+  width: 100%;
+}
+.search-results .results {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.horizontal-card {
+  display: flex;
+  align-items: center;
+  border-radius: 20px !important;
+  height: 9em;
+  width: 100%;
+}
+.horizontal-card .avatar {
+  height: 100px;
+  width: 100px;
+  margin-left: 2%;
+}
+.horizontal-card p {
+  font-size: 80%;
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#card-root {
+  text-align: center;
+  margin: auto 2em;
+  background-color: transparent;
+  display: flex;
+  height: 75vh;
+  align-items: center;
+  justify-content: center;
+}
+#card-root .submit-btn {
+  background: #00d1ff;
+  color: white;
+  border-radius: 30px;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
+  width: 50%;
+  margin-top: 3em;
+}
+#card-root .text-field {
+  width: 100%;
+  margin: 1em 0;
 }
 
 :root {
@@ -23,20 +252,25 @@ amplify-authenticator {
   border-radius: 30px;
 }
 
+.profile-page {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
 .profile-page Button {
   background-color: white;
   border-radius: 20px;
   padding: 1em 1.5em;
   display: block;
   margin: 1em auto;
-  width: 80%;
   text-align: inherit;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 #action-btn {
-  background: #81e8ff;
+  background: #00d1ff;
   color: white;
   border-radius: 30px;
   padding: 0.5em 1.5em;
@@ -49,7 +283,6 @@ amplify-authenticator {
 .about-card {
   background-color: white;
   border-radius: 20px;
-  width: 80%;
   display: block;
   margin: 0 auto;
 }
@@ -57,11 +290,18 @@ amplify-authenticator {
 .wrapper {
   display: flex;
   padding: 20px;
+  text-align: left;
 }
 
 #display-photo {
   width: 10em;
   height: 10em;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
 }
 
 @media (max-width: 768px) {
@@ -85,13 +325,24 @@ amplify-authenticator {
   margin-bottom: 0.5em;
 }
 
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  align-items: center;
+}
+
 body {
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+
+.blue-font {
+  color: #00d1ff;
 }
 
 /*# sourceMappingURL=main.css.map */
