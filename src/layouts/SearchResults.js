@@ -5,6 +5,7 @@ import {
   Divider,
   InputBase,
   Paper,
+  Grid,
 } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SearchIcon from '@material-ui/icons/Search';
@@ -47,13 +48,17 @@ const SearchResults = () => {
         </div>
       </div>
       <div className='results'>
-        {results.length ? (
-          results.map((whisk) => (
-            <CardHorizontal key={whisk.id} whisk={whisk} />
-          ))
-        ) : (
-          <h2>No Whisks found! </h2>
-        )}
+        <Grid container spacing={3}>
+          {results.length ? (
+            results.map((whisk) => (
+              <Grid item xs={12} sm={6} md={4} key={whisk.id}>
+                <CardHorizontal whisk={whisk} />
+              </Grid>
+            ))
+          ) : (
+            <h2>No Whisks found! </h2>
+          )}
+        </Grid>
       </div>
     </Container>
   );
