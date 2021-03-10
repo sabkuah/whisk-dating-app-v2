@@ -1,9 +1,9 @@
-import { LOGIN_USER, LOGOUT_USER } from '../types';
+import { LOGIN_USER, LOGOUT_USER, CURRENT_USER } from '../types';
 
 const UserReducer = (state, action) => {
+  console.log("user reducer", action)
   switch (action.type) {
     case LOGIN_USER:
-      console.log("logging in user", action.payload)
       return {
         ...state,
         //placeholder
@@ -16,6 +16,12 @@ const UserReducer = (state, action) => {
         //placeholder
         user: {},
         isAuthenticated: false
+      };
+    case CURRENT_USER:
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true
       };
     default:
       return state;

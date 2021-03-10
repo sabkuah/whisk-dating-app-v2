@@ -64,6 +64,12 @@ const Login = () => {
     }
   }
 
+  const handleLogin = e => {
+    setPW(e)
+    if (!!errorMsg) {
+      setErrorMsg("")
+    }
+  }
   return (
     <Card id="card-root" elevation={0}>
       <CardContent style={{maxWidth: "400px"}}>
@@ -78,11 +84,22 @@ const Login = () => {
             <Tab label="Login" style={{fontWeight: "bold"}}/>
             <Tab label="Sign Up" style={{fontWeight: "bold"}}/>
           </WhiskTabs>
+          {/* ---------- LOGIN ---------- */}
           <TabPanel value={tab} index={0}>
             <TextField label="Email" onChange={e => setEmail(e.target.value)} className="text-field"/>
-            <TextField label="Password" onChange={e => setPW(e.target.value)} type="password" className="text-field" />
+            <TextField
+              error={!!errorMsg ? true : false}
+              type="password"
+              id="login-helper-text"
+              label="Password"
+              helperText={!!errorMsg ? errorMsg : ""}
+              className="text-field"
+              onChange={e => handleLogin(e.target.value)}
+            />
+
             <Button className="submit-btn" type="submit">Login</Button>
           </TabPanel>
+          {/* ---------- REGISTER ---------- */}
           <TabPanel value={tab} index={1}>
             <TextField label="Username" onChange={e => setUsername(e.target.value)} className="text-field" />
             <TextField label="Email" onChange={e => setEmail(e.target.value)} className="text-field" />
@@ -90,7 +107,7 @@ const Login = () => {
             <TextField
               error={!!confirm && password !== confirm || !!errorMsg ? true : false}
               type="password"
-              id="standard-error-helper-text"
+              id="register-helper-text"
               label="Confirm Password"
               helperText={!!confirm && password !== confirm ? "Passwords must match" : !!errorMsg ? errorMsg: ""}
               className="text-field"
