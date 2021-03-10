@@ -9,7 +9,6 @@ import { BrowserView } from 'react-device-detect';
 import WhiskDetails from './layouts/WhiskDetails';
 import SearchResults from './layouts/SearchResults';
 import Login from './components/Login';
-// import { AmplifyAuthenticator, AmplifySignIn } from "@aws-amplify/ui-react"
 
 function App() {
   return (
@@ -29,7 +28,7 @@ function App() {
             <Route path='/user/whisks'>
               <ChosenWhisks />
             </Route>
-            <Route path='/whisks/id'>
+            <Route path='/whisks/:id'>
               <WhiskDetails />
             </Route>
             <Route path='/whisks/search'>
