@@ -1,9 +1,9 @@
 import { Container } from '@material-ui/core';
 import { isIOS, isAndroid, isMobile } from 'react-device-detect';
-import BottomNav from '../components/landing/BottomNav';
-import Search from '../components/landing/Search';
-import BurgerNav from '../components/landing/BurgerNav';
-import SuggestedWhisks from '../components/landing/SuggestedWhisks';
+import BottomNav from '../components/welcome/BottomNav';
+import Search from '../components/welcome/Search';
+import BurgerNav from '../components/welcome/BurgerNav';
+import SuggestedWhisks from '../components/welcome/SuggestedWhisks';
 
 const Welcome = () => {
   return (

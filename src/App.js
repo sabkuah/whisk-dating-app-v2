@@ -8,6 +8,7 @@ import Welcome from './layouts/Welcome';
 import Navigation from './components/Navigation';
 import { BrowserView } from 'react-device-detect';
 import WhiskDetails from './layouts/WhiskDetails';
+import SearchResults from './layouts/SearchResults';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route path='/whisks/id'>
               <WhiskDetails />
+            </Route>
+            <Route path='/whisks/search'>
+              <SearchResults />
             </Route>
             <Route exact path='/'>
               <Welcome />
