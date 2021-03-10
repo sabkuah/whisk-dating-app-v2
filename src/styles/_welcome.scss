@@ -15,35 +15,6 @@
     }
   }
 
-  //Search
-  .search {
-    display: flex;
-    justify-content: center;
-    //margin: 2%;
-
-    .search-bar {
-      padding: 2px 4px;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      border-radius: 50px;
-      background-color: #efeeee;
-
-      .input {
-        flex: 1;
-      }
-
-      .iconbutton {
-        padding: 10;
-      }
-
-      .divider {
-        height: 28;
-        margin: 4;
-      }
-    }
-  }
-
   //Suggested Whisks
   .suggested-whisks {
     min-height: 50vh;
@@ -136,5 +107,34 @@
 
   .MuiCard-root {
     overflow: visible;
+  }
+}
+
+//Search
+.search {
+  display: flex;
+  justify-content: center;
+  //margin: 2%;
+
+  .search-bar {
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 50px;
+    background-color: #efeeee;
+
+    .input {
+      flex: 1;
+    }
+
+    .iconbutton {
+      padding: 10;
+    }
+
+    .divider {
+      height: 28;
+      margin: 4;
+    }
   }
 }

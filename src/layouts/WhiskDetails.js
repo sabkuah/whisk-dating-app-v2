@@ -15,6 +15,7 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Carousel from 'react-material-ui-carousel';
 //import { useParams } from 'react-router-dom';
 import { BrowserView, MobileView } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
 const WhiskDetails = () => {
   //const { id } = useParams();
@@ -32,7 +33,9 @@ const WhiskDetails = () => {
     <Container className='whisk-details'>
       <div className='top-nav'>
         <IconButton aria-label='back'>
-          <ArrowBackIosIcon />
+          <Link to='/'>
+            <ArrowBackIosIcon />
+          </Link>
         </IconButton>
         <IconButton aria-label='like' onClick={handleLike}>
           {liked ? <FavoriteIcon className='icon' /> : <FavoriteBorderIcon />}

@@ -27,23 +27,22 @@ const SearchResults = () => {
             <ArrowBackIosIcon />
           </Link>
         </IconButton>
-        |<div className='query-text'>{query}</div>
-      </div>
-      <div className='search'>
-        <Paper component='form' className='search-bar'>
-          <IconButton className='iconButton' aria-label='search'>
-            <SearchIcon />
-          </IconButton>
-          <Divider className='divider' orientation='vertical' />
-          <InputBase
-            className='input'
-            placeholder='Search'
-            autoFocus={true}
-            onChange={(e) => {
-              handleSearch(e);
-            }}
-          />
-        </Paper>
+        <div className='search'>
+          <Paper component='form' className='search-bar'>
+            <IconButton className='iconButton' aria-label='search'>
+              <SearchIcon />
+            </IconButton>
+            <Divider className='divider' orientation='vertical' />
+            <InputBase
+              className='input'
+              placeholder='Search'
+              autoFocus={true}
+              onChange={(e) => {
+                handleSearch(e);
+              }}
+            />
+          </Paper>
+        </div>
       </div>
     </Container>
   );
