@@ -34,7 +34,7 @@ const WhiskDetails = () => {
         </IconButton>
       </div>
       <Grid container spacing={5} direction='row'>
-        <Grid item xs={12} lg={6} className='image-gallery'>
+        <Grid item xs={12} md={6} className='image-gallery'>
           <MobileView>
             <Carousel
               autoPlay={true}
@@ -79,7 +79,7 @@ const WhiskDetails = () => {
             </Carousel>
           </BrowserView>
         </Grid>
-        <Grid item xs={12} lg={6} className='info'>
+        <Grid item xs={12} md={6} className='info'>
           <h2 className='whisk-title'>{whisk.title}</h2>
           <div>
             <h4>Whisk Details</h4>
