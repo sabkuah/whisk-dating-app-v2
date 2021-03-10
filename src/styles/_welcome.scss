@@ -19,15 +19,10 @@
   .suggested-whisks {
     min-height: 50vh;
 
-    //Tabs
+    // //Tabs
     .tabs {
       margin-top: 8%;
       margin-bottom: 8%;
-
-      .Mui-selected {
-        color: $brand-color;
-        border-bottom: 3px solid $brand-color;
-      }
     }
 
     .mobile {
