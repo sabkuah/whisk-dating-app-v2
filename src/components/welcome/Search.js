@@ -15,7 +15,7 @@ const Search = () => {
         <IconButton className='iconButton' aria-label='search'>
           <SearchIcon />
         </IconButton>
-        <Divider className='divider' orientation='vertical' />
+
         <InputBase
           className='input'
           placeholder='Search'

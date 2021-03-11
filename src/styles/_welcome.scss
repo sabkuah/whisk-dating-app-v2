@@ -1,7 +1,7 @@
 .welcome-page {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+
   height: calc(100vh - 56px);
 
   //Burger Nav
@@ -26,7 +26,6 @@
 
   //Suggested Whisks
   .suggested-whisks {
-    min-height: 50vh;
     display: flex;
     flex-direction: column;
 
@@ -36,15 +35,15 @@
       margin-bottom: 3%;
     }
 
-    .mobile {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      overflow: hidden;
-      height: auto;
-      align-items: center;
-      color: #00d1ff;
-    }
+    // .mobile {
+    //   display: flex;
+    //   flex-wrap: wrap;
+    //   justify-content: space-around;
+    //   overflow: hidden;
+    //   height: auto;
+    //   align-items: center;
+    //   color: #00d1ff;
+    // }
   }
 
   // Bottom Nav
@@ -65,6 +64,8 @@
 
   /* Extra small devices (phones, 600px and down) */
   @media only screen and (max-width: 600px) {
+    justify-content: space-evenly;
+
     .burger-nav {
       height: 56px;
     }
@@ -79,63 +80,23 @@
     }
     .suggested-whisks {
       height: 50vh;
+
+      .vertical-scroll {
+        display: none;
+      }
     }
   }
 
-  // /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 992px) {
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
     .landing-title {
       height: 20vh;
     }
-  }
-}
-
-#title-logo {
-  font-family: $brand-font;
-}
-
-//Vertical Card
-.card-vertical {
-  display: flex;
-  height: 17em;
-  align-items: flex-end;
-  margin: 5%;
-
-  .card {
-    width: 13em;
-    height: 15em;
-    border-radius: 20px;
-    position: relative;
-  }
-
-  .avatar {
-    height: 60%;
-    width: 80%;
-    top: -30px;
-    left: 20px;
-    position: absolute;
-  }
-
-  .card-content {
-    bottom: 0;
-    margin-bottom: 2px;
-    position: absolute;
-  }
-
-  .card-text {
-    @include heading-sm;
-    display: -webkit-box;
-    max-width: 200px;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    @media only screen and (max-width: 768px) {
-      font-size: 100%;
+    .suggested-whisks {
+      .horiz-scroll {
+        display: none;
+      }
     }
-  }
-
-  .MuiCard-root {
-    overflow: visible;
   }
 }
 

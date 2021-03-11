@@ -17,26 +17,3 @@
     flex-wrap: wrap;
   }
 }
-
-.horizontal-card {
-  display: flex;
-  align-items: center;
-  border-radius: 20px !important;
-  height: 9em;
-  width: 100%;
-
-  .avatar {
-    height: 100px;
-    width: 100px;
-    margin-left: 2%;
-  }
-
-  p {
-    font-size: 80%;
-    display: -webkit-box;
-    max-width: 200px;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-}

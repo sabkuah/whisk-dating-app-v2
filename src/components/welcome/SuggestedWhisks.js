@@ -36,20 +36,20 @@ export default function SuggestedWhisks() {
         </WhiskTabs>
 
         {/* If viewing from Mobile, display horizontal scrolling, one row only */}
-        <MobileView>
-          <div className='mobile'>
-            <GridList className={classes.gridList}>
-              {filteredWhisks.map((whisk) => (
-                <div key={whisk.id}>
-                  <CardVertical whisk={whisk} />
-                </div>
-              ))}
-            </GridList>
-          </div>
-        </MobileView>
+
+        <div className='horiz-scroll'>
+          <GridList className={classes.gridList}>
+            {filteredWhisks.map((whisk) => (
+              <div key={whisk.id}>
+                <CardVertical whisk={whisk} />
+              </div>
+            ))}
+          </GridList>
+        </div>
 
         {/* If in browser, display multiple rows, no horizontal scrolling */}
-        <BrowserView>
+
+        <div className='vertical-scroll'>
           <Grid
             container
             justify='flex-start'
@@ -64,7 +64,7 @@ export default function SuggestedWhisks() {
               </Grid>
             ))}
           </Grid>
-        </BrowserView>
+        </div>
       </div>
     </>
   );

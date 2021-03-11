@@ -28,11 +28,11 @@ function App() {
             <Route path='/user/whisks'>
               <ChosenWhisks />
             </Route>
-            <Route path='/whisks/:id'>
-              <WhiskDetails />
-            </Route>
             <Route path='/whisks/search'>
               <SearchResults />
+            </Route>
+            <Route path='/whisks/:id'>
+              <WhiskDetails />
             </Route>
             <Route exact path='/'>
               <Welcome />
