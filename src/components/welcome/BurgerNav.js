@@ -17,7 +17,7 @@ const BurgerNav = () => {
   };
 
   return (
-    <>
+    <div className='burger-nav'>
       <Button
         aria-controls='simple-menu'
         aria-haspopup='true'
@@ -44,7 +44,7 @@ const BurgerNav = () => {
           Profile
         </MenuItem>
       </Menu>
-    </>
+    </div>
   );
 };
 

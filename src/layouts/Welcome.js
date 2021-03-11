@@ -7,15 +7,13 @@ import BurgerNav from '../components/welcome/BurgerNav';
 import SuggestedWhisks from '../components/welcome/SuggestedWhisks';
 import UserContext from '../context/user/userContext';
 
-
 const Welcome = () => {
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
 
   return (
     <Container className='welcome-page'>
       {isAndroid && <BurgerNav />}
-      {
-        userContext.isAuthenticated ? 
+      {userContext.isAuthenticated ? (
         <>
           <div className='landing-title'>
             <h1>
@@ -26,9 +24,9 @@ const Welcome = () => {
           <Search />
           <SuggestedWhisks />
         </>
-        : 
+      ) : (
         <div>Landing Page</div>
-      }
+      )}
       {isIOS && <BottomNav />}
     </Container>
   );

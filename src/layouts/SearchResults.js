@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Container,
   IconButton,
-  Divider,
   InputBase,
   Paper,
   Grid,
@@ -35,7 +34,6 @@ const SearchResults = () => {
             <IconButton className='iconButton' aria-label='search'>
               <SearchIcon />
             </IconButton>
-            <Divider className='divider' orientation='vertical' />
             <InputBase
               className='input'
               placeholder='Search'

@@ -1,18 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList, Tab, Grid } from '@material-ui/core';
+import {
+  GridList,
+  Tab,
+  Grid,
+  Card,
+  CardContent,
+  Avatar,
+  Typography,
+} from '@material-ui/core';
 import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
-import { BrowserView, MobileView } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import WhiskTabs from '../WhiskTabs';
 import UserContext from '../../context/user/userContext';
-import { Auth } from "aws-amplify"
+import { Auth } from 'aws-amplify';
 
 export default function SuggestedWhisks() {
   const classes = useStyles();
   const [value, setValue] = useState('food');
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -25,8 +32,8 @@ export default function SuggestedWhisks() {
       // var cred = await Auth.currentUserCredentials()
       // var info = await Auth.currentUserInfo()
       // console.log("welcome user", userContext.user,currentSession ,cred, info)
-    }
-    getInfo()
+    };
+    getInfo();
   }, [value]);
 
   return (
@@ -44,32 +51,48 @@ export default function SuggestedWhisks() {
           <Tab label='Adventure' value='adventure' />
         </WhiskTabs>
 
-        {/* If viewing from Mobile, display horizontal scrolling, one row only */}
-        <MobileView>
-          <div className='mobile'>
-            <GridList className={classes.gridList}>
-              {filteredWhisks.map((whisk) => (
-                <div key={whisk.id}>
-                  <CardVertical whisk={whisk} />
-                </div>
-              ))}
-            </GridList>
-          </div>
-        </MobileView>
+        {/* If viewing from Mobile/small screen, display horizontal scrolling, one row only */}
 
-        {/* If in browser, display multiple rows, no horizontal scrolling */}
-        <BrowserView>
-          <Grid container spacing={2}>
-            {
-              filteredWhisks.map(whisk => (
-              <Grid item key={whisk.id}>
+        <div className='horiz-scroll'>
+          <GridList className={classes.gridList} id='horiz-grid'>
+            {filteredWhisks.map((whisk) => (
+              <div key={whisk.id}>
+                <CardVertical whisk={whisk} />
+              </div>
+            ))}
+          </GridList>
+        </div>
+
+        {/* If in larger screen/browser, display multiple rows, no horizontal scrolling */}
+
+        <div className='vertical-scroll'>
+          <Grid container justify='flex-start' spacing={2}>
+            {filteredWhisks.map((whisk, i) => (
+              <Grid
+                item
+                sm={4}
+                md={3}
+                key={whisk.id}
+                className='v-card-vertical'
+              >
                 <Link to={`/whisks/${whisk.id}`}>
-                  <CardVertical whisk={whisk} />
+                  <Avatar
+                    className='v-avatar'
+                    alt={whisk.title}
+                    src={whisk.images[0]}
+                  />
+                  <Card className='v-card'>
+                    <CardContent className='v-card-content'>
+                      <Typography className='v-card-text'>
+                        {whisk.title}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Link>
               </Grid>
             ))}
           </Grid>
-        </BrowserView>
+        </div>
       </div>
     </>
   );
@@ -83,9 +106,4 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#f2f2f2',
     height: '18em',
   },
-  // browser: {
-  //   display: 'flex',
-  //   flexWrap: 'wrap',
-  //   justifyContent: 'space-between',
-  // },
 }));
