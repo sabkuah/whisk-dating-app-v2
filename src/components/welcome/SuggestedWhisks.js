@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
-import { BrowserView, MobileView } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import WhiskTabs from '../WhiskTabs';
 
@@ -74,8 +73,8 @@ export default function SuggestedWhisks() {
                     src={whisk.images[0]}
                   />
                   <Card className='v-card'>
-                    <CardContent className='card-content'>
-                      <Typography className='card-text'>
+                    <CardContent className='v-card-content'>
+                      <Typography className='v-card-text'>
                         {whisk.title}
                       </Typography>
                     </CardContent>

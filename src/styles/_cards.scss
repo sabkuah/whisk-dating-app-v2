@@ -14,7 +14,7 @@
 
     .avatar {
       top: -30px;
-      left: 18px;
+      left: 1.5rem;
       width: 120px;
       height: 120px;
     }
@@ -63,29 +63,33 @@
 //==================================
 
 .vertical-scroll {
-  .card-vertical {
-    display: flex;
+  margin-bottom: 10%;
+  .v-card-vertical {
     height: 20em;
+    display: flex;
     align-items: flex-end;
-    margin: 5%;
 
-    .avatar {
+    .v-avatar {
       top: 70px;
       width: 140px;
       height: 140px;
+      left: 2em; //how can I make this more responsive??
     }
 
-    .card {
-      height: 15em;
+    .v-card {
+      height: 14em;
+      width: 13em;
       border-radius: 20px;
+      display: flex;
+      align-items: flex-end;
     }
 
-    .card-content {
+    .v-card-content {
       bottom: 0;
       margin-bottom: 2px;
     }
 
-    .card-text {
+    .v-card-text {
       @include heading-sm;
       display: -webkit-box;
       max-width: 200px;
