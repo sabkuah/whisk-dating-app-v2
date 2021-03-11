@@ -11,6 +11,8 @@ const Navigation = () => {
     userContext.logoutUser()
     history.push("/")
   }
+
+
   return (
     <AppBar position='static' className='nav-container'>
       <Toolbar>
@@ -25,7 +27,7 @@ const Navigation = () => {
           {userContext.isAuthenticated ? 
             <>
               <Link to='/user'>Profile</Link>
-              <Button onClick={() => logout() }>Logout</Button>
+              <Button onClick={() => logout()}>Logout</Button>
             </>
           : 
             <>
