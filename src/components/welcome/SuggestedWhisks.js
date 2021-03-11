@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList, Tab, Grid } from '@material-ui/core';
+import {
+  GridList,
+  Tab,
+  Grid,
+  Card,
+  CardContent,
+  Avatar,
+  Typography,
+} from '@material-ui/core';
 import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
 import { BrowserView, MobileView } from 'react-device-detect';
@@ -35,10 +43,10 @@ export default function SuggestedWhisks() {
           <Tab label='Adventure' value='adventure' />
         </WhiskTabs>
 
-        {/* If viewing from Mobile, display horizontal scrolling, one row only */}
+        {/* If viewing from Mobile/small screen, display horizontal scrolling, one row only */}
 
         <div className='horiz-scroll'>
-          <GridList className={classes.gridList}>
+          <GridList className={classes.gridList} id='horiz-grid'>
             {filteredWhisks.map((whisk) => (
               <div key={whisk.id}>
                 <CardVertical whisk={whisk} />
@@ -47,19 +55,31 @@ export default function SuggestedWhisks() {
           </GridList>
         </div>
 
-        {/* If in browser, display multiple rows, no horizontal scrolling */}
+        {/* If in larger screen/browser, display multiple rows, no horizontal scrolling */}
 
         <div className='vertical-scroll'>
-          <Grid
-            container
-            justify='flex-start'
-            spacing={2}
-            className={classes.browser}
-          >
+          <Grid container justify='flex-start' spacing={2}>
             {filteredWhisks.map((whisk, i) => (
-              <Grid item key={whisk.id}>
+              <Grid
+                item
+                sm={4}
+                md={3}
+                key={whisk.id}
+                className='v-card-vertical'
+              >
                 <Link to={`/whisks/${whisk.id}`}>
-                  <CardVertical whisk={whisk} />
+                  <Avatar
+                    className='v-avatar'
+                    alt={whisk.title}
+                    src={whisk.images[0]}
+                  />
+                  <Card className='v-card'>
+                    <CardContent className='card-content'>
+                      <Typography className='card-text'>
+                        {whisk.title}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Link>
               </Grid>
             ))}
@@ -78,9 +98,4 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#f2f2f2',
     height: '18em',
   },
-  // browser: {
-  //   display: 'flex',
-  //   flexWrap: 'wrap',
-  //   justifyContent: 'space-between',
-  // },
 }));

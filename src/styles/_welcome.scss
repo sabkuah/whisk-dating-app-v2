@@ -63,7 +63,36 @@
   }
 
   /* Extra small devices (phones, 600px and down) */
-  @media only screen and (max-width: 600px) {
+
+  @media only screen and (max-width: 370px) {
+    justify-content: space-evenly;
+
+    .burger-nav {
+      height: 56px;
+    }
+    .landing-title {
+      height: 12vh;
+      h1 {
+        font-size: 2em;
+      }
+    }
+    .search {
+      height: 7vh;
+    }
+    .suggested-whisks {
+      height: 60vh;
+
+      .vertical-scroll {
+        display: none;
+      }
+    }
+
+    #horiz-grid {
+      align-items: flex-end;
+    }
+  }
+
+  @media only screen and (min-width: 370px) {
     justify-content: space-evenly;
 
     .burger-nav {
@@ -88,7 +117,7 @@
   }
 
   /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 600px) {
     .landing-title {
       height: 20vh;
     }

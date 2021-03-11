@@ -1,6 +1,6 @@
-//=======================
-//   Vertical Cards
-//=======================
+//==================================
+//   Vertical Cards in Mobile/Horizontal View
+//==================================
 .card-vertical {
   display: flex;
   height: 17em;
@@ -8,16 +8,16 @@
   margin: 5%;
 
   .card {
-    width: 12em;
     height: 15em;
+    width: 12em;
     border-radius: 20px;
-  }
 
-  .avatar {
-    height: 8rem;
-    width: 8rem;
-    top: -30px;
-    left: 15%;
+    .avatar {
+      top: -30px;
+      left: 18px;
+      width: 120px;
+      height: 120px;
+    }
   }
 
   .card-content {
@@ -39,6 +39,82 @@
 
   .MuiCard-root {
     overflow: visible;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .card-vertical {
+    height: 10em;
+
+    .card {
+      height: 12em;
+      width: 12em;
+
+      .avatar {
+        height: 95px;
+        width: 95px;
+      }
+    }
+  }
+}
+
+//==================================
+// Vertical Cards in Vertical Scroll
+//==================================
+
+.vertical-scroll {
+  .card-vertical {
+    display: flex;
+    height: 20em;
+    align-items: flex-end;
+    margin: 5%;
+
+    .avatar {
+      top: 70px;
+      width: 140px;
+      height: 140px;
+    }
+
+    .card {
+      height: 15em;
+      border-radius: 20px;
+    }
+
+    .card-content {
+      bottom: 0;
+      margin-bottom: 2px;
+    }
+
+    .card-text {
+      @include heading-sm;
+      display: -webkit-box;
+      max-width: 200px;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      @media only screen and (max-width: 768px) {
+        font-size: 100%;
+      }
+    }
+
+    .MuiCard-root {
+      overflow: visible;
+    }
+
+    @media only screen and (max-width: 600px) {
+      height: 17em;
+
+      .card {
+        width: 12em;
+      }
+
+      .avatar {
+        height: 8rem;
+        width: 8rem;
+        top: -30px;
+        left: 15%;
+      }
+    }
   }
 }
 
