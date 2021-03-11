@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   GridList,
@@ -13,18 +13,27 @@ import CardVertical from '../CardVertical';
 import filteredWhisks from './dummyData';
 import { Link } from 'react-router-dom';
 import WhiskTabs from '../WhiskTabs';
+import UserContext from '../../context/user/userContext';
+import { Auth } from 'aws-amplify';
 
 export default function SuggestedWhisks() {
   const classes = useStyles();
   const [value, setValue] = useState('food');
-
+  const userContext = useContext(UserContext);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    console.log('value', value);
+    // console.log('value', value);
     //add filtering logic
+    const getInfo = async () => {
+      // var currentSession = await Auth.currentSession()
+      // var cred = await Auth.currentUserCredentials()
+      // var info = await Auth.currentUserInfo()
+      // console.log("welcome user", userContext.user,currentSession ,cred, info)
+    };
+    getInfo();
   }, [value]);
 
   return (

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Avatar, Button, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserContext from '../context/user/userContext';
+import { Auth } from "aws-amplify"
 
 const UserProfile = () => {
   const dp =
