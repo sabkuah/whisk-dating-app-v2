@@ -1,0 +1,150 @@
+//==================================
+//   Vertical Cards in Mobile/Horizontal View
+//==================================
+.card-vertical {
+  display: flex;
+  height: 17em;
+  align-items: flex-end;
+  margin: 5%;
+
+  .card {
+    height: 15em;
+    width: 12em;
+    border-radius: 20px;
+
+    .avatar {
+      top: -30px;
+      left: 1.5rem;
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  .card-content {
+    bottom: 0;
+    margin-bottom: 2px;
+  }
+
+  .card-text {
+    @include heading-sm;
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    @media only screen and (max-width: 768px) {
+      font-size: 100%;
+    }
+  }
+
+  .MuiCard-root {
+    overflow: visible;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .card-vertical {
+    height: 10em;
+
+    .card {
+      height: 12em;
+      width: 12em;
+
+      .avatar {
+        height: 95px;
+        width: 95px;
+      }
+    }
+  }
+}
+
+//==================================
+// Vertical Cards in Vertical Scroll
+//==================================
+
+.vertical-scroll {
+  margin-bottom: 10%;
+  .v-card-vertical {
+    height: 20em;
+    display: flex;
+    align-items: flex-end;
+
+    .v-avatar {
+      top: 70px;
+      width: 140px;
+      height: 140px;
+      left: 2em; //how can I make this more responsive??
+    }
+
+    .v-card {
+      height: 14em;
+      width: 13em;
+      border-radius: 20px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .v-card-content {
+      bottom: 0;
+      margin-bottom: 2px;
+    }
+
+    .v-card-text {
+      @include heading-sm;
+      display: -webkit-box;
+      max-width: 200px;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      @media only screen and (max-width: 768px) {
+        font-size: 100%;
+      }
+    }
+
+    .MuiCard-root {
+      overflow: visible;
+    }
+
+    @media only screen and (max-width: 600px) {
+      height: 17em;
+
+      .card {
+        width: 12em;
+      }
+
+      .avatar {
+        height: 8rem;
+        width: 8rem;
+        top: -30px;
+        left: 15%;
+      }
+    }
+  }
+}
+
+//=======================
+//   Horicontal Cards
+//=======================
+
+.horizontal-card {
+  display: flex;
+  align-items: center;
+  border-radius: 20px !important;
+  height: 9em;
+  width: 100%;
+
+  .avatar {
+    height: 100px;
+    width: 100px;
+    margin-left: 2%;
+  }
+
+  p {
+    font-size: 80%;
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

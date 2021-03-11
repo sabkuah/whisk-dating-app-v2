@@ -8,9 +8,8 @@ import SuggestedWhisks from '../components/welcome/SuggestedWhisks';
 import UserContext from '../context/user/userContext';
 import LandingPage from './LandingPage';
 
-
 const Welcome = () => {
-  const userContext = useContext(UserContext)
+  const userContext = useContext(UserContext);
 
   return (
     userContext.isAuthenticated ? 
