@@ -36,7 +36,7 @@ const WhiskState = (props) => {
     try {
       (async function () {
         const items = await getData();
-        console.log('SCAN WHISKS>>>', items);
+        console.log('SCAN DB for whisks >>>', items);
         dispatch({
           type: SCAN_WHISKS,
           payload: items,

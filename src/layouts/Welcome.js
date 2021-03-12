@@ -13,13 +13,23 @@ import Spinner from '../components/Spinner';
 const Welcome = () => {
   const userContext = useContext(UserContext);
   const whiskContext = useContext(WhiskContext);
-  const { loading, setLoadingTrue, scanWhisks, whisks } = whiskContext;
+  const {
+    loading,
+    setLoadingTrue,
+    scanWhisks,
+    whisks,
+    setLoadingFalse,
+  } = whiskContext;
 
   useEffect(() => {
-    setLoadingTrue();
-    scanWhisks();
+    if (whisks.length) {
+      setLoadingFalse();
+    } else {
+      setLoadingTrue();
+      scanWhisks();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [whisks]);
 
   if (!userContext.isAuthenticated) return <LandingPage />;
   else if (loading) return <Spinner />;
