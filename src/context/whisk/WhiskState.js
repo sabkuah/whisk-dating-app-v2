@@ -3,6 +3,7 @@ import { SET_LOADING, GET_WHISK, SCAN_WHISKS } from '../types';
 import WhiskContext from './whiskContext';
 import WhiskReducer from './whiskReducer';
 import axios from 'axios';
+import Amplify, { API } from 'aws-amplify';
 
 const WhiskState = (props) => {
   const initialState = {
@@ -12,44 +13,74 @@ const WhiskState = (props) => {
   };
 
   const [state, dispatch] = useReducer(WhiskReducer, initialState);
-  const BASE_URL = '/placeholder.com'; //placeholder, URL to be imported from .env
 
   //=======================
   //    Scan Whisks
+  //  /api/Whisks
   //=======================
 
-  const scanWhisks = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/whisks`);
-      const items = JSON.parse(response.data.body);
-      console.log('Whisks retrieved>>>', items);
+  function getData() {
+    const apiName = 'WhiskPro';
+    const path = '/api/User';
+    const myInit = {
+      // OPTIONAL
+      headers: {}, // OPTIONAL
+    };
+    return API.get(apiName, path, myInit);
+  }
+  (async function () {
+    const response = await getData();
+    console.log(response);
+  })();
 
-      dispatch({
-        type: SCAN_WHISKS,
-        payload: items,
-      });
-    } catch (e) {
-      console.log('Error: ', e);
+  const scanWhisks = async () => {
+    function getData() {
+      const apiName = 'WhiskPro';
+      const path = '/api/Whisk';
+      const myInit = {
+        // OPTIONAL
+        headers: {}, // OPTIONAL
+      };
+      return API.get(apiName, path, myInit);
     }
+    (async function () {
+      const response = await getData();
+      console.log('SCAN WHISKS>>>', response);
+    })();
+
+    // try {
+    //   const response = await axios.get(`${BASE_URL}/whisks`);
+    //   const items = JSON.parse(response.data.body);
+    //   console.log('Whisks retrieved>>>', items);
+
+    //   dispatch({
+    //     type: SCAN_WHISKS,
+    //     payload: items,
+    //   });
+    // } catch (e) {
+    //   console.log('Error: ', e);
+    // }
   };
 
   //=======================
   //  Get Whisk By Id
   //=======================
 
-  const getWhisk = async (whiskId) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/whisks/${whiskId}`);
-      console.log('Whisk retrieved>>>', response.data);
+  // /api/object/Whisk/id
 
-      dispatch({
-        type: GET_WHISK,
-        payload: response.data,
-      });
-    } catch (e) {
-      console.log('Error: ', e);
-    }
-  };
+  // const getWhisk = async (whiskId) => {
+  //   try {
+  //     const response = await axios.get(`${BASE_URL}/whisks/${whiskId}`);
+  //     console.log('Whisk retrieved>>>', response.data);
+
+  //     dispatch({
+  //       type: GET_WHISK,
+  //       payload: response.data,
+  //     });
+  //   } catch (e) {
+  //     console.log('Error: ', e);
+  //   }
+  // };
 
   //=======================
   //    Set Loading
@@ -64,7 +95,7 @@ const WhiskState = (props) => {
         loading: state.loading,
         setLoading,
         scanWhisks,
-        getWhisk,
+        //getWhisk,
       }}
     >
       {props.children}

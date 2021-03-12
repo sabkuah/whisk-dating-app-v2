@@ -15,10 +15,10 @@ const Welcome = () => {
   const whiskContext = useContext(WhiskContext);
   const { loading, setLoading, scanWhisks } = whiskContext;
 
-  // useEffect(() => {
-  //   setLoading();
-  //   scanWhisks();
-  // }, []);
+  useEffect(() => {
+    //setLoading();
+    scanWhisks();
+  }, []);
 
   if (!userContext.isAuthenticated) return <LandingPage />;
   else if (loading) return <Spinner />;
