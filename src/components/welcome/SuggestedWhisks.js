@@ -17,22 +17,24 @@ import { Auth } from 'aws-amplify';
 
 export default function SuggestedWhisks({ whisks }) {
   const classes = useStyles();
-  const [value, setValue] = useState('food');
+  const [value, setValue] = useState('all');
   const userContext = useContext(UserContext);
-  const handleChange = (event, newValue) => {
+  const [filteredWhisks, setFilteredWhisks] = useState(whisks);
+
+  const handleChange = (_, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    // console.log('value', value);
-    //add filtering logic
-    const getInfo = async () => {
-      // var currentSession = await Auth.currentSession()
-      // var cred = await Auth.currentUserCredentials()
-      // var info = await Auth.currentUserInfo()
-      // console.log("welcome user", userContext.user,currentSession ,cred, info)
-    };
-    getInfo();
+    if (value === 'all') {
+      setFilteredWhisks(whisks);
+    } else {
+      const filtered = whisks.filter((w) => {
+        return w.category === value;
+      });
+      setFilteredWhisks(filtered);
+      console.log('number in array', filteredWhisks.length);
+    }
   }, [value]);
 
   return (
@@ -45,8 +47,9 @@ export default function SuggestedWhisks({ whisks }) {
           aria-label='whisk categories'
           className='tabs'
         >
+          <Tab label='All' value='all' />
           <Tab label='Food' value='food' />
-          <Tab label='Outdoors' value='outdoor' />
+          <Tab label='Outdoors' value='outdoors' />
           <Tab label='Adventure' value='adventure' />
         </WhiskTabs>
 
@@ -54,7 +57,7 @@ export default function SuggestedWhisks({ whisks }) {
 
         <div className='horiz-scroll'>
           <GridList className={classes.gridList} id='horiz-grid'>
-            {whisks.map((whisk) => (
+            {filteredWhisks.map((whisk) => (
               <Link to={`/whisks/${whisk.ID}`} key={whisk.ID}>
                 <CardVertical whisk={whisk} />
               </Link>
@@ -66,7 +69,7 @@ export default function SuggestedWhisks({ whisks }) {
 
         <div className='vertical-scroll'>
           <Grid container justify='flex-start' spacing={2}>
-            {whisks.map((whisk, i) => (
+            {filteredWhisks.map((whisk, i) => (
               <Grid
                 item
                 sm={4}
@@ -74,7 +77,7 @@ export default function SuggestedWhisks({ whisks }) {
                 key={whisk.ID}
                 className='v-card-vertical'
               >
-                <Link to={(`/whisks/${whisk.ID}`, whisk)}>
+                <Link to={`/whisks/${whisk.ID}`}>
                   <Avatar
                     className='v-avatar'
                     alt={whisk.title}
