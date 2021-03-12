@@ -1,5 +1,10 @@
 import React, { useReducer } from 'react';
-import { SET_LOADING, GET_WHISK, SCAN_WHISKS } from '../types';
+import {
+  GET_WHISK,
+  SCAN_WHISKS,
+  SET_LOADING_TRUE,
+  SET_LOADING_FALSE,
+} from '../types';
 import WhiskContext from './whiskContext';
 import WhiskReducer from './whiskReducer';
 import Amplify, { API } from 'aws-amplify';
@@ -7,8 +12,8 @@ import Amplify, { API } from 'aws-amplify';
 const WhiskState = (props) => {
   const initialState = {
     whisks: [],
-    whisk: {},
-    loading: false,
+    //whisk: {},
+    loading: true,
   };
 
   const [state, dispatch] = useReducer(WhiskReducer, initialState);
@@ -47,34 +52,41 @@ const WhiskState = (props) => {
   // /api/object/Whisk/id
   //=======================
 
-  // const getWhisk = async (whiskId) => {
-  //   try {
-  //     const response = await axios.get(`${BASE_URL}/whisks/${whiskId}`);
-  //     console.log('Whisk retrieved>>>', response.data);
+  const getWhisk = async (id) => {
+    function getData() {
+      const apiName = 'WhiskPro';
+      const path = `/api/object/Whisk/${id}`;
+      const myInit = {
+        headers: {},
+      };
+      return API.get(apiName, path, myInit);
+    }
 
-  //     dispatch({
-  //       type: GET_WHISK,
-  //       payload: response.data,
-  //     });
-  //   } catch (e) {
-  //     console.log('Error: ', e);
-  //   }
-  // };
+    try {
+      const item = await getData();
+      console.log('GET WHISK>>>', item);
+      return item;
+    } catch (e) {
+      console.log('Error: ', e);
+    }
+  };
 
   //=======================
   //    Set Loading
   //=======================
-  const setLoading = () => dispatch({ type: SET_LOADING });
+  const setLoadingTrue = () => dispatch({ type: SET_LOADING_TRUE });
+  const setLoadingFalse = () => dispatch({ type: SET_LOADING_FALSE });
 
   return (
     <WhiskContext.Provider
       value={{
         whisks: state.whisks,
-        whisk: state.whisk,
+        //whisk: state.whisk,
         loading: state.loading,
-        setLoading,
+        setLoadingTrue,
+        setLoadingFalse,
         scanWhisks,
-        //getWhisk,
+        getWhisk,
       }}
     >
       {props.children}

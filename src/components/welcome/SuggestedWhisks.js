@@ -55,9 +55,9 @@ export default function SuggestedWhisks({ whisks }) {
         <div className='horiz-scroll'>
           <GridList className={classes.gridList} id='horiz-grid'>
             {whisks.map((whisk) => (
-              <div key={whisk.id}>
+              <Link to={`/whisks/${whisk.ID}`} key={whisk.ID}>
                 <CardVertical whisk={whisk} />
-              </div>
+              </Link>
             ))}
           </GridList>
         </div>
@@ -71,10 +71,10 @@ export default function SuggestedWhisks({ whisks }) {
                 item
                 sm={4}
                 md={3}
-                key={whisk.id}
+                key={whisk.ID}
                 className='v-card-vertical'
               >
-                <Link to={`/whisks/${whisk.id}`}>
+                <Link to={(`/whisks/${whisk.ID}`, whisk)}>
                   <Avatar
                     className='v-avatar'
                     alt={whisk.title}

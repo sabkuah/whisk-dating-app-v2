@@ -13,11 +13,12 @@ import Spinner from '../components/Spinner';
 const Welcome = () => {
   const userContext = useContext(UserContext);
   const whiskContext = useContext(WhiskContext);
-  const { loading, setLoading, scanWhisks, whisks } = whiskContext;
+  const { loading, setLoadingTrue, scanWhisks, whisks } = whiskContext;
 
   useEffect(() => {
-    setLoading();
+    setLoadingTrue();
     scanWhisks();
+    // eslint-disable-next-line
   }, []);
 
   if (!userContext.isAuthenticated) return <LandingPage />;
