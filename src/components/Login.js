@@ -24,6 +24,7 @@ const Login = () => {
   const submitForm = async (e) => {
     e.preventDefault()
     if (tab === 1) {
+      // ------ REGISTER ------
       try {
         const user = await Auth.signUp({
           username: email,
@@ -39,12 +40,31 @@ const Login = () => {
           username: user.user.username,
           sub: user.userSub,
         })
-        history.push("/")
+        var newUser = {
+          "Bio": "",
+          "DateJoined": new Date().toISOString(),
+          "Fname": "",
+          "Lname": "",
+          "ID": user.userSub,
+          "Type": "User",
+          "Images": [],
+          "Interests": [],
+          "Matches": [],
+          "Phone": "",
+          "Preference": [],
+          "ProfileImage": "",
+          "ProfileQuestionnaire": [],
+          
+        }
+        console.log("new user obj",newUser)
+        userContext.postUser(newUser)
+        history.push("/user")
       } catch (err) {
         console.log(err)
         setErrorMsg(err.message)
       }
     } else {
+      // ------ LOGIN ------
       try {
         const user = await Auth.signIn({
           username: email,

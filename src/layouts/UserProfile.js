@@ -1,18 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Avatar, Button, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserContext from '../context/user/userContext';
-import { Auth } from "aws-amplify"
+
+const dp =
+'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80';
 
 const UserProfile = () => {
-  const dp =
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80';
+  const [user, setUser] = useState(null);
   const userContext = useContext(UserContext);
 
   useEffect(() => {
-    console.log('user page', userContext.user);
-    //to remove dependency array warning for above console log
-    // eslint-disable-next-line
+    const getUserData = async () => {
+      var userInfo = await userContext.user
+      console.log("userinfo", userInfo)
+      // const allUsers = await userContext.getAllUsers()
+      const response = await userContext.getUser(userInfo.sub); //ID  "75648392" // "872c97d4-de77-46f6-8ba3-d6b2d460c3a7"
+      console.log("getUserData", response)
+      setUser(response)
+    }
+    getUserData()
   }, []);
 
   return (
