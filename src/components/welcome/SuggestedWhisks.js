@@ -10,13 +10,12 @@ import {
   Typography,
 } from '@material-ui/core';
 import CardVertical from '../CardVertical';
-import filteredWhisks from './dummyData';
 import { Link } from 'react-router-dom';
 import WhiskTabs from '../WhiskTabs';
 import UserContext from '../../context/user/userContext';
 import { Auth } from 'aws-amplify';
 
-export default function SuggestedWhisks() {
+export default function SuggestedWhisks({ whisks }) {
   const classes = useStyles();
   const [value, setValue] = useState('food');
   const userContext = useContext(UserContext);
@@ -55,7 +54,7 @@ export default function SuggestedWhisks() {
 
         <div className='horiz-scroll'>
           <GridList className={classes.gridList} id='horiz-grid'>
-            {filteredWhisks.map((whisk) => (
+            {whisks.map((whisk) => (
               <div key={whisk.id}>
                 <CardVertical whisk={whisk} />
               </div>
@@ -67,7 +66,7 @@ export default function SuggestedWhisks() {
 
         <div className='vertical-scroll'>
           <Grid container justify='flex-start' spacing={2}>
-            {filteredWhisks.map((whisk, i) => (
+            {whisks.map((whisk, i) => (
               <Grid
                 item
                 sm={4}

@@ -13,10 +13,10 @@ import Spinner from '../components/Spinner';
 const Welcome = () => {
   const userContext = useContext(UserContext);
   const whiskContext = useContext(WhiskContext);
-  const { loading, setLoading, scanWhisks } = whiskContext;
+  const { loading, setLoading, scanWhisks, whisks } = whiskContext;
 
   useEffect(() => {
-    //setLoading();
+    setLoading();
     scanWhisks();
   }, []);
 
@@ -33,7 +33,7 @@ const Welcome = () => {
           </h1>
         </div>
         <Search />
-        <SuggestedWhisks />
+        <SuggestedWhisks whisks={whisks} />
         {isIOS && <BottomNav />}
       </Container>
     );

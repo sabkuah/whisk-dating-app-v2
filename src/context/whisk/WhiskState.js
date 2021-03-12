@@ -2,7 +2,6 @@ import React, { useReducer } from 'react';
 import { SET_LOADING, GET_WHISK, SCAN_WHISKS } from '../types';
 import WhiskContext from './whiskContext';
 import WhiskReducer from './whiskReducer';
-import axios from 'axios';
 import Amplify, { API } from 'aws-amplify';
 
 const WhiskState = (props) => {
@@ -16,57 +15,37 @@ const WhiskState = (props) => {
 
   //=======================
   //    Scan Whisks
-  //  /api/Whisks
+  // /api/Whisks
   //=======================
-
-  function getData() {
-    const apiName = 'WhiskPro';
-    const path = '/api/User';
-    const myInit = {
-      // OPTIONAL
-      headers: {}, // OPTIONAL
-    };
-    return API.get(apiName, path, myInit);
-  }
-  (async function () {
-    const response = await getData();
-    console.log(response);
-  })();
 
   const scanWhisks = async () => {
     function getData() {
       const apiName = 'WhiskPro';
       const path = '/api/Whisk';
       const myInit = {
-        // OPTIONAL
-        headers: {}, // OPTIONAL
+        headers: {},
       };
       return API.get(apiName, path, myInit);
     }
-    (async function () {
-      const response = await getData();
-      console.log('SCAN WHISKS>>>', response);
-    })();
 
-    // try {
-    //   const response = await axios.get(`${BASE_URL}/whisks`);
-    //   const items = JSON.parse(response.data.body);
-    //   console.log('Whisks retrieved>>>', items);
-
-    //   dispatch({
-    //     type: SCAN_WHISKS,
-    //     payload: items,
-    //   });
-    // } catch (e) {
-    //   console.log('Error: ', e);
-    // }
+    try {
+      (async function () {
+        const items = await getData();
+        console.log('SCAN WHISKS>>>', items);
+        dispatch({
+          type: SCAN_WHISKS,
+          payload: items,
+        });
+      })();
+    } catch (e) {
+      console.log('Error: ', e);
+    }
   };
 
   //=======================
   //  Get Whisk By Id
-  //=======================
-
   // /api/object/Whisk/id
+  //=======================
 
   // const getWhisk = async (whiskId) => {
   //   try {
