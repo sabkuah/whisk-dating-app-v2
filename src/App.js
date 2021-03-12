@@ -12,10 +12,12 @@ import Login from './components/Login';
 
 import Amplify from "aws-amplify"
 import config from "./aws-exports"
+import ProtectedRoute from './components/ProtectedRoute';
 
 Amplify.configure(config)
 
 function App() {
+
   return (
     <UserState>
       <WhiskState>
@@ -27,9 +29,10 @@ function App() {
             <Route path='/login'>
               <Login />
             </Route>
-            <Route path='/user'>
+            <ProtectedRoute path="/user" component={UserProfile}/>
+            {/* <Route path='/user'>
               <UserProfile />
-            </Route>
+            </Route> */}
             <Route path='/user/whisks'>
               <ChosenWhisks />
             </Route>

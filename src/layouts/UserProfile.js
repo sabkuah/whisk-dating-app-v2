@@ -11,9 +11,11 @@ const UserProfile = () => {
     const getUserData = async () => {
       var userInfo = await userContext.user
       console.log("userinfo", userInfo)
-      const response = await userContext.getUser(userInfo.sub);
-      console.log("getUserData", response)
-      setUser(response)
+      if (userInfo) {
+        const response = await userContext.getUser(userInfo.sub);
+        console.log("getUserData", response)
+        setUser(response)
+      }
     }
     getUserData()
   }, []);

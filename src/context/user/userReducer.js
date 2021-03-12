@@ -14,7 +14,7 @@ const UserReducer = (state, action) => {
       return {
         ...state,
         //placeholder
-        user: {},
+        user: null,
         isAuthenticated: false
       };
     case CURRENT_USER:
