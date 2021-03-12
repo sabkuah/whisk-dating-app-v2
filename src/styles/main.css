@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Chewy&family=Raleway&display=swap");
-.welcome-page .burger-icon {
+.welcome-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 56px);
+  /* Extra small devices (phones, 600px and down) */
+  /* Medium devices (landscape tablets, 768px and up) */
+}
+.welcome-page .burger-nav {
+  display: flex;
+  align-items: flex-end;
+}
+.welcome-page .burger-nav .burger-icon {
   color: #00d1ff;
   font-size: 30px;
 }
@@ -16,20 +27,12 @@
   line-height: 1.5;
 }
 .welcome-page .suggested-whisks {
-  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
 }
 .welcome-page .suggested-whisks .tabs {
   margin-top: 3%;
   margin-bottom: 3%;
-}
-.welcome-page .suggested-whisks .mobile {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  overflow: hidden;
-  height: auto;
-  align-items: center;
-  color: #00d1ff;
 }
 .welcome-page .bottom-nav {
   width: 100%;
@@ -44,59 +47,62 @@
   color: #00d1ff;
   text-shadow: 0 10px 10px;
 }
-@media only screen and (min-width: 992px) {
+@media only screen and (max-width: 370px) {
+  .welcome-page {
+    justify-content: space-evenly;
+  }
+  .welcome-page .burger-nav {
+    height: 56px;
+  }
+  .welcome-page .landing-title {
+    height: 12vh;
+  }
+  .welcome-page .landing-title h1 {
+    font-size: 2em;
+  }
+  .welcome-page .search {
+    height: 7vh;
+  }
+  .welcome-page .suggested-whisks {
+    height: 60vh;
+  }
+  .welcome-page .suggested-whisks .vertical-scroll {
+    display: none;
+  }
+  .welcome-page #horiz-grid {
+    align-items: flex-end;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .welcome-page {
+    justify-content: space-evenly;
+  }
+  .welcome-page .burger-nav {
+    height: 56px;
+  }
   .welcome-page .landing-title {
     height: 20vh;
   }
-}
-
-#title-logo {
-  font-family: "Chewy", cursive;
-}
-
-.card-vertical {
-  display: flex;
-  height: 17em;
-  align-items: flex-end;
-  margin: 5%;
-}
-.card-vertical .card {
-  width: 13em;
-  height: 15em;
-  border-radius: 20px;
-  position: relative;
-}
-.card-vertical .avatar {
-  height: 60%;
-  width: 80%;
-  top: -30px;
-  left: 20px;
-  position: absolute;
-}
-.card-vertical .card-content {
-  bottom: 0;
-  margin-bottom: 2px;
-  position: absolute;
-}
-.card-vertical .card-text {
-  font-family: "Raleway", sans-serif;
-  color: black;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 1.5;
-  display: -webkit-box;
-  max-width: 200px;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-@media only screen and (max-width: 768px) {
-  .card-vertical .card-text {
-    font-size: 100%;
+  .welcome-page .landing-title h1 {
+    font-size: 2em;
+  }
+  .welcome-page .search {
+    height: 8vh;
+  }
+  .welcome-page .suggested-whisks {
+    height: 50vh;
+  }
+  .welcome-page .suggested-whisks .vertical-scroll {
+    display: none;
   }
 }
-.card-vertical .MuiCard-root {
-  overflow: visible;
+@media only screen and (min-width: 600px) {
+  .welcome-page .landing-title {
+    height: 20vh;
+  }
+  .welcome-page .suggested-whisks .horiz-scroll {
+    display: none;
+  }
 }
 
 .search {
@@ -120,6 +126,42 @@
 .search .search-bar .divider {
   height: 28;
   margin: 4;
+}
+
+.hero-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("https://images.unsplash.com/photo-1588285210516-0ad37ef7f09e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80");
+  height: 70vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin-top: -0.5em;
+}
+.hero-background .text-container {
+  padding: 0 3em;
+}
+.hero-background h4 {
+  padding: 3em 0 1em 0;
+  font-weight: bold;
+}
+.hero-background Button {
+  background: #00d1ff;
+  color: white;
+  border-radius: 30px;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
+  width: 25%;
+  margin: 1.5em 10px;
+}
+.hero-background #register {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  border-radius: 30px;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
 }
 
 .whisk-details .top-nav {
@@ -190,27 +232,6 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.horizontal-card {
-  display: flex;
-  align-items: center;
-  border-radius: 20px !important;
-  height: 9em;
-  width: 100%;
-}
-.horizontal-card .avatar {
-  height: 100px;
-  width: 100px;
-  margin-left: 2%;
-}
-.horizontal-card p {
-  font-size: 80%;
-  display: -webkit-box;
-  max-width: 200px;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 #card-root {
@@ -330,6 +351,142 @@ amplify-authenticator {
   justify-content: space-between;
   width: 20%;
   align-items: center;
+}
+
+.card-vertical {
+  display: flex;
+  height: 17em;
+  align-items: flex-end;
+  margin: 5%;
+}
+.card-vertical .card {
+  height: 15em;
+  width: 12em;
+  border-radius: 20px;
+}
+.card-vertical .card .avatar {
+  top: -30px;
+  left: 1.5rem;
+  width: 120px;
+  height: 120px;
+}
+.card-vertical .card-content {
+  bottom: 0;
+  margin-bottom: 2px;
+}
+.card-vertical .card-text {
+  font-family: "Raleway", sans-serif;
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@media only screen and (max-width: 768px) {
+  .card-vertical .card-text {
+    font-size: 100%;
+  }
+}
+.card-vertical .MuiCard-root {
+  overflow: visible;
+}
+
+@media only screen and (max-width: 370px) {
+  .card-vertical {
+    height: 10em;
+  }
+  .card-vertical .card {
+    height: 12em;
+    width: 12em;
+  }
+  .card-vertical .card .avatar {
+    height: 95px;
+    width: 95px;
+  }
+}
+.vertical-scroll {
+  margin-bottom: 10%;
+}
+.vertical-scroll .v-card-vertical {
+  height: 20em;
+  display: flex;
+  align-items: flex-end;
+}
+.vertical-scroll .v-card-vertical .v-avatar {
+  top: 70px;
+  width: 140px;
+  height: 140px;
+  left: 2em;
+}
+.vertical-scroll .v-card-vertical .v-card {
+  height: 14em;
+  width: 13em;
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-end;
+}
+.vertical-scroll .v-card-vertical .v-card-content {
+  bottom: 0;
+  margin-bottom: 2px;
+}
+.vertical-scroll .v-card-vertical .v-card-text {
+  font-family: "Raleway", sans-serif;
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.5;
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@media only screen and (max-width: 768px) {
+  .vertical-scroll .v-card-vertical .v-card-text {
+    font-size: 100%;
+  }
+}
+.vertical-scroll .v-card-vertical .MuiCard-root {
+  overflow: visible;
+}
+@media only screen and (max-width: 600px) {
+  .vertical-scroll .v-card-vertical {
+    height: 17em;
+  }
+  .vertical-scroll .v-card-vertical .card {
+    width: 12em;
+  }
+  .vertical-scroll .v-card-vertical .avatar {
+    height: 8rem;
+    width: 8rem;
+    top: -30px;
+    left: 15%;
+  }
+}
+
+.horizontal-card {
+  display: flex;
+  align-items: center;
+  border-radius: 20px !important;
+  height: 9em;
+  width: 100%;
+}
+.horizontal-card .avatar {
+  height: 100px;
+  width: 100px;
+  margin-left: 2%;
+}
+.horizontal-card p {
+  font-size: 80%;
+  display: -webkit-box;
+  max-width: 200px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 body {

@@ -7,8 +7,9 @@ const Navigation = () => {
   const history = useHistory();
   const userContext = useContext(UserContext);
 
-  const logout = () => {
-    userContext.logoutUser()
+  const logout = async () => {
+    const response = await userContext.logoutUser()
+    console.log("user logged out", response)
     history.push("/")
   }
 
