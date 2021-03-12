@@ -10,5 +10,6 @@ export const CURRENT_USER = 'CURRENT_USER';
 //           WHISKS
 //============================
 
+export const SET_LOADING = 'SET_LOADING';
 export const GET_WHISK = 'GET_WHISK';
 export const SCAN_WHISKS = 'SCAN_WHISKS';
