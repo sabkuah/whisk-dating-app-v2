@@ -27,10 +27,12 @@ const WhiskDetails = () => {
   };
 
   const handleChooseWhisk = async () => {
-    //console.log('choose whisk clicked!');
-    //** check to see if this whisk has already been chosen to prevent duplicates in the user's chosenWhisk array */
-    await chooseWhisk(user, whisk);
-    //history.push('/user/whisks');
+    if (user.ChosenWhisks.includes(whisk.ID)) {
+      alert('You have already chosen this Whisk!'); //replace this alert
+    } else {
+      await chooseWhisk(user, whisk);
+      history.push('/user/whisks');
+    }
   };
 
   useEffect(() => {
@@ -55,9 +57,9 @@ const WhiskDetails = () => {
     // eslint-disable-next-line
   }, [id, whisks]);
 
-  if (loading === true) return <Spinner />;
-  if (!whisk) return <Spinner />;
-  else
+  if (loading || !whisk) {
+    return <Spinner />;
+  } else
     return (
       <Container className='whisk-details'>
         <div className='top-nav'>
@@ -154,5 +156,4 @@ const WhiskDetails = () => {
       </Container>
     );
 };
-
 export default WhiskDetails;

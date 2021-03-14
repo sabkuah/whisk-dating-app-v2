@@ -16,9 +16,9 @@ const UserState = (props) => {
   useEffect(() => {
     const getInfo = async () => {
       var info = await Auth.currentUserInfo();
-      console.log('user State', 'current user info:\n', info);
+      //console.log('user State', 'current user info:\n', info);
       const fullUser = await getUser(info?.attributes.sub);
-      console.log('fulluser>>', fullUser);
+      //console.log('fulluser>>', fullUser);
       dispatch({
         type: fullUser ? CURRENT_USER : LOGOUT_USER,
         payload: fullUser,
@@ -66,20 +66,25 @@ const UserState = (props) => {
 
   //=======================
   //  Choose Whisk, Add to User's Matches Array
-  // /api/object/Whisk/id
+  // /api/object/User/id
   //=======================
-
+  //push whisk to user's chosenWhisks array
+  //send updated user object to DB
+  //ensure user state is up to date
   const chooseWhisk = async (user, whisk) => {
     console.log('choose whisk fxn>>', user, whisk);
     try {
       user.ChosenWhisks.push(whisk.ID);
-      console.log('user.chosenWhisks>>>', user.ChosenWhisks);
+      const apiName = 'WhiskPro';
+      const path = `/api`;
+      const myInit = {
+        body: user,
+      };
+      //dispatch({ type: LOGIN_USER, payload: user });
+      return API.post(apiName, path, myInit);
     } catch (e) {
       console.log(e);
     }
-    //push whisk to user's chosenWhisks array
-    //send updated user object to DB
-    //ensure user state is up to date
     return;
   };
 
