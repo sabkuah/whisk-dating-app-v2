@@ -5,7 +5,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 //import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Carousel from 'react-material-ui-carousel';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import Spinner from '../components/Spinner';
@@ -16,8 +16,9 @@ const WhiskDetails = () => {
   const whiskContext = useContext(WhiskContext);
   const userContext = useContext(UserContext);
   const { whisks, getWhisk, loading, setLoadingFalse } = whiskContext;
-  const { user, getUser } = userContext;
+  const { user, chooseWhisk } = userContext;
   const { id } = useParams();
+  const history = useHistory();
   const [liked, setLiked] = useState(false);
   const [whisk, setWhisk] = useState();
 
@@ -25,8 +26,10 @@ const WhiskDetails = () => {
     setLiked(!liked);
   };
 
-  const handleChooseWhisk = () => {
+  const handleChooseWhisk = async () => {
     console.log('choose whisk clicked!');
+    await chooseWhisk(user, whisk); //don't need to send user
+    //history.push('/user/whisks')
   };
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
-import { CURRENT_USER, LOGIN_USER, LOGOUT_USER } from '../types';
+import { CURRENT_USER, LOGIN_USER, LOGOUT_USER, CHOOSE_WHISK } from '../types';
 import UserReducer from './userReducer';
 import UserContext from './userContext';
 import { Auth, API } from 'aws-amplify';
@@ -17,9 +17,11 @@ const UserState = (props) => {
     const getInfo = async () => {
       var info = await Auth.currentUserInfo();
       console.log('user State', 'current user info:\n', info);
+      const fullUser = await getUser(info.attributes.sub);
+      console.log('fulluser>>', fullUser);
       dispatch({
-        type: info ? CURRENT_USER : LOGOUT_USER,
-        payload: info?.attributes,
+        type: fullUser ? CURRENT_USER : LOGOUT_USER,
+        payload: fullUser,
       });
     };
     getInfo();
@@ -51,14 +53,24 @@ const UserState = (props) => {
 
   const loginUser = async (user) => {
     console.log('user sub>>', user.sub);
-    const userInfo = await getUser(user.sub);
-    console.log('userInfo>>>>>', userInfo);
-    dispatch({ type: LOGIN_USER, payload: userInfo });
+    const fullUser = await getUser(user.sub);
+    console.log('fullUser>>>>>', fullUser);
+    dispatch({ type: LOGIN_USER, payload: fullUser });
   };
 
   const logoutUser = async () => {
     const result = await Auth.signOut({ global: true });
     return dispatch({ type: LOGOUT_USER });
+  };
+
+  //=======================
+  //  Choose Whisk, Add to User's Matches Array
+  // /api/object/Whisk/id
+  //=======================
+
+  const chooseWhisk = async (user, whisk) => {
+    console.log('choose whisk fxn>>', user, whisk);
+    return;
   };
 
   return (
@@ -71,6 +83,7 @@ const UserState = (props) => {
         getAllUsers,
         getUser,
         postUser,
+        chooseWhisk,
       }}
     >
       {props.children}
