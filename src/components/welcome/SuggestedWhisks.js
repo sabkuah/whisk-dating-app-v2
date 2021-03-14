@@ -33,7 +33,6 @@ export default function SuggestedWhisks({ whisks }) {
         return w.category === value;
       });
       setFilteredWhisks(filtered);
-      console.log('number in array', filteredWhisks.length);
     }
   }, [value]);
 
