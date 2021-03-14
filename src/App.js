@@ -10,14 +10,13 @@ import WhiskDetails from './layouts/WhiskDetails';
 import SearchResults from './layouts/SearchResults';
 import Login from './components/Login';
 
-import Amplify from "aws-amplify"
-import config from "./aws-exports"
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
 import ProtectedRoute from './components/ProtectedRoute';
 
-Amplify.configure(config)
+Amplify.configure(config);
 
 function App() {
-
   return (
     <UserState>
       <WhiskState>
@@ -29,13 +28,13 @@ function App() {
             <Route path='/login'>
               <Login />
             </Route>
-            <ProtectedRoute path="/user" component={UserProfile}/>
-            {/* <Route path='/user'>
-              <UserProfile />
-            </Route> */}
             <Route path='/user/whisks'>
               <ChosenWhisks />
             </Route>
+            <ProtectedRoute path='/user' component={UserProfile} />
+            {/* <Route path='/user'>
+              <UserProfile />
+            </Route> */}
             <Route path='/whisks/search'>
               <SearchResults />
             </Route>
