@@ -7,11 +7,6 @@ const UserMatches = ({ whisks }) => {
       {whisks?.length ? (
         <p>yes there are matches</p>
       ) : (
-        // <div>
-        //   {whisks.map((w) => {
-        //     return <CardHorizontal whisk={w} key={w.ID} />;
-        //   })}
-        // </div>
         <p>No matches yet, hang tight! </p>
       )}
     </div>

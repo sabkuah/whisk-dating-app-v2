@@ -74,7 +74,7 @@ const UserState = (props) => {
   const chooseWhisk = async (user, whisk) => {
     console.log('choose whisk fxn>>', user, whisk);
     try {
-      user.ChosenWhisks.push(whisk.ID);
+      user.ChosenWhisks.unshift(whisk.ID);
       const apiName = 'WhiskPro';
       const path = `/api`;
       const myInit = {
