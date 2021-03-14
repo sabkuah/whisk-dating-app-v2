@@ -8,18 +8,25 @@ import Carousel from 'react-material-ui-carousel';
 import { useParams } from 'react-router-dom';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import WhiskContext from '../context/whisk/whiskContext';
 import Spinner from '../components/Spinner';
+import WhiskContext from '../context/whisk/whiskContext';
+import UserContext from '../context/user/userContext';
 
 const WhiskDetails = () => {
   const whiskContext = useContext(WhiskContext);
+  const userContext = useContext(UserContext);
   const { whisks, getWhisk, loading, setLoadingFalse } = whiskContext;
+  const { user, getUser } = userContext;
   const { id } = useParams();
   const [liked, setLiked] = useState(false);
   const [whisk, setWhisk] = useState();
 
   const handleLike = () => {
     setLiked(!liked);
+  };
+
+  const handleChooseWhisk = () => {
+    console.log('choose whisk clicked!');
   };
 
   useEffect(() => {
@@ -134,31 +141,14 @@ const WhiskDetails = () => {
               </Grid>
             </Grid>
             <div className='button'>
-              <Button className='choose-whisk'>Choose Whisk</Button>
+              <Button onClick={handleChooseWhisk} className='choose-whisk'>
+                Choose Whisk
+              </Button>
             </div>
           </Grid>
         </Grid>
       </Container>
     );
-};
-
-//dummy data:
-const whisk = {
-  title: 'Beaches & Islands Paddleboard Tour',
-  images: [
-    'https://a0.muscache.com/im/pictures/2b94dbb2-4648-4e3c-9b6f-c0a2e3a7e381.jpg?im_w=1440',
-    'https://a0.muscache.com/im/pictures/c34926e9-fb13-4ad0-880d-f6736021ba98.jpg?im_w=1440',
-    'https://a0.muscache.com/im/pictures/fede252b-1b7d-4df4-a615-10d3192ddc5c.jpg?im_w=1440',
-  ],
-  city: 'Vancouver',
-  neighborhood: 'UBC',
-  description:
-    'Your adventure will begin at a local beach.  You will be whisked away to private beaches with an experienced instructor. Paddleboard and wetsuit rental included.',
-  durationHours: 3,
-  participants: 2,
-  type: 'outdoors',
-  tags: ['Summer', 'Activity', 'Water'],
-  cost: '$$$',
 };
 
 export default WhiskDetails;

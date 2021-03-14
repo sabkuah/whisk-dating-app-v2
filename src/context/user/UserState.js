@@ -3,7 +3,7 @@ import { CURRENT_USER, LOGIN_USER, LOGOUT_USER } from '../types';
 import UserReducer from './userReducer';
 import UserContext from './userContext';
 import { Auth, API } from 'aws-amplify';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 const UserState = (props) => {
   const initialState = {
@@ -13,47 +13,53 @@ const UserState = (props) => {
   const history = useHistory();
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-
   useEffect(() => {
     const getInfo = async () => {
-      var info = await Auth.currentUserInfo()
-      console.log("user State", "current user info:\n", info)
+      var info = await Auth.currentUserInfo();
+      console.log('user State', 'current user info:\n', info);
       dispatch({
         type: info ? CURRENT_USER : LOGOUT_USER,
-        payload: info?.attributes
-      })
-    }
-    getInfo()
+        payload: info?.attributes,
+      });
+    };
+    getInfo();
   }, []);
 
   const getAllUsers = (myInit) => {
     const apiName = 'WhiskPro';
-    const path = '/api/User'
-    return API.get(apiName, path)
-  }
-  
+    const path = '/api/User';
+    return API.get(apiName, path);
+  };
+
   const getUser = (id) => {
     const apiName = 'WhiskPro';
-    const path = `/api/object/User/${id}`
-    return API.get(apiName, path)
-  }
+    const path = `/api/object/User/${id}`;
+    return API.get(apiName, path);
+  };
 
   const postUser = (user) => {
     const apiName = 'WhiskPro';
-    const path = `/api`
+    const path = `/api`;
     const myInit = {
       body: user, // replace this with attributes you need
       // headers: {}, // OPTIONAL
+    };
+    return API.post(apiName, path, myInit);
   };
-    return API.post(apiName, path, myInit)
-  }
 
-  const loginUser = (user) => dispatch({ type: LOGIN_USER, payload: user });
-  
+  // const loginUser = (user) => dispatch({ type: LOGIN_USER, payload: user });
+
+  const loginUser = async (user) => {
+    console.log('user sub>>', user.sub);
+    const userInfo = await getUser(user.sub);
+    console.log('userInfo>>>>>', userInfo);
+    dispatch({ type: LOGIN_USER, payload: userInfo });
+  };
+
   const logoutUser = async () => {
-    const result = await Auth.signOut({ global: true })
+    const result = await Auth.signOut({ global: true });
     return dispatch({ type: LOGOUT_USER });
-  } 
+  };
 
   return (
     <UserContext.Provider
@@ -64,7 +70,7 @@ const UserState = (props) => {
         logoutUser,
         getAllUsers,
         getUser,
-        postUser
+        postUser,
       }}
     >
       {props.children}

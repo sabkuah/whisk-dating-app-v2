@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import {
-  GET_WHISK,
+  //GET_WHISK,
   SCAN_WHISKS,
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,

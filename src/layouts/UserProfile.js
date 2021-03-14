@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Avatar, Button, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserContext from '../context/user/userContext';
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -9,15 +10,15 @@ const UserProfile = () => {
 
   useEffect(() => {
     const getUserData = async () => {
-      var userInfo = await userContext.user
-      console.log("userinfo", userInfo)
+      var userInfo = await userContext.user;
+      console.log('userinfo', userInfo);
       if (userInfo) {
         const response = await userContext.getUser(userInfo.sub);
-        console.log("getUserData", response)
-        setUser(response)
+        console.log('getUserData', response);
+        setUser(response);
       }
-    }
-    getUserData()
+    };
+    getUserData();
   }, []);
 
   return (
@@ -29,7 +30,11 @@ const UserProfile = () => {
       </div>
       <div className='about-card'>
         <div className='wrapper'>
-          <Avatar variant='rounded' src={user?.ProfileImage} id='display-photo'/>
+          <Avatar
+            variant='rounded'
+            src={user?.ProfileImage}
+            id='display-photo'
+          />
           <div style={{ padding: '0 10px', width: '100%' }}>
             Your name here
             <hr />
@@ -44,10 +49,12 @@ const UserProfile = () => {
         <span>Preferences</span>
         <ChevronRightIcon />
       </Button>
-      <Button>
-        <span>Whisks</span>
-        <ChevronRightIcon />
-      </Button>
+      <Link to='/user/whisks'>
+        <Button>
+          <span>Whisks</span>
+          <ChevronRightIcon />
+        </Button>
+      </Link>
       <Button>
         <span>Help</span>
         <ChevronRightIcon />
