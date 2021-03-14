@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Container,
   IconButton,
@@ -10,16 +10,21 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 import CardHorizontal from '../components/CardHorizontal';
+import WhiskContext from '../context/whisk/whiskContext';
 
 const SearchResults = () => {
-  //const query = 'dummydata';
+  const whiskContext = useContext(WhiskContext);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState(dummyData);
+  const [results, setResults] = useState([]);
 
-  const handleSearch = (e) => {
-    setQuery(e.target.value);
-    console.log('query', query);
-  };
+  //triggered when query is entered
+  useEffect(() => {
+    const filtered = whiskContext.whisks.filter((w) => {
+      return w.title.toLowerCase().includes(query.toLowerCase());
+    });
+    setResults(filtered);
+    console.log('search ping');
+  }, [query, whiskContext.whisks]);
 
   return (
     <Container className='search-results'>
@@ -39,7 +44,8 @@ const SearchResults = () => {
               placeholder='Search'
               autoFocus={true}
               onChange={(e) => {
-                handleSearch(e);
+                setQuery(e.target.value);
+                console.log(query);
               }}
             />
           </Paper>
@@ -61,40 +67,5 @@ const SearchResults = () => {
     </Container>
   );
 };
-
-const dummyData = [
-  {
-    id: 1017,
-    title: 'Brewery Crawl Around East Van',
-    images: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ14dH_K9fffbCAeQ2Q2GHGoKsqq-sRx70lQ&usqp=CAU',
-    ],
-    description:
-      'This is a normal length string. Enjoy a brief stroll through the Mt.Pleasant neighbourhood while sipping on coffee from local roasters.  ',
-    durationHours: 2,
-    participants: 2,
-  },
-  {
-    id: 1027,
-    title: 'Fish n Chips in Steveston',
-    images: [
-      'https://www.thespruceeats.com/thmb/hToYLa2CWDEZKNX4VROsCSE3K0M=/1500x1000/filters:fill(auto,1)/best-fish-and-chips-recipe-434856-Hero-5b61b89346e0fb00500f2141.jpg',
-    ],
-    description:
-      'This is a super long string. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, assumenda illum, deserunt at saepe laborum deleniti harum omnis amet delectus eius sequi unde numquam iste vel, totam similique dolor culpa.',
-    durationHours: 2,
-    participants: 2,
-  },
-  {
-    id: 1037,
-    title: 'Coffee Date in Mt. Pleasant',
-    images: [
-      'https://res.cloudinary.com/fittco/image/upload/v1557509574/cshp6bekdicl5v7wqlgq.jpg',
-    ],
-    description: 'This is a short line',
-    durationHours: 2,
-    participants: 2,
-  },
-];
 
 export default SearchResults;
