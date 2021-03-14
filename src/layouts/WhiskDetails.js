@@ -27,13 +27,13 @@ const WhiskDetails = () => {
   };
 
   const handleChooseWhisk = async () => {
-    console.log('choose whisk clicked!');
-    await chooseWhisk(user, whisk); //don't need to send user
-    //history.push('/user/whisks')
+    //console.log('choose whisk clicked!');
+    //** check to see if this whisk has already been chosen to prevent duplicates in the user's chosenWhisk array */
+    await chooseWhisk(user, whisk);
+    //history.push('/user/whisks');
   };
 
   useEffect(() => {
-    console.log('user state in details>>', user);
     //if whisks in context
     if (whisks.length) {
       console.log('calling Context for this whisk');

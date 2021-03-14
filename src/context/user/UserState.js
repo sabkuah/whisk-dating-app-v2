@@ -17,7 +17,7 @@ const UserState = (props) => {
     const getInfo = async () => {
       var info = await Auth.currentUserInfo();
       console.log('user State', 'current user info:\n', info);
-      const fullUser = await getUser(info.attributes.sub);
+      const fullUser = await getUser(info?.attributes.sub);
       console.log('fulluser>>', fullUser);
       dispatch({
         type: fullUser ? CURRENT_USER : LOGOUT_USER,
@@ -46,6 +46,7 @@ const UserState = (props) => {
       body: user, // replace this with attributes you need
       // headers: {}, // OPTIONAL
     };
+    dispatch({ type: LOGIN_USER, payload: user });
     return API.post(apiName, path, myInit);
   };
 
@@ -70,6 +71,15 @@ const UserState = (props) => {
 
   const chooseWhisk = async (user, whisk) => {
     console.log('choose whisk fxn>>', user, whisk);
+    try {
+      user.ChosenWhisks.push(whisk.ID);
+      console.log('user.chosenWhisks>>>', user.ChosenWhisks);
+    } catch (e) {
+      console.log(e);
+    }
+    //push whisk to user's chosenWhisks array
+    //send updated user object to DB
+    //ensure user state is up to date
     return;
   };
 
