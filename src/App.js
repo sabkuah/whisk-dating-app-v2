@@ -8,7 +8,6 @@ import { BrowserView } from 'react-device-detect';
 import WhiskDetails from './layouts/WhiskDetails';
 import SearchResults from './layouts/SearchResults';
 import Login from './components/Login';
-
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
 import ProtectedRoute from './components/ProtectedRoute';
