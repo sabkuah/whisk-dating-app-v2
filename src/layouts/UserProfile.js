@@ -5,20 +5,23 @@ import UserContext from '../context/user/userContext';
 import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
-  const [user, setUser] = useState(null);
+  //const [user, setUser] = useState(null);
   const userContext = useContext(UserContext);
+  const { user } = userContext;
 
   useEffect(() => {
-    const getUserData = async () => {
-      var userInfo = await userContext.user;
-      console.log('userinfo', userInfo);
-      if (userInfo) {
-        const response = await userContext.getUser(userInfo.sub);
-        console.log('getUserData', response);
-        setUser(response);
-      }
-    };
-    getUserData();
+    console.log('User state in Profile>>', user);
+
+    // const getUserData = async () => {
+    //   var userInfo = await userContext.user;
+    //   console.log('userinfo', userInfo);
+    //   if (userInfo) {
+    //     const response = await userContext.getUser(userInfo.sub);
+    //     console.log('getUserData', response);
+    //     setUser(response);
+    //   }
+    // };
+    // getUserData();
   }, []);
 
   return (

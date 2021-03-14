@@ -30,6 +30,7 @@ const WhiskDetails = () => {
   };
 
   useEffect(() => {
+    console.log('user state in details>>', user);
     //if whisks in context
     if (whisks.length) {
       console.log('calling Context for this whisk');
