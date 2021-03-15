@@ -41,7 +41,7 @@ const UserMatches = ({}) => {
             <ListItemText primary='Ice Fishing with a Local' />
             <ListItemText secondary='Fred McDonald' />
             <Button>
-              <Link to=''>View Match</Link>
+              <Link to='/user/match/333'>View Match</Link>
             </Button>
           </ListItem>
           <Divider variant='inset' component='li' />
