@@ -23,7 +23,6 @@ const SearchResults = () => {
       return w.title.toLowerCase().includes(query.toLowerCase());
     });
     setResults(filtered);
-    console.log('search ping');
   }, [query, whiskContext.whisks]);
 
   return (

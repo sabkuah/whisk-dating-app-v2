@@ -1,0 +1,12 @@
+.chosen-list-item {
+  .cancel-icon {
+    display: none;
+  }
+}
+
+.chosen-list-item:hover {
+  .cancel-icon {
+    display: block;
+    color: $brand-color;
+  }
+}
