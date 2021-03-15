@@ -6,17 +6,16 @@ const ChosenWhisks = ({ whisks }) => {
   useEffect(() => {
     console.log('whisks in chosenWhisks', whisks);
   }, []);
+
   if (!whisks) return <Spinner />;
   else
     return (
       <div className='chosen-whisks'>
         <h1>Your Chosen Whisks</h1>
         {whisks.length ? (
-          //<p>yes there are chosen whisks</p>
           <div>
             {whisks.map((w) => {
-              return <p key={w}>Whisk Id: {w}</p>;
-              //return <CardHorizontal whisk={w} key={w.ID} />;
+              return <CardHorizontal whisk={w} key={w.ID} />;
             })}
           </div>
         ) : (
