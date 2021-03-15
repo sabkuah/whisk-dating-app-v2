@@ -44,7 +44,6 @@ const SearchResults = () => {
               autoFocus={true}
               onChange={(e) => {
                 setQuery(e.target.value);
-                console.log(query);
               }}
             />
           </Paper>

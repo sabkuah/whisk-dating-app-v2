@@ -65,14 +65,12 @@ const UserState = (props) => {
   };
 
   //=======================
-  //  Choose Whisk, Add to User's Matches Array
-  // /api/object/User/id
+  //     Choose Whisk
   //=======================
   //push whisk to user's chosenWhisks array
   //send updated user object to DB
   //ensure user state is up to date
   const chooseWhisk = async (user, whisk) => {
-    console.log('choose whisk fxn>>', user, whisk);
     try {
       user.ChosenWhisks.unshift(whisk.ID);
       const apiName = 'WhiskPro';
@@ -88,6 +86,22 @@ const UserState = (props) => {
     return;
   };
 
+  //=======================
+  //  Cancel Choose Whisk
+  //=======================
+
+  const cancelChooseWhisk = async (user, whiskId) => {
+    const filtered = user.ChosenWhisks.filter((w) => w !== whiskId);
+    user.ChosenWhisks = filtered;
+    const apiName = 'WhiskPro';
+    const path = `/api`;
+    const myInit = {
+      body: user,
+    };
+    await API.post(apiName, path, myInit);
+    return filtered;
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -99,6 +113,7 @@ const UserState = (props) => {
         getUser,
         postUser,
         chooseWhisk,
+        cancelChooseWhisk,
       }}
     >
       {props.children}
