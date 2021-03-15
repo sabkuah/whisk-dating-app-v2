@@ -9,16 +9,13 @@ import {
   Typography,
   Divider,
   Avatar,
+  Button,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-const ChosenWhisks = ({ whisks }) => {
+const ChosenWhisks = ({ whisks, handleCancelWhisk }) => {
   const classes = useStyles();
-
-  useEffect(() => {
-    console.log('whisks in chosenWhisks', whisks);
-  }, []);
 
   if (!whisks) return <Spinner />;
   else
@@ -35,7 +32,13 @@ const ChosenWhisks = ({ whisks }) => {
                       <Avatar alt={w.title} src={w.images[0]} />
                     </ListItemAvatar>
                     <ListItemText primary={w.title} />
-                    <CancelIcon className='cancel-icon' />
+                    <Button
+                      onClick={() => {
+                        handleCancelWhisk(w.ID);
+                      }}
+                    >
+                      <CancelIcon className='cancel-icon' />
+                    </Button>
                   </ListItem>
                   <Divider variant='inset' component='li' />{' '}
                 </div>
