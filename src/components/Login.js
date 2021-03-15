@@ -1,21 +1,16 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Card,
-  CardContent,
-  Tab,
-  TextField,
-  Typography,
-} from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { Button, Card, CardContent, Tab, TextField, Typography } from '@material-ui/core';
+import { useHistory, useLocation } from 'react-router-dom';
 import WhiskTabs from './WhiskTabs';
 import { Auth } from 'aws-amplify';
 import { isMobile } from 'react-device-detect';
 import UserContext from '../context/user/userContext';
 
 const Login = () => {
-  const [tab, setTab] = useState(0);
+  const location = useLocation();
+
+  const [tab, setTab] = useState(location.state ? location.state.tab : 0);
   const [username, setUsername] = useState('');
   const [password, setPW] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -26,6 +21,7 @@ const Login = () => {
 
   const handleChange = (event, newValue) => {
     setTab(newValue);
+    setErrorMsg("");
   };
 
   const submitForm = async (e) => {

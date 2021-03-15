@@ -62,9 +62,12 @@ const UserWhisks = () => {
               handleCancelWhisk={handleCancelWhisk}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
-            <UserMatches whisks={user.Matches} />
-          </Grid>
+          {
+            user && 
+            <Grid item xs={12} md={6}>
+              <UserMatches whisks={user.Matches} />
+            </Grid>
+          }
         </Grid>
       </Container>
     );

@@ -1,10 +1,4 @@
-import {
-  GET_WHISK,
-  CHOOSE_WHISK,
-  SCAN_WHISKS,
-  SET_LOADING_TRUE,
-  SET_LOADING_FALSE,
-} from '../types';
+import { GET_WHISK, CLEAR_WHISKS, SCAN_WHISKS, SET_LOADING_TRUE, SET_LOADING_FALSE } from '../types';
 
 const WhiskReducer = (state, action) => {
   switch (action.type) {
@@ -30,8 +24,14 @@ const WhiskReducer = (state, action) => {
         whisk: action.payload,
         //loading: false,
       };
-    default:
-      return state;
+  case CLEAR_WHISKS:
+    return {
+      ...state,
+      whisks: null,
+      loading: false,
+    };
+  default:
+    return state;
   }
 };
 
