@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CardHorizontal = ({ whisk }) => {
   return (
-    <Link to={`/whisks/id`}>
+    <Link to={`/whisks/${whisk.ID}`}>
       <Card className='horizontal-card'>
         <Avatar src={whisk.images[0]} alt={whisk.title} className='avatar' />
         <CardContent>

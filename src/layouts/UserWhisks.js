@@ -21,10 +21,6 @@ const UserWhisks = () => {
   const [chosenWhisks, setChosenWhisks] = useState(null);
 
   useEffect(() => {
-    // console.log("user's matches>>", user.Matches);
-    // console.log("user's chosen whisks>>", user.ChosenWhisks);
-    // console.log('whisks>>', whisks);
-
     setLoadingTrue();
     if (!whisks.length) {
       (async () => {
@@ -40,17 +36,17 @@ const UserWhisks = () => {
       setChosenWhisks(items);
     }
     setLoadingFalse();
-  }, []);
+  }, [loading]);
 
   if (loading) return <Spinner />;
   else
     return (
       <Container className='user-whisks'>
         <Grid container spacing={3}>
-          <Grid item xs>
+          <Grid item xs={12} md={6}>
             <ChosenWhisks whisks={chosenWhisks} />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={12} md={6}>
             <UserMatches whisks={user.Matches} />
           </Grid>
         </Grid>
