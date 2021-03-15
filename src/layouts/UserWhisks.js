@@ -46,9 +46,12 @@ const UserWhisks = () => {
           <Grid item xs={12} md={6}>
             <ChosenWhisks whisks={chosenWhisks} />
           </Grid>
-          <Grid item xs={12} md={6}>
-            <UserMatches whisks={user.Matches} />
-          </Grid>
+          {
+            user && 
+            <Grid item xs={12} md={6}>
+              <UserMatches whisks={user.Matches} />
+            </Grid>
+          }
         </Grid>
       </Container>
     );

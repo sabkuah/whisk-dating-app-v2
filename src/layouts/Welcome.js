@@ -22,7 +22,7 @@ const Welcome = () => {
   } = whiskContext;
 
   useEffect(() => {
-    if (whisks.length) {
+    if (whisks && whisks.length) {
       setLoadingFalse();
     } else {
       setLoadingTrue();

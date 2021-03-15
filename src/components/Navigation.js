@@ -2,13 +2,16 @@ import React, { useContext } from 'react';
 import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../context/user/userContext';
+import WhiskContext from '../context/whisk/whiskContext';
 
 const Navigation = () => {
   const history = useHistory();
   const userContext = useContext(UserContext);
+  const whiskContext = useContext(WhiskContext)
 
   const logout = async () => {
     const response = await userContext.logoutUser()
+    const whiskResponse = await whiskContext.clearWhisks()
     console.log("user logged out", response)
     history.push("/")
   }
