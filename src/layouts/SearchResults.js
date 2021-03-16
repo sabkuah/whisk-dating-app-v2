@@ -42,9 +42,7 @@ const SearchResults = () => {
               className='input'
               placeholder='Search'
               autoFocus={true}
-              onChange={(e) => {
-                setQuery(e.target.value);
-              }}
+              onChange={(e) => setQuery(e.target.value)}
             />
           </Paper>
         </div>

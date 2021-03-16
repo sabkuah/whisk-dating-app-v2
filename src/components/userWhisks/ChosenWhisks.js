@@ -19,19 +19,15 @@ const ChosenWhisks = ({ whisks, handleCancelWhisk }) => {
       <h1>Your Chosen Whisks</h1>
       {whisks?.length ? (
         <List className={classes.root}>
-          {whisks.map((w) => {
+          {whisks.map(w => {
             return (
               <div key={w.ID} className='chosen-list-item'>
                 <ListItem alignItems='center'>
                   <ListItemAvatar>
-                    <Avatar alt={w.title} src={w.images[0]} />
+                    <Avatar alt={w?.title} src={w?.images[0]} />
                   </ListItemAvatar>
                   <ListItemText primary={w.title} />
-                  <Button
-                    onClick={() => {
-                      handleCancelWhisk(w.ID);
-                    }}
-                  >
+                  <Button onClick={() => handleCancelWhisk(w.ID)}>
                     <CancelIcon className='cancel-icon' />
                   </Button>
                 </ListItem>

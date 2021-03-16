@@ -35,9 +35,6 @@ function App() {
               <Match />
             </Route>
             <ProtectedRoute path='/user' component={UserProfile} />
-            {/* <Route path='/user'>
-              <UserProfile />
-            </Route> */}
             <Route path='/whisks/search'>
               <SearchResults />
             </Route>

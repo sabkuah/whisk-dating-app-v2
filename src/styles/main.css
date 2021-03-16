@@ -164,6 +164,11 @@
   font-weight: bold;
 }
 
+.main-container {
+  text-align: center;
+  padding: 3em 0em;
+}
+
 .whisk-details .top-nav {
   margin-top: 2%;
   display: flex;
@@ -175,8 +180,6 @@
 .whisk-details .image-gallery {
   display: flex;
   justify-content: center;
-  margin-top: 2em;
-  margin-bottom: 2em;
 }
 .whisk-details .image-gallery .avatar-img {
   height: 12em;
@@ -214,6 +217,7 @@
   border-radius: 30px;
   padding: 0.5em 1.5em;
   font-weight: bold;
+  padding: 1em 1.5em;
   width: 75%;
   margin: 5%;
 }
@@ -251,10 +255,6 @@
   font-weight: bold;
   width: 50%;
   margin-top: 3em;
-}
-#card-root .text-field {
-  width: 100%;
-  margin: 1em 0;
 }
 
 :root {
@@ -489,6 +489,28 @@ amplify-authenticator {
   overflow: hidden;
 }
 
+.chosen-list-item .cancel-icon {
+  display: none;
+}
+
+.chosen-list-item:hover .cancel-icon {
+  display: block;
+  color: #00d1ff;
+}
+
+#match-page .match {
+  height: calc(100vh - 92px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#match-page .match-info {
+  height: 50%;
+}
+#match-page .whisk-info {
+  height: 40%;
+}
+
 body {
   background-color: #f2f2f2;
 }
@@ -497,9 +519,41 @@ a {
   text-decoration: none;
   color: black;
 }
+a:hover {
+  cursor: pointer;
+}
 
 .blue-font {
   color: #00d1ff;
+}
+
+.close-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -10px;
+}
+.close-wrapper svg:hover {
+  cursor: pointer;
+}
+
+.text-field {
+  width: 100%;
+  margin: 1em 0;
+}
+
+#aboutMe-form {
+  text-align: center;
+}
+#aboutMe-form .submit-btn {
+  background: #00d1ff;
+  color: white;
+  border-radius: 30px;
+  padding: 0.5em 1.5em;
+  font-weight: bold;
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 3em;
 }
 
 /*# sourceMappingURL=main.css.map */
