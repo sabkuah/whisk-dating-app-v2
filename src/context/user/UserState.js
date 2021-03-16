@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 const UserState = (props) => {
   const initialState = {
-    user: {},
+    user: null,
     matches: [],
     isAuthenticated: false,
   };
@@ -18,8 +18,10 @@ const UserState = (props) => {
     const getInfo = async () => {
       var info = await Auth.currentUserInfo();
       //console.log('user State', 'current user info:\n', info);
-      const fullUser = await getUser(info?.attributes.sub);
-      //console.log('fulluser>>', fullUser);
+      var findUser = await getUser(info?.attributes.sub);
+      const fullUser = Object.keys(findUser).length !== 0 ? findUser : null
+      
+      console.log('fulluser>>', fullUser);
       dispatch({
         type: fullUser ? CURRENT_USER : LOGOUT_USER,
         payload: fullUser,

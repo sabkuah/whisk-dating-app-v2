@@ -67,22 +67,26 @@ const UserProfile = ({questionnaire}) => {
         label='First Name'
         onChange={(e) => handleChange('fName', e.target.value)}
         className='text-field'
+        defaultValue={user?.fName}
       />
       <TextField
         label='Last Name'
         onChange={(e) => handleChange('lName', e.target.value)}
         className='text-field'
+        defaultValue={user?.lName}
       />
       <TextField
         label='Age'
         onChange={(e) => handleChange('age', e.target.value)}
         className='text-field'
         type="number"
+        defaultValue={user?.age}
       />
       <TextField
         label='Phone'
         onChange={(e) => handleChange('phone', e.target.value)}
         className='text-field'
+        defaultValue={user?.phone}
       />
       <TextField
           id="bio"
@@ -92,6 +96,7 @@ const UserProfile = ({questionnaire}) => {
           className='text-field'
           placeholder="Tell us about yourself"
           onChange={(e) => handleChange('bio', e.target.value)}
+          defaultValue={user?.bio}
         />
         <TextField
           id="interests"
@@ -101,6 +106,7 @@ const UserProfile = ({questionnaire}) => {
           className='text-field'
           placeholder="What are your hobbies"
           onChange={(e) => handleChange('interests', e.target.value)}
+          defaultValue={user?.interests}
         />
        <Button className='submit-btn' type='submit'>
         Save

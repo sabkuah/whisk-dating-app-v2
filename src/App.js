@@ -25,27 +25,13 @@ function App() {
             <Navigation />
           </BrowserView>
           <Switch>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <ProtectedRoute path='/user/whisks'>
-              <UserWhisks />
-            </ProtectedRoute>
-            <ProtectedRoute path='/user/match/:id'>
-              <Match />
-            </ProtectedRoute>
-            <ProtectedRoute path='/user'>
-              <UserProfile questionnaire={<div>Q modal</div>}/>
-            </ProtectedRoute>
-            <ProtectedRoute path='/whisks/search'>
-              <SearchResults />
-            </ProtectedRoute>
-            <ProtectedRoute path='/whisks/:id'>
-              <WhiskDetails />
-            </ProtectedRoute>
-            <Route exact path='/'>
-              <Welcome />
-            </Route>
+            <Route exact path='/' component={Welcome}/>
+            <Route path='/login' component={Login}/>
+            <ProtectedRoute path='/user/whisks' component={UserWhisks}/>
+            <ProtectedRoute path='/user/match/:id' component={Match}/>
+            <ProtectedRoute path='/user' component={UserProfile} questionnaire={<div>Q modal</div>}/>
+            <ProtectedRoute path='/whisks/search' component={SearchResults}/>
+            <ProtectedRoute path='/whisks/:id' component={WhiskDetails}/>
           </Switch>
         </Router>
       </WhiskState>

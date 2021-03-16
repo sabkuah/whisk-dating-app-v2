@@ -4,14 +4,13 @@ import UserContext from '../context/user/userContext'
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
   const userContext = useContext(UserContext)
-  
   return <Route {...rest} render={props => {
     if (userContext.user) {
      return <Component {...rest} {...props}/>
     } else {
       return <Redirect to="/"/> // could redirect to an unauthorized component if we like *stretch*
     }
-    }}
+  }}
   />
 }
 
