@@ -7,60 +7,82 @@ import UserModal from '../components/Modal';
 
 const UserProfile = () => {
   const userContext = useContext(UserContext);
-  const [open, setOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [preferencesOpen, setPrefOpen] = useState(false);
+  const [userInfo, setInfo] = useState({});
   const { user } = userContext;
 
   useEffect(() => {
     console.log('User state in Profile>>', user);
+
   }, []);
 
-    const handleOpen = () => {
-    setOpen(true);
+  const handleOpen = (modal) => {
+    console.log("handle modal Open", modal)
+    modal === "profileOpen" ? setProfileOpen(true) : setPrefOpen(true)
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (modal) => {
+    modal === "profileOpen" ? setProfileOpen(false) : setPrefOpen(false)
   };
 
   const handleChange = (field, value) => {
     switch (field) {
-      case 'Fname':
+      case 'fName':
         console.log("Fname", value)
+        userInfo[field] = value
         break;
-      case 'Lname':
+      case 'lName':
         console.log("Lname", value)
+        userInfo[field] = value
         break;
-      case 'Phone':
+      case 'phone':
         console.log("Phone", value)
+        userInfo[field] = value
         break;
-      case 'Bio':
+      case 'bio':
         console.log("Bio", value)
+        userInfo[field] = value
         break;
-      case 'Interests':
+      case 'interests':
         console.log("Interests", value)
+        userInfo[field] = value
         break;
       default:
         break;
     }
-       
+    console.log("setting userinfo", userInfo)
+    setInfo(userInfo)  
   }
 
+  const submitUserProfile = (e) => {
+    e.preventDefault()
+    console.log("submitUserProfile", userInfo)
+  }
+
+  const questionnaire = <div>questionnaire modal</div>
+
   const aboutMe = (
-    <form id="aboutMe-form">
+    <form id="aboutMe-form" onSubmit={submitUserProfile}>
       <Typography variant="h5" style={{paddingBottom: "1em"}}>Complete My Profile</Typography>
       <TextField
         label='First Name'
-        onChange={(e) => handleChange('Fname', e.target.value)}
+        onChange={(e) => handleChange('fName', e.target.value)}
         className='text-field'
       />
       <TextField
         label='Last Name'
-        onChange={(e) => handleChange('Lname', e.target.value)}
+        onChange={(e) => handleChange('lName', e.target.value)}
+        className='text-field'
+      />
+      <TextField
+        label='Age'
+        onChange={(e) => handleChange('age', e.target.value)}
         className='text-field'
       />
       <TextField
         label='Phone'
-        onChange={(e) => handleChange('Phone', e.target.value)}
+        onChange={(e) => handleChange('phone', e.target.value)}
         className='text-field'
       />
       <TextField
@@ -70,7 +92,7 @@ const UserProfile = () => {
           rows={4}
           className='text-field'
           placeholder="Tell us about yourself"
-          onChange={(e) => handleChange('Bio', e.target.value)}
+          onChange={(e) => handleChange('bio', e.target.value)}
         />
         <TextField
           id="interests"
@@ -79,7 +101,7 @@ const UserProfile = () => {
           rows={2}
           className='text-field'
           placeholder="What are your hobbies"
-          onChange={(e) => handleChange('Interests', e.target.value)}
+          onChange={(e) => handleChange('interests', e.target.value)}
         />
        <Button className='submit-btn' type='submit'>
         Save
@@ -92,7 +114,7 @@ const UserProfile = () => {
       <h1>My Profile</h1>
       <div className='card-title'>
         <span>Personal details</span>
-        <a className='blue-font' onClick={handleOpen}>change</a>
+        <a className='blue-font' onClick={() => handleOpen('profileOpen')}>change</a>
       </div>
       <div className='about-card'>
         <div className='wrapper'>
@@ -109,7 +131,7 @@ const UserProfile = () => {
       <Button>
         <span>About You</span> <ChevronRightIcon />
       </Button>
-      <Button>
+      <Button onClick={() => handleOpen('preferencesOpen')}>
         <span>Preferences</span>
         <ChevronRightIcon />
       </Button>
@@ -124,7 +146,8 @@ const UserProfile = () => {
         <ChevronRightIcon />
       </Button>
       <Button id='action-btn'>Update</Button>
-      <UserModal body={aboutMe} open={open} handleClose={handleClose}/>
+      <UserModal body={aboutMe} open={profileOpen} handleClose={() => handleClose('profileOpen')}/>
+      <UserModal body={questionnaire} open={preferencesOpen} handleClose={() => handleClose('preferencesOpen')}/>
     </div>
   );
 };

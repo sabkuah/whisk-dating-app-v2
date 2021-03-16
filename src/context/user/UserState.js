@@ -51,8 +51,6 @@ const UserState = (props) => {
     return API.post(apiName, path, myInit);
   };
 
-  // const loginUser = (user) => dispatch({ type: LOGIN_USER, payload: user });
-
   const loginUser = async (user) => {
     console.log('user sub>>', user.sub);
     const fullUser = await getUser(user.sub);
@@ -103,6 +101,18 @@ const UserState = (props) => {
     return filtered;
   };
 
+
+  const updateProfile = async (userInfo) => {
+    const apiName = 'WhiskPro';
+    const path = `/api`;
+    const myInit = {
+      body: userInfo 
+    };
+    // dispatch({ type: LOGIN_USER, payload: user });
+    const response = await API.post(apiName, path, myInit);
+    console.log("updated Profile", response)
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -115,6 +125,7 @@ const UserState = (props) => {
         postUser,
         chooseWhisk,
         cancelChooseWhisk,
+        updateProfile
       }}
     >
       {props.children}
