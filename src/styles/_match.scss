@@ -1,4 +1,4 @@
-// MATCH PROFILE //
+// PROFILE MODAL //
 #full-profile-match-pic {
   width: 100%;
   height: 100%;
@@ -15,7 +15,23 @@
   }
 }
 
-//LEFT SIDE MATCH/WHISK INFO //
+// MATCH AVATARS //
+
+#match-avatars {
+  display: none;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1%;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+// MATCH CARDS //
 
 .match-info,
 .whisk-info {
@@ -121,5 +137,14 @@
   .match-info #match-pic {
     width: 6em;
     height: 6em;
+  }
+}
+
+@media (max-width: 768px) {
+  #match-avatars {
+    display: block;
+  }
+  #match-cards {
+    display: none;
   }
 }

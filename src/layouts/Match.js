@@ -46,8 +46,19 @@ export const Match = () => {
 
   return (
     <Container id='match-page'>
-      <Grid container spacing={3} style={{ paddingBottom: '5%' }}>
-        <Grid xs={12} sm={4} item>
+      <Grid container spacing={1} style={{ paddingBottom: '5%' }}>
+        <Grid xs={12} item id='match-avatars'>
+          <h2>Marvis Inghedosa</h2>
+          <div className='center'>
+            <Button onClick={handleOpen}>
+              <Avatar alt='Match Details' />
+            </Button>
+            <Button>
+              <Avatar alt='Whisk Details' />
+            </Button>
+          </div>
+        </Grid>
+        <Grid xs={12} sm={4} item id='match-cards'>
           <div className='match'>
             <h2 className='heading'>Match Details</h2>
             <MatchInfo open={handleOpen} />
