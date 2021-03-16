@@ -1,115 +1,122 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Avatar, Button, Typography, TextField } from '@material-ui/core';
+import { Avatar, Button } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserContext from '../context/user/userContext';
 import { Link } from 'react-router-dom';
 import UserModal from '../components/Modal';
+import DP from '../components/modalBodyComponents/profileImage';
+import AboutMe from '../components/modalBodyComponents/aboutMe';
 
-const UserProfile = () => {
+const UserProfile = ({questionnaire}) => {
   const userContext = useContext(UserContext);
-  const [open, setOpen] = useState(false);
-  const { user } = userContext;
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [preferencesOpen, setPrefOpen] = useState(false);
+  const [profileImg, setDPOpen] = useState(false);
+  const [userInfo, setInfo] = useState({});
+  const { user, updateProfile } = userContext;
 
   useEffect(() => {
     console.log('User state in Profile>>', user);
+
   }, []);
 
-    const handleOpen = () => {
-    setOpen(true);
-  };
+  const handleOpen = (modal) => {
+    switch (modal) {
+      case "profileOpen":
+        setProfileOpen(true)
+        break;
+      case "preferencesOpen":
+        setPrefOpen(true)
+        break;
+      case "profileImg":
+        setDPOpen(true)
+        break;
+      default:
+        console.log("modal does not exist")
+        break;
+    }
+  }; 
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (modal) => {
+    switch (modal) {
+      case "profileOpen":
+        setProfileOpen(false)
+        break;
+      case "preferencesOpen":
+        setPrefOpen(false)
+        break;
+      case "profileImg":
+        setDPOpen(false)
+        break;
+      default:
+        console.log("modal does not exist")
+        break;
+    }
+    
   };
 
   const handleChange = (field, value) => {
     switch (field) {
-      case 'Fname':
-        console.log("Fname", value)
+      case 'fName':
+        userInfo[field] = value
         break;
-      case 'Lname':
-        console.log("Lname", value)
+      case 'lName':
+        userInfo[field] = value
         break;
-      case 'Phone':
-        console.log("Phone", value)
+      case 'phone':
+        userInfo[field] = value
         break;
-      case 'Bio':
-        console.log("Bio", value)
+      case 'bio':
+        userInfo[field] = value
         break;
-      case 'Interests':
-        console.log("Interests", value)
+      case 'interests':
+        userInfo[field] = value
+        break;
+      case 'age':
+        userInfo[field] = +value
+        break;
+      case 'profileImage':
+        userInfo[field] = value
         break;
       default:
+        console.log("form field does not exist")
         break;
     }
-       
+    setInfo(userInfo)  
   }
 
-  const aboutMe = (
-    <form id="aboutMe-form">
-      <Typography variant="h5" style={{paddingBottom: "1em"}}>Complete My Profile</Typography>
-      <TextField
-        label='First Name'
-        onChange={(e) => handleChange('Fname', e.target.value)}
-        className='text-field'
-      />
-      <TextField
-        label='Last Name'
-        onChange={(e) => handleChange('Lname', e.target.value)}
-        className='text-field'
-      />
-      <TextField
-        label='Phone'
-        onChange={(e) => handleChange('Phone', e.target.value)}
-        className='text-field'
-      />
-      <TextField
-          id="bio"
-          label="Bio"
-          multiline
-          rows={4}
-          className='text-field'
-          placeholder="Tell us about yourself"
-          onChange={(e) => handleChange('Bio', e.target.value)}
-        />
-        <TextField
-          id="interests"
-          label="Interests"
-          multiline
-          rows={2}
-          className='text-field'
-          placeholder="What are your hobbies"
-          onChange={(e) => handleChange('Interests', e.target.value)}
-        />
-       <Button className='submit-btn' type='submit'>
-        Save
-      </Button>
-    </form>
-  )
+  const submitUserProfile = (e) => {
+    e.preventDefault()
+    var userObject = {...user, ...userInfo}
+    console.log("submitUserProfile", userObject)
+    updateProfile(userObject)
+    setProfileOpen(false)
+    setDPOpen(false)
+  }
 
   return (
     <div className='profile-page'>
       <h1>My Profile</h1>
       <div className='card-title'>
         <span>Personal details</span>
-        <a className='blue-font' onClick={handleOpen}>change</a>
+        <a className='blue-font' onClick={() => handleOpen('profileOpen')}>change</a>
       </div>
       <div className='about-card'>
         <div className='wrapper'>
-          <Avatar variant='rounded' src={user?.ProfileImage} id='display-photo' />
+          <Avatar variant='rounded' src={user?.profileImage} id='display-photo' onClick={() => handleOpen('profileImg')}/>
           <div style={{ padding: '0 10px', width: '100%' }}>
             <h3>
-              {user?.Fname} {user?.Lname}
+              {user?.fName} {user?.lName}
             </h3>
             <hr />
-            <p>{user?.Bio}</p>
+            <p>{user?.bio}</p>
           </div>
         </div>
       </div>
       <Button>
         <span>About You</span> <ChevronRightIcon />
       </Button>
-      <Button>
+      <Button onClick={() => handleOpen('preferencesOpen')}>
         <span>Preferences</span>
         <ChevronRightIcon />
       </Button>
@@ -124,7 +131,17 @@ const UserProfile = () => {
         <ChevronRightIcon />
       </Button>
       <Button id='action-btn'>Update</Button>
-      <UserModal body={aboutMe} open={open} handleClose={handleClose}/>
+      <UserModal 
+        body={<DP submit={submitUserProfile} handleChange={handleChange} user={user}/>} 
+        open={profileImg} 
+        handleClose={() => handleClose('profileImg')}
+      />
+      <UserModal 
+        body={<AboutMe submit={submitUserProfile} handleChange={handleChange} user={user}/>} 
+        open={profileOpen} 
+        handleClose={() => handleClose('profileOpen')}
+      />
+      <UserModal body={questionnaire} open={preferencesOpen} handleClose={() => handleClose('preferencesOpen')}/>
     </div>
   );
 };

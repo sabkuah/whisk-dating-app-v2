@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 const UserState = (props) => {
   const initialState = {
-    user: {},
+    user: null,
     matches: [],
     isAuthenticated: false,
   };
@@ -18,8 +18,10 @@ const UserState = (props) => {
     const getInfo = async () => {
       var info = await Auth.currentUserInfo();
       //console.log('user State', 'current user info:\n', info);
-      const fullUser = await getUser(info?.attributes.sub);
-      //console.log('fulluser>>', fullUser);
+      var findUser = await getUser(info?.attributes.sub);
+      const fullUser = Object.keys(findUser).length !== 0 ? findUser : null
+      
+      console.log('fulluser>>', fullUser);
       dispatch({
         type: fullUser ? CURRENT_USER : LOGOUT_USER,
         payload: fullUser,
@@ -40,6 +42,9 @@ const UserState = (props) => {
     return API.get(apiName, path);
   };
 
+  // ======================================
+  //  User Authentication / Authorization
+  // =======================================
   const postUser = (user) => {
     const apiName = 'WhiskPro';
     const path = `/api`;
@@ -50,8 +55,6 @@ const UserState = (props) => {
     dispatch({ type: LOGIN_USER, payload: user });
     return API.post(apiName, path, myInit);
   };
-
-  // const loginUser = (user) => dispatch({ type: LOGIN_USER, payload: user });
 
   const loginUser = async (user) => {
     console.log('user sub>>', user.sub);
@@ -103,6 +106,20 @@ const UserState = (props) => {
     return filtered;
   };
 
+  //=======================
+  //  Update User Profile
+  //=======================
+  const updateProfile = async (userInfo) => {
+    const apiName = 'WhiskPro';
+    const path = `/api`;
+    const myInit = {
+      body: userInfo 
+    };
+    const response = await API.post(apiName, path, myInit);
+    var updateUser = await getUser(userInfo.ID)
+    dispatch({ type: CURRENT_USER, payload: updateUser });
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -115,6 +132,7 @@ const UserState = (props) => {
         postUser,
         chooseWhisk,
         cancelChooseWhisk,
+        updateProfile
       }}
     >
       {props.children}
