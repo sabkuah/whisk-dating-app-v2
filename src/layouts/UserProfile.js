@@ -1,43 +1,66 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Avatar, Button, Typography } from '@material-ui/core';
+import { Avatar, Button, Typography, TextField } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserContext from '../context/user/userContext';
 import { Link } from 'react-router-dom';
+import UserModal from '../components/Modal';
 
 const UserProfile = () => {
-  //const [user, setUser] = useState(null);
   const userContext = useContext(UserContext);
+  const [open, setOpen] = useState(false);
   const { user } = userContext;
 
   useEffect(() => {
     console.log('User state in Profile>>', user);
-
-    // const getUserData = async () => {
-    //   var userInfo = await userContext.user;
-    //   console.log('userinfo', userInfo);
-    //   if (userInfo) {
-    //     const response = await userContext.getUser(userInfo.sub);
-    //     console.log('getUserData', response);
-    //     setUser(response);
-    //   }
-    // };
-    // getUserData();
   }, []);
+
+    const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // const aboutMe = () => {
+  //   return (
+  //     <div>
+  //     </div>
+  //   )
+  // }
+  const aboutMe = (
+    <form id="aboutMe-form">
+      <Typography variant="h5">Complete My Profile</Typography>
+      <TextField
+        label='First Name'
+        className='text-field'
+      />
+      <TextField
+        label='Last Name'
+        // onChange={(e) => setEmail(e.target.value)}
+        className='text-field'
+      />
+      <TextField
+        label='Phone'
+        // onChange={(e) => setPW(e.target.value)}
+        className='text-field'
+      />
+       <Button className='submit-btn' type='submit'>
+        Sign Up
+      </Button>
+    </form>
+  )
 
   return (
     <div className='profile-page'>
       <h1>My Profile</h1>
       <div className='card-title'>
         <span>Personal details</span>
-        <span className='blue-font'>change</span>
+        <a className='blue-font' onClick={handleOpen}>change</a>
       </div>
       <div className='about-card'>
         <div className='wrapper'>
-          <Avatar
-            variant='rounded'
-            src={user?.ProfileImage}
-            id='display-photo'
-          />
+          <Avatar variant='rounded' src={user?.ProfileImage} id='display-photo' />
           <div style={{ padding: '0 10px', width: '100%' }}>
             <h3>
               {user?.Fname} {user?.Lname}
@@ -65,6 +88,7 @@ const UserProfile = () => {
         <ChevronRightIcon />
       </Button>
       <Button id='action-btn'>Update</Button>
+      <UserModal body={aboutMe} open={open} handleClose={handleClose}/>
     </div>
   );
 };

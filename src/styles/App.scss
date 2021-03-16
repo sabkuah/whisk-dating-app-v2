@@ -18,8 +18,39 @@ body {
 a {
   text-decoration: none;
   color: black;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .blue-font {
   @include blue-font;
+}
+
+.close-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -10px;
+  svg {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.text-field {
+  width: 100%;
+  margin: 1em 0;
+}
+
+#aboutMe-form {
+  text-align: center;
+  
+  .submit-btn {
+    @include brand-button-lg;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 3em;
+  }
 }
