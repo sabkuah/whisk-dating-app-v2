@@ -32,6 +32,9 @@
 #display-photo {
   width: 10em;
   height: 10em;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .card-title {
@@ -44,7 +47,7 @@
   margin: 0.5em 0 !important;
 }
 
-#aboutMe-form {
+form {
   text-align: center;
   
   .submit-btn {
