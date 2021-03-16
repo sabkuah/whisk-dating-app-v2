@@ -38,19 +38,4 @@ a {
   }
 }
 
-.text-field {
-  width: 100%;
-  margin: 1em 0;
-}
 
-#aboutMe-form {
-  text-align: center;
-  
-  .submit-btn {
-    @include brand-button-lg;
-    width: 50%;
-    display: block;
-    margin: 0 auto;
-    margin-top: 3em;
-  }
-}

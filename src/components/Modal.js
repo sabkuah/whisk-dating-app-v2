@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "20px",
     "&:focus": {
       outline: 'none'
+    },
+    "@media (max-width: 768px)": {
+      width: '70vw'
     }
   },
 }));

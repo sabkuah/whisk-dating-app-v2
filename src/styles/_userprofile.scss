@@ -39,6 +39,23 @@
   padding: 10px 0;
 }
 
+.text-field {
+  width: 100%;
+  margin: 0.5em 0 !important;
+}
+
+#aboutMe-form {
+  text-align: center;
+  
+  .submit-btn {
+    @include brand-button-lg;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 3em;
+  }
+}
+
 @media (max-width: 768px) {
   #display-photo {
     width: 5em;
