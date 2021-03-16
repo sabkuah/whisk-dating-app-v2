@@ -1,0 +1,16 @@
+#match-page {
+  .match {
+    height: calc(100vh - 92px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .match-info {
+    height: 50%;
+  }
+
+  .whisk-info {
+    height: 40%;
+  }
+}

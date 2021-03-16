@@ -26,7 +26,7 @@ const UserProfile = () => {
 
   return (
     <div className='profile-page'>
-      <Typography variant='h4'>My profile</Typography>
+      <h1>My Profile</h1>
       <div className='card-title'>
         <span>Personal details</span>
         <span className='blue-font'>change</span>
@@ -39,9 +39,11 @@ const UserProfile = () => {
             id='display-photo'
           />
           <div style={{ padding: '0 10px', width: '100%' }}>
-            Your name here
+            <h3>
+              {user?.Fname} {user?.Lname}
+            </h3>
             <hr />
-            +1 778 000 0000
+            <p>{user?.Bio}</p>
           </div>
         </div>
       </div>

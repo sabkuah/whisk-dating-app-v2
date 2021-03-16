@@ -41,10 +41,6 @@ const UserWhisks = () => {
     setLoadingFalse();
   }, [loading]);
 
-  //   useEffect(() => {
-  //     getChosenWhiskDetails();
-  //   }, [user]);
-
   if (loading) return <Spinner />;
   else
     return (
