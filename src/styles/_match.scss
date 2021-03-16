@@ -1,6 +1,6 @@
 #match-page {
   .match {
-    height: calc(100vh - 92px);
+    max-height: calc(100vh - 96px - 2.5em);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -30,6 +30,38 @@
     .view-profile {
       align-self: flex-end;
       margin-right: 5%;
+    }
+  }
+
+  .whisk-info {
+    #whisk-pic {
+      height: 7em;
+      width: 7em;
+    }
+  }
+}
+
+.messaging {
+  height: 100%;
+  margin-top: 5%;
+  border-radius: 20px !important;
+  display: flex;
+  flex-direction: column;
+
+  .messages {
+    height: 100%;
+  }
+
+  .message-input {
+    margin-bottom: 1%;
+
+    .message-form {
+      align-items: center;
+    }
+
+    .input {
+      width: 100%;
+      background-color: $bg-color;
     }
   }
 }
