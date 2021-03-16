@@ -34,7 +34,9 @@ function App() {
             <Route path='/user/match/:id'>
               <Match />
             </Route>
-            <ProtectedRoute path='/user' component={UserProfile} />
+            <ProtectedRoute path='/user'>
+              <UserProfile questionnaire={<div>Q modal</div>}/>
+            </ProtectedRoute>
             <Route path='/whisks/search'>
               <SearchResults />
             </Route>
