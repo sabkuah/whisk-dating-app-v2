@@ -73,7 +73,7 @@ const UserState = (props) => {
   //ensure user state is up to date
   const chooseWhisk = async (user, whisk) => {
     try {
-      user.ChosenWhisks.unshift(whisk.ID);
+      user.chosenWhisks.unshift(whisk.ID);
       const apiName = 'WhiskPro';
       const path = `/api`;
       const myInit = {
@@ -92,8 +92,8 @@ const UserState = (props) => {
   //=======================
 
   const cancelChooseWhisk = async (user, whiskId) => {
-    const filtered = user.ChosenWhisks.filter((w) => w !== whiskId);
-    user.ChosenWhisks = filtered;
+    const filtered = user.chosenWhisks.filter((w) => w !== whiskId);
+    user.chosenWhisks = filtered;
     const apiName = 'WhiskPro';
     const path = `/api`;
     const myInit = {

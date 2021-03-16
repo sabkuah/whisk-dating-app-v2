@@ -1,19 +1,48 @@
-import { Container, Grid, Paper } from '@material-ui/core';
+import { Container, Grid, Avatar, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import MatchInfo from '../components/match/MatchInfo';
 import Messaging from '../components/match/Messaging';
 import WhiskInfo from '../components/match/WhiskInfo';
 import UserModal from '../components/Modal';
-import confirmMatch from '../components/match/confirmMatch';
 
 export const Match = () => {
   const [open, setOpen] = useState(true);
-
-  //
-
+  const [user, setUser] = useState();
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const confirmMatch = (
+    <Grid container justify='center' spacing={1} style={{ width: '100%' }}>
+      <Grid xs={12} md={6} item>
+        <Avatar
+          variant='rounded'
+          src={user?.ProfileImage}
+          id='full-profile-match-pic'
+        />
+      </Grid>
+      <Grid xs={12} md={6} item>
+        <div style={{ padding: '0 10px', width: '100%' }}>
+          <h3>
+            {user?.Fname} {user?.Lname} Marvis Ighedosa
+          </h3>
+          <hr />
+          {/* add user images here */}
+          {user?.interests.join(', ')} Photography, Music, Dance
+          <hr />
+          <p>
+            {user?.Bio}My top 3 guilty pleasures: reality TV dating shows,
+            cheesy thrillers, my mom's chocolate chip cookies.
+          </p>
+        </div>
+        {/* if already accepted, do not render accept button*/}
+        <form>
+          <Button>Decline</Button>
+          <Button>Accept</Button>
+        </form>
+      </Grid>
+    </Grid>
+  );
 
   return (
     <Container id='match-page'>

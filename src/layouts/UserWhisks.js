@@ -10,7 +10,13 @@ const UserWhisks = () => {
   const userContext = useContext(UserContext);
   const whiskContext = useContext(WhiskContext);
   const { user, cancelChooseWhisk } = userContext;
-  const { whisks, scanWhisks, setLoadingFalse, setLoadingTrue, loading } = whiskContext;
+  const {
+    whisks,
+    scanWhisks,
+    setLoadingFalse,
+    setLoadingTrue,
+    loading,
+  } = whiskContext;
   const [chosenWhisks, setChosenWhisks] = useState(null);
 
   const handleCancelWhisk = async (whiskId) => {
@@ -19,8 +25,8 @@ const UserWhisks = () => {
   };
 
   const getChosenWhiskDetails = () => {
-    if (user.ChosenWhisks) {
-      const items = user.ChosenWhisks.map((id) => {
+    if (user.chosenWhisks) {
+      const items = user.chosenWhisks.map((id) => {
         return whisks.find((w) => w.ID === id);
       });
       setChosenWhisks(items);
@@ -52,12 +58,11 @@ const UserWhisks = () => {
               handleCancelWhisk={handleCancelWhisk}
             />
           </Grid>
-          {
-            user && 
+          {user && (
             <Grid item xs={12} sm={6} md={6}>
-              <UserMatches whisks={user.Matches} />
+              <UserMatches whisks={user.matches} />
             </Grid>
-          }
+          )}
         </Grid>
       </Container>
     );
