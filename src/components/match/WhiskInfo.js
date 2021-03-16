@@ -4,7 +4,7 @@ import { Paper, Avatar, Grid } from '@material-ui/core';
 const WhiskInfo = ({ whisk }) => {
   return (
     <Paper className='whisk-info'>
-      <Grid container justify='center' spacing={2} style={{ width: '100%' }}>
+      <Grid container justify='center' spacing={1} style={{ width: '100%' }}>
         <Grid sm={12} md={6} item className='img-grid-container'>
           <Avatar src={whisk?.Images[0]} id='whisk-pic' />
         </Grid>

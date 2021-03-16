@@ -1,10 +1,10 @@
 import React from 'react';
 import { Paper, Avatar, Grid } from '@material-ui/core';
 
-const MatchInfo = ({ user }) => {
+const MatchInfo = ({ user, open }) => {
   return (
     <Paper className='match-info'>
-      <Grid container spacing={2} style={{ width: '100%' }}>
+      <Grid container justify='center' spacing={1} style={{ width: '100%' }}>
         <Grid sm={12} md={6} className='img-grid-container' item>
           <Avatar variant='rounded' src={user?.ProfileImage} id='match-pic' />
         </Grid>
@@ -24,9 +24,9 @@ const MatchInfo = ({ user }) => {
         </Grid>
       </Grid>
 
-      <p className='blue-font' id='view-profile-button'>
+      <a className='blue-font' id='view-profile-button' onClick={open}>
         View Profile
-      </p>
+      </a>
     </Paper>
   );
 };
