@@ -1,16 +1,100 @@
 #match-page {
   .match {
-    height: calc(100vh - 92px);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-content: center;
+
+    .heading {
+      text-align: center;
+    }
+  }
+
+  .match-info,
+  .whisk-info {
+    height: 40%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .match-info {
-    height: 50%;
+    #match-pic {
+      height: 10em;
+      width: 7em;
+      border-radius: 20px;
+    }
+
+    .view-profile {
+      align-self: flex-end;
+      margin-right: 5%;
+    }
   }
 
   .whisk-info {
-    height: 40%;
+    #whisk-pic {
+      height: 7em;
+      width: 7em;
+    }
+  }
+}
+
+.messaging {
+  height: 100%;
+  margin-top: 5%;
+  border-radius: 20px !important;
+  display: flex;
+  flex-direction: column;
+
+  .messages {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    .msg-sent,
+    .msg-received {
+      width: 70%;
+
+      .msg-text {
+        width: 100%;
+        margin-left: 3%;
+        margin-right: 3%;
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+      }
+    }
+
+    .msg-sent {
+      align-self: flex-end;
+
+      .msg-text {
+        background-color: $brand-color;
+      }
+    }
+
+    .msg-received {
+      align-self: flex-start;
+      .msg-text {
+        background-color: $accent-gray;
+      }
+    }
+  }
+
+  .message-input {
+    margin-bottom: 1%;
+
+    .message-form {
+      align-items: center;
+    }
+
+    .input {
+      width: 100%;
+      background-color: $accent-gray;
+      border-radius: 20px;
+      padding-left: 12px;
+    }
   }
 }
