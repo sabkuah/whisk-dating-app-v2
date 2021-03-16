@@ -5,12 +5,12 @@ import UserContext from '../context/user/userContext';
 import { Link } from 'react-router-dom';
 import UserModal from '../components/Modal';
 
-const UserProfile = () => {
+const UserProfile = ({questionnaire}) => {
   const userContext = useContext(UserContext);
   const [profileOpen, setProfileOpen] = useState(false);
   const [preferencesOpen, setPrefOpen] = useState(false);
   const [userInfo, setInfo] = useState({});
-  const { user } = userContext;
+  const { user, updateProfile } = userContext;
 
   useEffect(() => {
     console.log('User state in Profile>>', user);
@@ -18,7 +18,6 @@ const UserProfile = () => {
   }, []);
 
   const handleOpen = (modal) => {
-    console.log("handle modal Open", modal)
     modal === "profileOpen" ? setProfileOpen(true) : setPrefOpen(true)
   };
 
@@ -29,38 +28,37 @@ const UserProfile = () => {
   const handleChange = (field, value) => {
     switch (field) {
       case 'fName':
-        console.log("Fname", value)
         userInfo[field] = value
         break;
       case 'lName':
-        console.log("Lname", value)
         userInfo[field] = value
         break;
       case 'phone':
-        console.log("Phone", value)
         userInfo[field] = value
         break;
       case 'bio':
-        console.log("Bio", value)
         userInfo[field] = value
         break;
       case 'interests':
-        console.log("Interests", value)
         userInfo[field] = value
         break;
+      case 'age':
+        userInfo[field] = +value
+        break;
       default:
+        console.log("form field does not exist")
         break;
     }
-    console.log("setting userinfo", userInfo)
     setInfo(userInfo)  
   }
 
   const submitUserProfile = (e) => {
     e.preventDefault()
-    console.log("submitUserProfile", userInfo)
+    var userObject = {...user, ...userInfo}
+    console.log("submitUserProfile", userObject)
+    updateProfile(userObject)
+    setProfileOpen(false)
   }
-
-  const questionnaire = <div>questionnaire modal</div>
 
   const aboutMe = (
     <form id="aboutMe-form" onSubmit={submitUserProfile}>
@@ -79,6 +77,7 @@ const UserProfile = () => {
         label='Age'
         onChange={(e) => handleChange('age', e.target.value)}
         className='text-field'
+        type="number"
       />
       <TextField
         label='Phone'
@@ -118,13 +117,13 @@ const UserProfile = () => {
       </div>
       <div className='about-card'>
         <div className='wrapper'>
-          <Avatar variant='rounded' src={user?.ProfileImage} id='display-photo' />
+          <Avatar variant='rounded' src={user?.profileImage} id='display-photo' />
           <div style={{ padding: '0 10px', width: '100%' }}>
             <h3>
-              {user?.Fname} {user?.Lname}
+              {user?.fName} {user?.lName}
             </h3>
             <hr />
-            <p>{user?.Bio}</p>
+            <p>{user?.bio}</p>
           </div>
         </div>
       </div>

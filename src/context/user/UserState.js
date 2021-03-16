@@ -40,6 +40,9 @@ const UserState = (props) => {
     return API.get(apiName, path);
   };
 
+  // ======================================
+  //  User Authentication / Authorization
+  // =======================================
   const postUser = (user) => {
     const apiName = 'WhiskPro';
     const path = `/api`;
@@ -101,16 +104,18 @@ const UserState = (props) => {
     return filtered;
   };
 
-
+  //=======================
+  //  Update User Profile
+  //=======================
   const updateProfile = async (userInfo) => {
     const apiName = 'WhiskPro';
     const path = `/api`;
     const myInit = {
       body: userInfo 
     };
-    // dispatch({ type: LOGIN_USER, payload: user });
     const response = await API.post(apiName, path, myInit);
-    console.log("updated Profile", response)
+    var updateUser = await getUser(userInfo.ID)
+    dispatch({ type: CURRENT_USER, payload: updateUser });
   }
 
   return (

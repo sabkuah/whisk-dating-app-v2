@@ -28,21 +28,21 @@ function App() {
             <Route path='/login'>
               <Login />
             </Route>
-            <Route path='/user/whisks'>
+            <ProtectedRoute path='/user/whisks'>
               <UserWhisks />
-            </Route>
-            <Route path='/user/match/:id'>
+            </ProtectedRoute>
+            <ProtectedRoute path='/user/match/:id'>
               <Match />
-            </Route>
+            </ProtectedRoute>
             <ProtectedRoute path='/user'>
               <UserProfile questionnaire={<div>Q modal</div>}/>
             </ProtectedRoute>
-            <Route path='/whisks/search'>
+            <ProtectedRoute path='/whisks/search'>
               <SearchResults />
-            </Route>
-            <Route path='/whisks/:id'>
+            </ProtectedRoute>
+            <ProtectedRoute path='/whisks/:id'>
               <WhiskDetails />
-            </Route>
+            </ProtectedRoute>
             <Route exact path='/'>
               <Welcome />
             </Route>
