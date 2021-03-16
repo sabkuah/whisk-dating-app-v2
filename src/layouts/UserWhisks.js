@@ -47,10 +47,6 @@ const UserWhisks = () => {
     setLoadingFalse();
   }, [loading]);
 
-  //   useEffect(() => {
-  //     getChosenWhiskDetails();
-  //   }, [user]);
-
   if (loading) return <Spinner />;
   else
     return (
@@ -62,12 +58,11 @@ const UserWhisks = () => {
               handleCancelWhisk={handleCancelWhisk}
             />
           </Grid>
-          {
-            user && 
+          {user && (
             <Grid item xs={12} md={6}>
-              <UserMatches whisks={user.Matches} />
+              <UserMatches matches={user.Matches} />
             </Grid>
-          }
+          )}
         </Grid>
       </Container>
     );

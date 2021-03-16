@@ -12,6 +12,7 @@ import Amplify from 'aws-amplify';
 import config from './aws-exports';
 import ProtectedRoute from './components/ProtectedRoute';
 import UserWhisks from './layouts/UserWhisks';
+import { Match } from './layouts/Match';
 
 Amplify.configure(config);
 
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route path='/user/whisks'>
               <UserWhisks />
+            </Route>
+            <Route path='/user/match/:id'>
+              <Match />
             </Route>
             <ProtectedRoute path='/user' component={UserProfile} />
             {/* <Route path='/user'>
