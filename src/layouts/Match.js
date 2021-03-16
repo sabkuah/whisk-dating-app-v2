@@ -1,5 +1,7 @@
 import { Container, Grid, Paper } from '@material-ui/core';
 import React from 'react';
+import MatchInfo from '../components/match/MatchInfo';
+import WhiskInfo from '../components/match/WhiskInfo';
 
 export const Match = () => {
   return (
@@ -7,8 +9,10 @@ export const Match = () => {
       <Grid container spacing={3}>
         <Grid xs={12} sm={4} item>
           <div className='match'>
-            <Paper className='match-info'>Match Info</Paper>
-            <Paper className='whisk-info'>Whisk Info</Paper>
+            <h2 className='heading'>Match Details</h2>
+            <MatchInfo />
+            <h2 className='heading'>Whisk Details</h2>
+            <WhiskInfo />
           </div>
         </Grid>
         <Grid xs={12} sm={8} item>
