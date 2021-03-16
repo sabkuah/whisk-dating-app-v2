@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 const UserState = (props) => {
   const initialState = {
     user: {},
+    matches: [],
     isAuthenticated: false,
   };
   const history = useHistory();

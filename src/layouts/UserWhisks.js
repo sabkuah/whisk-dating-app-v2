@@ -60,7 +60,7 @@ const UserWhisks = () => {
           </Grid>
           {user && (
             <Grid item xs={12} md={6}>
-              <UserMatches whisks={user.Matches} />
+              <UserMatches matches={user.Matches} />
             </Grid>
           )}
         </Grid>
