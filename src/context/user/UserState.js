@@ -9,6 +9,7 @@ import {
 import UserReducer from './userReducer';
 import UserContext from './userContext';
 import { Auth, API } from 'aws-amplify';
+import { v4 as uuid } from 'uuid';
 
 const UserState = (props) => {
   const initialState = {
@@ -134,6 +135,65 @@ const UserState = (props) => {
     dispatch({ type: CURRENT_USER, payload: updateUser });
   };
 
+  //=======================
+  //  Create New Match
+  //=======================
+
+  const FemaleUsers = [
+    '52bb9ed8-2297-4996-89db-01383c09e51f',
+    '59490f6f-5eba-405a-a4e1-770efb15794a',
+  ];
+
+  const MaleUsers = [
+    '5dd02c42-3024-4c57-bf3a-e1cdd239502c',
+    '5eb24c36-6192-4108-bdff-cf7c1d376526',
+  ];
+
+  const createMatch = async (user, whiskId) => {
+    //Assemble possible matches
+    let possibleMatches = [];
+    switch (user.preference) {
+      case 'females':
+        possibleMatches = FemaleUsers;
+        break;
+      case 'males':
+        possibleMatches = MaleUsers;
+        break;
+      case 'other':
+        possibleMatches = FemaleUsers;
+        possibleMatches.push(...MaleUsers);
+        break;
+      default:
+        possibleMatches = FemaleUsers;
+        possibleMatches.push(...MaleUsers);
+        break;
+    }
+
+    //Pick a random person
+    console.log('Your possible matches are: ', possibleMatches);
+    const randomIndex = Math.floor(Math.random() * possibleMatches.length);
+    const matchId = possibleMatches[randomIndex];
+    possibleMatches = []; //reset
+
+    console.log('Congrats, your match is: ', matchId);
+
+    //Create match object
+    const newMatch = {
+      ID: uuid(),
+      isConfirmed: true,
+      status: 'pending',
+      Type: 'Match',
+      userIds: [user.ID, matchId],
+      whiskId: whiskId,
+    };
+
+    console.log('A match made in heaven!!', newMatch);
+  };
+
+  //=======================
+  //  Populate all Matches
+  //=======================
+
   return (
     <UserContext.Provider
       value={{
@@ -151,6 +211,7 @@ const UserState = (props) => {
         updateProfile,
         setLoadingFalse,
         setLoadingTrue,
+        createMatch,
       }}
     >
       {props.children}

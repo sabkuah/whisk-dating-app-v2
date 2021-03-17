@@ -9,7 +9,7 @@ import Spinner from '../components/Spinner';
 const UserWhisks = () => {
   const userContext = useContext(UserContext);
   const whiskContext = useContext(WhiskContext);
-  const { user, cancelChooseWhisk } = userContext;
+  const { user, cancelChooseWhisk, createMatch } = userContext;
   const {
     whisks,
     scanWhisks,
@@ -44,6 +44,7 @@ const UserWhisks = () => {
       setLoadingTrue();
       await checkContextForWhisks();
       await getChosenWhiskDetails();
+      createMatch(user, '43190d21-9fb9-462d-97d1-79d73e15262e');
       setLoadingFalse();
     })();
     //eslint-disable-next-line
