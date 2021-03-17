@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import UserModal from '../components/Modal';
 import DP from '../components/modalBodyComponents/profileImage';
 import AboutMe from '../components/modalBodyComponents/aboutMe';
+import Questionnaire from '../components/modalBodyComponents/questionnaire';
 
 const UserProfile = ({ questionnaire }) => {
   const userContext = useContext(UserContext);
@@ -155,7 +156,7 @@ const UserProfile = ({ questionnaire }) => {
         handleClose={() => handleClose('profileOpen')}
       />
       <UserModal
-        body={questionnaire}
+        body={<Questionnaire />}
         open={preferencesOpen}
         handleClose={() => handleClose('preferencesOpen')}
       />
