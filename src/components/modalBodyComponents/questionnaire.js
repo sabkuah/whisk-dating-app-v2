@@ -1,107 +1,96 @@
 import React, { useState, useEffect } from 'react';
 import { API } from 'aws-amplify';
 import {
-    Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails,
+  Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const Questionnaire = () => {
-    const [questions, setQuestions] = useState([]);
-    const [answers, setAnswers] = useState([]);
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState([]);
 
-    const handleChange = (event) => {
-        console.log(event.target.value);
+  const handleChange = (q, a) => {
+    console.log("question:", q, ":", a);
+    var qObj = [] // { questionId: q.id, answer: a}
+    // if questionId does not exist in qObj, push to array, else change answer
+  };
+
+
+  function getData() {
+    const apiName = 'WhiskPro';
+    const path = '/api/Question';
+    const myInit = { // OPTIONAL
+      headers: {}, // OPTIONAL
     };
 
+    // const response = await 
+    return API.get(apiName, path, myInit)
+    // setQuestion(response)
+  }
 
-    function getData() {
-        const apiName = 'WhiskPro';
-        const path = '/api/Question';
-        const myInit = { // OPTIONAL
-            headers: {}, // OPTIONAL
-        };
-
-        // const response = await 
-        return API.get(apiName, path, myInit)
-        // setQuestion(response)
-    }
-
-    useEffect(() => {
-        (async function () {
-            const response = await getData();
-            setQuestions(response)
-        })();
-    }, [])
+  useEffect(() => {
+    (async function () {
+      const response = await getData();
+      console.log("grabbing questions", response)
+      setQuestions(response)
+    })();
+  }, [])
 
 
-    return (
-        <div>
-            <form>
+  return (
+    <div id="Q-container">
+      <form>
+        {
+          questions.map((q, i) => (
+            <div key={i}>
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <h4 key={i}>{`${i + 1}. ${q.question}`}</h4>
+                </AccordionSummary>
                 {
-                    questions.map((x, i) => {
-                        //Need to add question id and answer into object
-                        return (
-                            <div>
-                                <Accordion>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        <h2 key={i}>{i + 1 + ". "}{x.question}</h2>
-                                    </AccordionSummary>
-                                    {x.answers.map((j, p) => {
-
-                                        if (x.category === "radio") {
-                                            return (
-                                                <AccordionDetails>
-                                                    <FormGroup style={{ flexDirection: "row" }}>
-                                                        <FormControlLabel key={p}
-                                                            value={j}
-                                                            control={<Radio />}
-                                                            label={j}
-                                                            onChange={handleChange} />
-                                                    </FormGroup>
-                                                </AccordionDetails>
-                                            )
-                                        } else if (x.category === "multiple choice") {
-                                            return (
-                                                <AccordionDetails>
-                                                    <FormGroup row>
-                                                        <FormControlLabel key={p} value={j} control={<Checkbox />} label={j} />
-                                                    </FormGroup>
-                                                </AccordionDetails>
-                                            )
-
-                                        } else if (x.category === "text") {
-                                            return (
-                                                <AccordionDetails>
-                                                    <TextField id="outlined-full-width"
-
-                                                        style={{ margin: 8 }}
-                                                        placeholder="Answer Here!"
-                                                        fullWidth
-                                                        margin="normal"
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                        variant="outlined" />
-                                                    {/* <FormControlLabel key={p} value={j} control={<Checkbox />} label={j} /> */}
-
-                                                </AccordionDetails>
-                                            )
-
-                                        }
-
-
-                                    })}
-                                </Accordion>
-                            </div>
-                        )
-                    })
+                  q.category === "radio" ?
+                    <AccordionDetails>
+                      <RadioGroup aria-label="gender" name="gender1" onChange={(e) => handleChange(q, e.target.value)}>
+                        {q.answers.map(opt =>
+                          <FormControlLabel key={opt} value={opt} control={<Radio />} label={opt} />
+                        )}
+                      </RadioGroup>
+                    </AccordionDetails>
+                    :
+                    q.category === "multiple choice" ?
+                      <AccordionDetails>
+                        <FormGroup>
+                          {q.answers.map(opt =>
+                            <FormControlLabel key={`${q.question}-${opt}`}
+                              control={<Checkbox checked={false} onChange={(e) => handleChange(q, e.target.value)} name={opt} />}
+                              label={opt}
+                            />
+                          )}
+                        </FormGroup>
+                      </AccordionDetails>
+                    :
+                    q.category === "text" ?
+                      <AccordionDetails>
+                        <TextField id={`${q.question}-textfield`}
+                          placeholder="Answer Here!"
+                          fullWidth
+                          InputLabelProps={{ shrink: true }}
+                          variant="outlined"
+                          onChange={(e) => handleChange(q, e.target.value)}
+                        />
+                      </AccordionDetails> 
+                    : ""
                 }
-                <Button className='submit-btn' type='submit'>
-                    Save
+              </Accordion>
+            </div>
+          ))
+        }
+        <Button className='submit-btn' type='submit'>
+          Save
         </Button>
-            </form>
-        </div>
-    )
+      </form>
+    </div>
+  )
 }
 
 export default Questionnaire
