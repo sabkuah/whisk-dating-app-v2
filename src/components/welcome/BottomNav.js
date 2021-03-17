@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 
+import { useHistory } from 'react-router-dom';
+
 const BottomNav = () => {
   const [value, setValue] = useState('home');
+  const history = useHistory();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log('value', value);
   };
+
+  useEffect(() => {
+    switch (value) {
+      case 'home':
+        history.push('/');
+        break;
+      case 'matches':
+        history.push('/user/whisks');
+        break;
+      case 'profile':
+        history.push('/user');
+        break;
+      default:
+        history.push('/');
+    }
+  }, [value]);
 
   return (
     <BottomNavigation
@@ -25,8 +43,8 @@ const BottomNav = () => {
         icon={<HomeIcon className='icon' />}
       />
       <BottomNavigationAction
-        label='Favourites'
-        value='favourites'
+        label='Matches'
+        value='matches'
         icon={<FavoriteBorderIcon className='icon' />}
       />
       <BottomNavigationAction
