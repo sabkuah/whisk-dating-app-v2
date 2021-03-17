@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { Container } from '@material-ui/core';
-import { isIOS, isAndroid, isMobile } from 'react-device-detect';
-import BottomNav from '../components/welcome/BottomNav';
+import { isMobile } from 'react-device-detect';
+
 import Search from '../components/welcome/Search';
-import BurgerNav from '../components/welcome/BurgerNav';
+
 import SuggestedWhisks from '../components/welcome/SuggestedWhisks';
 import UserContext from '../context/user/userContext';
 import LandingPage from './LandingPage';
@@ -36,7 +36,6 @@ const Welcome = () => {
   else
     return (
       <Container className='welcome-page'>
-        {isAndroid && <BurgerNav />}
         <div className='landing-title'>
           <h1>
             Experiences {isMobile && <br />}
@@ -45,7 +44,6 @@ const Welcome = () => {
         </div>
         <Search />
         <SuggestedWhisks whisks={whisks} />
-        {isIOS && <BottomNav />}
       </Container>
     );
 };
