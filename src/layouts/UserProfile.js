@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar, Button } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserContext from '../context/user/userContext';
@@ -7,7 +7,7 @@ import UserModal from '../components/Modal';
 import DP from '../components/modalBodyComponents/profileImage';
 import AboutMe from '../components/modalBodyComponents/aboutMe';
 
-const UserProfile = ({questionnaire}) => {
+const UserProfile = ({ questionnaire }) => {
   const userContext = useContext(UserContext);
   const [profileOpen, setProfileOpen] = useState(false);
   const [preferencesOpen, setPrefOpen] = useState(false);
@@ -15,95 +15,96 @@ const UserProfile = ({questionnaire}) => {
   const [userInfo, setInfo] = useState({});
   const { user, updateProfile } = userContext;
 
-  useEffect(() => {
-    console.log('User state in Profile>>', user);
-
-  }, []);
-
   const handleOpen = (modal) => {
     switch (modal) {
-      case "profileOpen":
-        setProfileOpen(true)
+      case 'profileOpen':
+        setProfileOpen(true);
         break;
-      case "preferencesOpen":
-        setPrefOpen(true)
+      case 'preferencesOpen':
+        setPrefOpen(true);
         break;
-      case "profileImg":
-        setDPOpen(true)
+      case 'profileImg':
+        setDPOpen(true);
         break;
       default:
-        console.log("modal does not exist")
+        console.log('modal does not exist');
         break;
     }
-  }; 
+  };
 
   const handleClose = (modal) => {
     switch (modal) {
-      case "profileOpen":
-        setProfileOpen(false)
+      case 'profileOpen':
+        setProfileOpen(false);
         break;
-      case "preferencesOpen":
-        setPrefOpen(false)
+      case 'preferencesOpen':
+        setPrefOpen(false);
         break;
-      case "profileImg":
-        setDPOpen(false)
+      case 'profileImg':
+        setDPOpen(false);
         break;
       default:
-        console.log("modal does not exist")
+        console.log('modal does not exist');
         break;
     }
-    
   };
 
   const handleChange = (field, value) => {
     switch (field) {
       case 'fName':
-        userInfo[field] = value
+        userInfo[field] = value;
         break;
       case 'lName':
-        userInfo[field] = value
+        userInfo[field] = value;
         break;
       case 'phone':
-        userInfo[field] = value
+        userInfo[field] = value;
         break;
       case 'bio':
-        userInfo[field] = value
+        userInfo[field] = value;
         break;
       case 'interests':
-        userInfo[field] = value
+        userInfo[field] = value;
         break;
       case 'age':
-        userInfo[field] = +value
+        userInfo[field] = +value;
         break;
       case 'profileImage':
-        userInfo[field] = value
+        userInfo[field] = value;
         break;
       default:
-        console.log("form field does not exist")
+        console.log('form field does not exist');
         break;
     }
-    setInfo(userInfo)  
-  }
+    setInfo(userInfo);
+  };
 
   const submitUserProfile = (e) => {
-    e.preventDefault()
-    var userObject = {...user, ...userInfo}
-    console.log("submitUserProfile", userObject)
-    updateProfile(userObject)
-    setProfileOpen(false)
-    setDPOpen(false)
-  }
+    e.preventDefault();
+    var userObject = { ...user, ...userInfo };
+    console.log('submitUserProfile', userObject);
+    updateProfile(userObject);
+    setProfileOpen(false);
+    setDPOpen(false);
+  };
 
   return (
     <div className='profile-page'>
       <h1>My Profile</h1>
       <div className='card-title'>
         <span>Personal details</span>
-        <a className='blue-font' onClick={() => handleOpen('profileOpen')}>change</a>
+        <a className='blue-font' onClick={() => handleOpen('profileOpen')}>
+          change
+        </a>
       </div>
       <div className='about-card'>
         <div className='wrapper'>
-          <Avatar variant='rounded' src={user?.profileImage} id='display-photo' onClick={() => handleOpen('profileImg')}/>
+          <Avatar
+            variant='rounded'
+            src={user?.profileImage}
+            id='display-photo'
+            onClick={() => handleOpen('profileImg')}
+          />
           <div style={{ padding: '0 10px', width: '100%' }}>
             <h3>
               {user?.fName} {user?.lName}
@@ -131,17 +132,33 @@ const UserProfile = ({questionnaire}) => {
         <ChevronRightIcon />
       </Button>
       <Button id='action-btn'>Update</Button>
-      <UserModal 
-        body={<DP submit={submitUserProfile} handleChange={handleChange} user={user}/>} 
-        open={profileImg} 
+      <UserModal
+        body={
+          <DP
+            submit={submitUserProfile}
+            handleChange={handleChange}
+            user={user}
+          />
+        }
+        open={profileImg}
         handleClose={() => handleClose('profileImg')}
       />
-      <UserModal 
-        body={<AboutMe submit={submitUserProfile} handleChange={handleChange} user={user}/>} 
-        open={profileOpen} 
+      <UserModal
+        body={
+          <AboutMe
+            submit={submitUserProfile}
+            handleChange={handleChange}
+            user={user}
+          />
+        }
+        open={profileOpen}
         handleClose={() => handleClose('profileOpen')}
       />
-      <UserModal body={questionnaire} open={preferencesOpen} handleClose={() => handleClose('preferencesOpen')}/>
+      <UserModal
+        body={questionnaire}
+        open={preferencesOpen}
+        handleClose={() => handleClose('preferencesOpen')}
+      />
     </div>
   );
 };

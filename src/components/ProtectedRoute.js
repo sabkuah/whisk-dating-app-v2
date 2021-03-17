@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import UserContext from '../context/user/userContext';
 import Spinner from './Spinner';
@@ -20,7 +20,8 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       setLoadingFalse();
       return;
     })();
-  }, [loading]);
+    //eslint-disable-next-line
+  }, []);
 
   if (loading === true || !user) return <Spinner />;
   else

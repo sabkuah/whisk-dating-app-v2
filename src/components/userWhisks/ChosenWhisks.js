@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   List,
   ListItem,
@@ -19,7 +19,7 @@ const ChosenWhisks = ({ whisks, handleCancelWhisk }) => {
       <h1>Your Chosen Whisks</h1>
       {whisks?.length ? (
         <List className={classes.root}>
-          {whisks.map(w => {
+          {whisks.map((w) => {
             return (
               <div key={w.ID} className='chosen-list-item'>
                 <ListItem alignItems='center'>

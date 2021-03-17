@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   GridList,
@@ -12,13 +12,10 @@ import {
 import CardVertical from '../CardVertical';
 import { Link } from 'react-router-dom';
 import WhiskTabs from '../WhiskTabs';
-import UserContext from '../../context/user/userContext';
-import { Auth } from 'aws-amplify';
 
 export default function SuggestedWhisks({ whisks }) {
   const classes = useStyles();
   const [value, setValue] = useState('all');
-  const userContext = useContext(UserContext);
   const [filteredWhisks, setFilteredWhisks] = useState(whisks);
 
   const handleChange = (_, newValue) => {
@@ -34,7 +31,7 @@ export default function SuggestedWhisks({ whisks }) {
       });
       setFilteredWhisks(filtered);
     }
-  }, [value]);
+  }, [whisks, value]);
 
   return (
     <>

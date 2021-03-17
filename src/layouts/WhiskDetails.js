@@ -27,7 +27,7 @@ const WhiskDetails = () => {
   };
 
   const handleChooseWhisk = async () => {
-    if (user.ChosenWhisks.includes(whisk.ID)) {
+    if (user.chosenWhisks.includes(whisk.ID)) {
       alert('You have already chosen this Whisk!'); //replace this alert
     } else {
       await chooseWhisk(user, whisk);

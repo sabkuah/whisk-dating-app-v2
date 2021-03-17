@@ -29,6 +29,16 @@ const UserReducer = (state, action) => {
         user: action.payload,
         isAuthenticated: true,
       };
+    case SET_LOADING_TRUE:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SET_LOADING_FALSE:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }

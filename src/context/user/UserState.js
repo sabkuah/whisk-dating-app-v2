@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import {
   CURRENT_USER,
   LOGIN_USER,
@@ -9,7 +9,6 @@ import {
 import UserReducer from './userReducer';
 import UserContext from './userContext';
 import { Auth, API } from 'aws-amplify';
-import { useHistory } from 'react-router-dom';
 
 const UserState = (props) => {
   const initialState = {
@@ -18,7 +17,7 @@ const UserState = (props) => {
     isAuthenticated: false,
     loading: false,
   };
-  const history = useHistory();
+
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   // useEffect(() => {
@@ -79,7 +78,7 @@ const UserState = (props) => {
   };
 
   const logoutUser = async () => {
-    const result = await Auth.signOut({ global: true });
+    await Auth.signOut({ global: true });
     return dispatch({ type: LOGOUT_USER });
   };
 
@@ -130,7 +129,7 @@ const UserState = (props) => {
     const myInit = {
       body: userInfo,
     };
-    const response = await API.post(apiName, path, myInit);
+    await API.post(apiName, path, myInit);
     var updateUser = await getUserFromDB(userInfo.ID);
     dispatch({ type: CURRENT_USER, payload: updateUser });
   };
