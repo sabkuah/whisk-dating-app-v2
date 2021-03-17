@@ -25,7 +25,7 @@ const UserWhisks = () => {
   };
 
   const getChosenWhiskDetails = () => {
-    if (user.chosenWhisks) {
+    if (user.chosenWhisks?.length) {
       const items = user.chosenWhisks.map((id) => {
         return whisks.find((w) => w.ID === id);
       });
@@ -34,20 +34,22 @@ const UserWhisks = () => {
   };
 
   const checkContextForWhisks = async () => {
-    if (!whisks.length) {
+    if (whisks.length === 0) {
       await scanWhisks();
     }
-    return;
   };
 
   useEffect(() => {
-    setLoadingTrue();
-    checkContextForWhisks();
-    getChosenWhiskDetails();
-    setLoadingFalse();
-  }, [loading]);
+    (async () => {
+      setLoadingTrue();
+      await checkContextForWhisks();
+      await getChosenWhiskDetails();
+      setLoadingFalse();
+    })();
+    //eslint-disable-next-line
+  }, [whisks]);
 
-  if (loading) return <Spinner />;
+  if (loading === true) return <Spinner />;
   else
     return (
       <Container className='user-whisks'>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Avatar, Grid } from '@material-ui/core';
+import { Paper, Avatar, Grid, Button } from '@material-ui/core';
 
 const MatchInfo = ({ user, open }) => {
   return (
@@ -24,9 +24,9 @@ const MatchInfo = ({ user, open }) => {
         </Grid>
       </Grid>
 
-      <a className='blue-font' id='view-profile-button' onClick={open}>
+      <Button className='blue-font' id='view-profile-button' onClick={open}>
         View Profile
-      </a>
+      </Button>
     </Paper>
   );
 };

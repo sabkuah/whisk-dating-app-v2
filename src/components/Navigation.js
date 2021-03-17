@@ -7,15 +7,14 @@ import WhiskContext from '../context/whisk/whiskContext';
 const Navigation = () => {
   const history = useHistory();
   const userContext = useContext(UserContext);
-  const whiskContext = useContext(WhiskContext)
+  const whiskContext = useContext(WhiskContext);
 
   const logout = async () => {
-    const response = await userContext.logoutUser()
-    const whiskResponse = await whiskContext.clearWhisks()
-    console.log("user logged out", response)
-    history.push("/")
-  }
-
+    const response = await userContext.logoutUser();
+    await whiskContext.clearWhisks();
+    console.log('user logged out', response);
+    history.push('/');
+  };
 
   return (
     <AppBar position='static' className='nav-container'>
@@ -28,17 +27,17 @@ const Navigation = () => {
           Whisk
         </Typography>
         <div className='nav-links'>
-          {userContext.isAuthenticated ? 
+          {userContext.isAuthenticated ? (
             <>
               <Link to='/user'>Profile</Link>
               <Button onClick={() => logout()}>Logout</Button>
             </>
-          : 
+          ) : (
             <>
               <Link to='/about'>About</Link>
               <Link to='/login'>Login</Link>
             </>
-          }
+          )}
         </div>
       </Toolbar>
     </AppBar>

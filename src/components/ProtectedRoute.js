@@ -1,18 +1,43 @@
-import React, {useContext }  from 'react'
-import { Redirect, Route } from 'react-router-dom'
-import UserContext from '../context/user/userContext'
+import React, { useContext, useEffect } from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import UserContext from '../context/user/userContext';
+import Spinner from './Spinner';
 
-const ProtectedRoute = ({component: Component, ...rest}) => {
-  const userContext = useContext(UserContext)
-  return <Route {...rest} render={props => {
-    if (userContext.user) {
-     return <Component {...rest} {...props}/>
-    } else {
-      return <Redirect to="/"/> // could redirect to an unauthorized component if we like *stretch*
-    }
-  }}
-  />
-}
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const userContext = useContext(UserContext);
+  const {
+    getAuthenticatedUser,
+    user,
+    loading,
+    setLoadingTrue,
+    setLoadingFalse,
+  } = userContext;
+
+  useEffect(() => {
+    (async () => {
+      setLoadingTrue();
+      await getAuthenticatedUser();
+      setLoadingFalse();
+      return;
+    })();
+    //eslint-disable-next-line
+  }, []);
+
+  if (loading === true || !user) return <Spinner />;
+  else
+    return (
+      <Route
+        {...rest}
+        render={(props) => {
+          if (user) {
+            return <Component {...rest} {...props} />;
+          } else {
+            return <Redirect to='/' />; // could redirect to an unauthorized component if we like *stretch*
+          }
+        }}
+      />
+    );
+};
 
 export default ProtectedRoute;
 

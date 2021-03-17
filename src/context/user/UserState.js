@@ -1,34 +1,48 @@
-import React, { useEffect, useReducer } from 'react';
-import { CURRENT_USER, LOGIN_USER, LOGOUT_USER, CHOOSE_WHISK } from '../types';
+import React, { useReducer } from 'react';
+import {
+  CURRENT_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+  SET_LOADING_TRUE,
+  SET_LOADING_FALSE,
+} from '../types';
 import UserReducer from './userReducer';
 import UserContext from './userContext';
 import { Auth, API } from 'aws-amplify';
-import { useHistory } from 'react-router-dom';
 
 const UserState = (props) => {
   const initialState = {
     user: null,
     matches: [],
     isAuthenticated: false,
+    loading: false,
   };
-  const history = useHistory();
+
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  useEffect(() => {
-    const getInfo = async () => {
-      var info = await Auth.currentUserInfo();
-      //console.log('user State', 'current user info:\n', info);
-      var findUser = await getUser(info?.attributes.sub);
-      const fullUser = Object.keys(findUser).length !== 0 ? findUser : null
-      
-      console.log('fulluser>>', fullUser);
-      dispatch({
-        type: fullUser ? CURRENT_USER : LOGOUT_USER,
-        payload: fullUser,
-      });
-    };
-    getInfo();
-  }, []);
+  // useEffect(() => {
+  //   //getAuthenticatedUser();
+  //   (async () => {
+  //     await getAuthenticatedUser();
+  //     return;
+  //   })();
+  // }, []);
+
+  const setLoadingTrue = () => dispatch({ type: SET_LOADING_TRUE });
+  const setLoadingFalse = () => dispatch({ type: SET_LOADING_FALSE });
+
+  const getAuthenticatedUser = async () => {
+    var info = await Auth.currentUserInfo();
+    //console.log('user State', 'current user info:\n', info);
+    var findUser = await getUserFromDB(info?.attributes.sub);
+    const fullUser = Object.keys(findUser).length !== 0 ? findUser : null;
+
+    console.log('fulluser>>', fullUser);
+    dispatch({
+      type: fullUser ? CURRENT_USER : LOGOUT_USER,
+      payload: fullUser,
+    });
+  };
 
   const getAllUsers = (myInit) => {
     const apiName = 'WhiskPro';
@@ -36,7 +50,7 @@ const UserState = (props) => {
     return API.get(apiName, path);
   };
 
-  const getUser = (id) => {
+  const getUserFromDB = (id) => {
     const apiName = 'WhiskPro';
     const path = `/api/object/User/${id}`;
     return API.get(apiName, path);
@@ -58,13 +72,13 @@ const UserState = (props) => {
 
   const loginUser = async (user) => {
     console.log('user sub>>', user.sub);
-    const fullUser = await getUser(user.sub);
+    const fullUser = await getUserFromDB(user.sub);
     console.log('fullUser>>>>>', fullUser);
     dispatch({ type: LOGIN_USER, payload: fullUser });
   };
 
   const logoutUser = async () => {
-    const result = await Auth.signOut({ global: true });
+    await Auth.signOut({ global: true });
     return dispatch({ type: LOGOUT_USER });
   };
 
@@ -113,26 +127,30 @@ const UserState = (props) => {
     const apiName = 'WhiskPro';
     const path = `/api`;
     const myInit = {
-      body: userInfo 
+      body: userInfo,
     };
-    const response = await API.post(apiName, path, myInit);
-    var updateUser = await getUser(userInfo.ID)
+    await API.post(apiName, path, myInit);
+    var updateUser = await getUserFromDB(userInfo.ID);
     dispatch({ type: CURRENT_USER, payload: updateUser });
-  }
+  };
 
   return (
     <UserContext.Provider
       value={{
         user: state.user,
         isAuthenticated: state.isAuthenticated,
+        loading: state.loading,
+        getAuthenticatedUser,
         loginUser,
         logoutUser,
         getAllUsers,
-        getUser,
+        getUserFromDB,
         postUser,
         chooseWhisk,
         cancelChooseWhisk,
-        updateProfile
+        updateProfile,
+        setLoadingFalse,
+        setLoadingTrue,
       }}
     >
       {props.children}

@@ -8,26 +8,24 @@ import {
   Avatar,
   Button,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-const UserMatches = ({}) => {
-  const classes = useStyles();
-  const dummyData = {
-    matches: [
-      {
-        ID: '2f2f3185-0e19-4b57-90fa-c0f2e73726e3',
-        isConfirmed: true,
-        status: 'pending',
-        Type: 'Match',
-        userIds: [
-          '52bb9ed8-2297-4996-89db-01383c09e51f',
-          '5dd02c42-3024-4c57-bf3a-e1cdd239502c',
-        ],
-        whiskId: '173105dc-f900-4790-9b76-21a902d44a23',
-      },
-    ],
-  };
+const UserMatches = () => {
+  // const dummyData = {
+  //   matches: [
+  //     {
+  //       ID: '2f2f3185-0e19-4b57-90fa-c0f2e73726e3',
+  //       isConfirmed: true,
+  //       status: 'pending',
+  //       Type: 'Match',
+  //       userIds: [
+  //         '52bb9ed8-2297-4996-89db-01383c09e51f',
+  //         '5dd02c42-3024-4c57-bf3a-e1cdd239502c',
+  //       ],
+  //       whiskId: '173105dc-f900-4790-9b76-21a902d44a23',
+  //     },
+  //   ],
+  // };
 
   return (
     <div className='user-matches'>
@@ -71,13 +69,5 @@ const UserMatches = ({}) => {
     </div>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: '36ch',
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
 export default UserMatches;

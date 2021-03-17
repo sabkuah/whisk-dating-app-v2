@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, InputBase, IconButton, Avatar, Box } from '@material-ui/core';
+import { Paper, InputBase, IconButton, Avatar } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
 const Messaging = () => {
