@@ -1,44 +1,72 @@
-#match-page {
-  .match {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-content: center;
+// PROFILE MODAL //
+#full-profile-match-pic {
+  width: 100%;
+  height: 100%;
+}
 
-    .heading {
-      text-align: center;
-    }
-  }
+.match {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: center;
 
-  .match-info,
-  .whisk-info {
-    height: 40%;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .match-info {
-    #match-pic {
-      height: 10em;
-      width: 7em;
-      border-radius: 20px;
-    }
-
-    .view-profile {
-      align-self: flex-end;
-      margin-right: 5%;
-    }
-  }
-
-  .whisk-info {
-    #whisk-pic {
-      height: 7em;
-      width: 7em;
-    }
+  .heading {
+    text-align: center;
   }
 }
+
+// MATCH AVATARS //
+
+#match-avatars {
+  display: none;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1%;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+// MATCH CARDS //
+
+.match-info,
+.whisk-info {
+  height: 40%;
+  border-radius: 20px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.match-info {
+  #match-pic {
+    height: 10em;
+    width: 7em;
+    border-radius: 20px;
+  }
+
+  #view-profile-button {
+    align-self: flex-end;
+    margin-right: 5%;
+  }
+}
+
+.img-grid-container {
+  display: flex;
+  justify-content: center;
+}
+
+#whisk-pic {
+  height: 7em;
+  width: 7em;
+}
+
+// MESSAGING //
 
 .messaging {
   height: 100%;
@@ -64,6 +92,7 @@
         display: flex;
         align-items: center;
         border-radius: 20px;
+        padding: 14px;
       }
     }
 
@@ -96,5 +125,26 @@
       border-radius: 20px;
       padding-left: 12px;
     }
+  }
+}
+
+@media (max-width: 992px) {
+  #whisk-pic {
+    width: 6em;
+    height: 6em;
+  }
+
+  .match-info #match-pic {
+    width: 6em;
+    height: 6em;
+  }
+}
+
+@media (max-width: 768px) {
+  #match-avatars {
+    display: block;
+  }
+  #match-cards {
+    display: none;
   }
 }

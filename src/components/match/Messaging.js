@@ -8,9 +8,7 @@ const Messaging = () => {
       <div className='messages'>
         <div className='msg-sent'>
           <div className='wrapper'>
-            <Paper className='msg-text'>
-              <Box m={2}>Wow I love cookies!</Box>
-            </Paper>
+            <Paper className='msg-text'>Wow I love cookies!</Paper>
             <Avatar />
           </div>
         </div>
@@ -18,12 +16,10 @@ const Messaging = () => {
           <div className='wrapper'>
             <Avatar />
             <Paper className='msg-text'>
-              <Box m={2}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Ducimus culpa commodi sequi architecto. Architecto beatae, sequi
-                fugit velit deserunt, sed atque laudantium distinctio impedit
-                porro iure alias dicta, repellat rerum.
-              </Box>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ducimus
+              culpa commodi sequi architecto. Architecto beatae, sequi fugit
+              velit deserunt, sed atque laudantium distinctio impedit porro iure
+              alias dicta, repellat rerum.
             </Paper>
           </div>
         </div>
