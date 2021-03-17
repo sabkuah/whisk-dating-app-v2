@@ -46,7 +46,7 @@ export const Match = () => {
 
   return (
     <Container id='match-page'>
-      <Grid container spacing={1} style={{ paddingBottom: '5%' }}>
+      <Grid container spacing={3} style={{ paddingBottom: '5%' }}>
         <Grid xs={12} item id='match-avatars'>
           <h2>Marvis Inghedosa</h2>
           <div className='center'>

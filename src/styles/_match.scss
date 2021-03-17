@@ -141,10 +141,25 @@
 }
 
 @media (max-width: 768px) {
+  #match-page {
+    height: 100vh;
+  }
+  .MuiGrid-container {
+    height: 100%;
+  }
+  .MuiGrid-item {
+    width: 100%;
+  }
   #match-avatars {
     display: block;
   }
   #match-cards {
     display: none;
+  }
+  .match {
+    height: 100%;
+  }
+  .messaging {
+    width: 100%;
   }
 }

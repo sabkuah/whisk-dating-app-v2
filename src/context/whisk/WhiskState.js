@@ -1,5 +1,10 @@
 import React, { useReducer } from 'react';
-import { SCAN_WHISKS, SET_LOADING_TRUE, SET_LOADING_FALSE, CLEAR_WHISKS } from '../types';
+import {
+  SCAN_WHISKS,
+  SET_LOADING_TRUE,
+  SET_LOADING_FALSE,
+  CLEAR_WHISKS,
+} from '../types';
 import WhiskContext from './whiskContext';
 import WhiskReducer from './whiskReducer';
 import { API } from 'aws-amplify';
@@ -82,7 +87,7 @@ const WhiskState = (props) => {
         setLoadingFalse,
         scanWhisks,
         getWhisk,
-        clearWhisks
+        clearWhisks,
       }}
     >
       {props.children}
