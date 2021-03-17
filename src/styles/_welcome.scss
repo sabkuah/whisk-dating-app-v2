@@ -3,16 +3,6 @@
   flex-direction: column;
   height: calc(100vh - 56px);
 
-  //Burger Nav
-  .burger-nav {
-    display: flex;
-    align-items: flex-end;
-    .burger-icon {
-      color: $brand-color;
-      font-size: 30px;
-    }
-  }
-
   .landing-title {
     height: 30vh;
     display: flex;
@@ -35,30 +25,11 @@
     }
   }
 
-  // Bottom Nav
-  .bottom-nav {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    background-color: $bg-color;
-
-    .Mui-selected {
-      color: $brand-color;
-      .icon {
-        color: $brand-color;
-        text-shadow: 0 10px 10px;
-      }
-    }
-  }
-
   /* Extra small devices (phones, 600px and down) */
   //MEDIA QUERIES HERE ARE INCOMPATIBLE BETWEEN SMALLEST VIEW (IPHONE5) & Large view, often only one or the other works
   @media only screen and (max-width: 370px) {
     justify-content: space-evenly;
 
-    .burger-nav {
-      height: 56px;
-    }
     .landing-title {
       height: 12vh;
       h1 {
@@ -84,9 +55,6 @@
   @media only screen and (max-width: 599px) {
     justify-content: space-evenly;
 
-    .burger-nav {
-      height: 56px;
-    }
     .landing-title {
       height: 20vh;
       h1 {
