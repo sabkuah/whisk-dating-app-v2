@@ -1,26 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { API } from 'aws-amplify';
-import { Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import UserContext from '../../context/user/userContext';
 
-const Questionnaire = () => {
-  const [questions, setQuestions] = useState([]);
-  const [userQs, setUserResponses] = useState(null);
-  const userContext = useContext(UserContext)
-  const { user, updateProfile } = userContext
+const Questionnaire = ({questions, submit, user, setInfo}) => {
+  const [userQs, setUserResponses] = useState(user.profileQuestionnaire);
 
-  useEffect(() => {
-    (async () => {
-      const response = await getData();
-      console.log("grabbing questions", response)
-      setQuestions(response)
-
-      console.log("user profile qs?", user.profileQuestionnaire)
-      setUserResponses(user.profileQuestionnaire)
-
-    })();
-  }, [])
 
   const handleChange = (q, a, mc) => {
     var qObj = new Array(...userQs)
@@ -43,31 +27,15 @@ const Questionnaire = () => {
       }
     }
     setUserResponses(qObj)
+    var newUserObj =  Object.assign(user)
+    newUserObj.profileQuestionnaire = qObj
+    console.log("newUserObj", newUserObj)
+    setInfo(newUserObj)
   };
-
-
-  function getData() {
-    const apiName = 'WhiskPro';
-    const path = '/api/Question';
-    const myInit = { // OPTIONAL
-      headers: {}, // OPTIONAL
-    };
-
-    // const response = await 
-    return API.get(apiName, path, myInit)
-    // setQuestion(response)
-  }
-
-  const submit = (e) => {
-    e.preventDefault();
-    var userObject = Object.assign(user)
-    userObject.profileQuestionnaire = userQs
-    console.log("update profile with this info", userObject)
-    updateProfile(userObject)
-  }
 
   return (
     <form onSubmit={submit}>
+      <Typography variant="h5" style={{paddingBottom: "1em"}}>Profile Questionnaire</Typography>
       <div id="Q-container">
         {
           questions.map((q, i) => (
@@ -80,8 +48,11 @@ const Questionnaire = () => {
                   q.category === "radio" ?
                     <AccordionDetails>
                       <RadioGroup aria-label="gender" name="gender1" onChange={(e) => handleChange(q, e.target.value)}>
-                        {q.answers.map(opt =>
-                          <FormControlLabel key={opt} value={opt} control={<Radio />} label={opt} />
+                        {q.answers.map(opt => {
+                          var findCurrentA = userQs.find(question => question.ID === q.ID)
+                          let checked = findCurrentA ? findCurrentA.answer === opt  : false
+                          return <FormControlLabel key={opt} value={opt} control={<Radio checked={checked}/>} label={opt} />
+                        }
                         )}
                       </RadioGroup>
                     </AccordionDetails>
@@ -89,7 +60,7 @@ const Questionnaire = () => {
                     q.category === "multiple choice" ?
                       <AccordionDetails>
                         <FormGroup>
-                          {userQs && q.answers.map(opt => {
+                          {q.answers.map(opt => {
                             var findCurrentA = userQs.find(question => question.ID === q.ID)
                             let checked = findCurrentA ? findCurrentA.answer.includes(opt) : false
                             return <FormControlLabel key={`${q.question}-${opt}`}
