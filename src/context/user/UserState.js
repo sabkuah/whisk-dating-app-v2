@@ -142,7 +142,7 @@ const UserState = (props) => {
     //query db for match info using each matchId in matches array
     let matchInfo = [];
 
-    user.matches.map(async (matchId) => {
+    user?.matches?.map(async (matchId) => {
       function getData() {
         const apiName = 'WhiskPro';
         const path = `/api/object/Match/${matchId}`;
@@ -153,15 +153,18 @@ const UserState = (props) => {
       }
 
       try {
-        const item = await getData();
-        console.log('Get Match Obj>>>', item);
-        matchInfo.push(item);
+        const matchDoc = await getData();
+        console.log('Get Match Doc from DB>>>1️⃣', matchDoc);
+
+        //Use MatchDoc to get user info from matchId
+
+        matchInfo.push(matchDoc);
       } catch (e) {
         console.log('Error: ', e);
       }
     });
 
-    console.log('MatchInfo Array', matchInfo);
+    console.log('MatchInfo Array2️⃣', matchInfo);
     dispatch({
       type: GET_MATCHES,
       payload: matchInfo,
