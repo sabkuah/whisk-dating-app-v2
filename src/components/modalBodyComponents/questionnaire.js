@@ -1,18 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { API } from 'aws-amplify';
-import {
-  Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails,
-} from '@material-ui/core';
+import { Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import UserContext from '../../context/user/userContext';
 
 const Questionnaire = () => {
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
+  const [userQs, setUserResponses] = useState(null);
+  const userContext = useContext(UserContext)
+  const { user, updateProfile } = userContext
 
-  const handleChange = (q, a) => {
-    console.log("question:", q, ":", a);
-    var qObj = [] // { questionId: q.id, answer: a}
-    // if questionId does not exist in qObj, push to array, else change answer
+  useEffect(() => {
+    (async () => {
+      const response = await getData();
+      console.log("grabbing questions", response)
+      setQuestions(response)
+
+      console.log("user profile qs?", user.profileQuestionnaire)
+      setUserResponses(user.profileQuestionnaire)
+
+    })();
+  }, [])
+
+  const handleChange = (q, a, mc) => {
+    var qObj = new Array(...userQs)
+    var findCurrentQ = qObj.find(question => question.ID === q.ID)
+    
+    if (mc) {
+      if (findCurrentQ) {
+        findCurrentQ.answer.includes(a) ? findCurrentQ.answer.splice(a, 1) : findCurrentQ.answer.push(a)
+      } else {
+        let question = { ID: q.ID, answer: [a] }
+        qObj.push(question)
+      }
+    } else {
+      let question = { ID: q.ID, answer: a }
+      if (findCurrentQ) {
+        qObj.splice(findCurrentQ, 1)
+        qObj.push(question)
+      } else {
+        qObj.push(question)
+      }
+    }
+    setUserResponses(qObj)
   };
 
 
@@ -28,18 +58,17 @@ const Questionnaire = () => {
     // setQuestion(response)
   }
 
-  useEffect(() => {
-    (async function () {
-      const response = await getData();
-      console.log("grabbing questions", response)
-      setQuestions(response)
-    })();
-  }, [])
-
+  const submit = (e) => {
+    e.preventDefault();
+    var userObject = Object.assign(user)
+    userObject.profileQuestionnaire = userQs
+    console.log("update profile with this info", userObject)
+    updateProfile(userObject)
+  }
 
   return (
-    <div id="Q-container">
-      <form>
+    <form onSubmit={submit}>
+      <div id="Q-container">
         {
           questions.map((q, i) => (
             <div key={i}>
@@ -60,36 +89,40 @@ const Questionnaire = () => {
                     q.category === "multiple choice" ?
                       <AccordionDetails>
                         <FormGroup>
-                          {q.answers.map(opt =>
-                            <FormControlLabel key={`${q.question}-${opt}`}
-                              control={<Checkbox checked={false} onChange={(e) => handleChange(q, e.target.value)} name={opt} />}
+                          {userQs && q.answers.map(opt => {
+                            var findCurrentA = userQs.find(question => question.ID === q.ID)
+                            let checked = findCurrentA ? findCurrentA.answer.includes(opt) : false
+                            return <FormControlLabel key={`${q.question}-${opt}`}
+                              control={<Checkbox checked={checked} onChange={() => handleChange(q, opt, 'mc')} name={opt} />}
                               label={opt}
                             />
+                          }
                           )}
                         </FormGroup>
                       </AccordionDetails>
-                    :
-                    q.category === "text" ?
-                      <AccordionDetails>
-                        <TextField id={`${q.question}-textfield`}
-                          placeholder="Answer Here!"
-                          fullWidth
-                          InputLabelProps={{ shrink: true }}
-                          variant="outlined"
-                          onChange={(e) => handleChange(q, e.target.value)}
-                        />
-                      </AccordionDetails> 
-                    : ""
+                      :
+                      q.category === "text" ?
+                        <AccordionDetails>
+                          <TextField id={`${q.question}-textfield`}
+                            placeholder="Answer Here!"
+                            fullWidth
+                            InputLabelProps={{ shrink: true }}
+                            variant="outlined"
+                            onChange={(e) => handleChange(q, e.target.value)}
+                            style={{textAlign: "left"}}
+                          />
+                        </AccordionDetails>
+                        : ""
                 }
               </Accordion>
             </div>
           ))
         }
-        <Button className='submit-btn' type='submit'>
-          Save
-        </Button>
-      </form>
-    </div>
+      </div>
+      <Button className='submit-btn' type='submit' style={{marginTop: "1em"}}>
+        Save
+      </Button>
+    </form>
   )
 }
 

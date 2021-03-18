@@ -6,18 +6,15 @@ import CloseIcon from '@material-ui/icons/Close';
 export default function UserModal({ body, open, handleClose }) {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-
   return (
-    <div>
-      <Modal open={open} onClose={handleClose} aria-labelledby="user-modal">
-        <div style={modalStyle} className={classes.paper}>
-          <div className="close-wrapper">
-            <CloseIcon onClick={handleClose}/>
-          </div>
-          {body}
+    <Modal open={open} onClose={handleClose} aria-labelledby="user-modal">
+      <div style={modalStyle} className={classes.paper}>
+        <div className="close-wrapper">
+          <CloseIcon onClick={handleClose}/>
         </div>
-      </Modal>
-    </div>
+        {body}
+      </div>
+    </Modal>
   );
 }
 
@@ -32,7 +29,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: '40vw',
+    width: '50vw',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
