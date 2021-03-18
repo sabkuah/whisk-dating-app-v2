@@ -5,11 +5,12 @@ import {
   LOGOUT_USER,
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,
+  GET_MATCHES,
 } from '../types';
 import UserReducer from './userReducer';
 import UserContext from './userContext';
 import { Auth, API } from 'aws-amplify';
-import { v4 as uuid } from 'uuid';
+import createMatch from './createMatch';
 
 const UserState = (props) => {
   const initialState = {
@@ -45,7 +46,7 @@ const UserState = (props) => {
     });
   };
 
-  const getAllUsers = (myInit) => {
+  const getAllUsers = () => {
     const apiName = 'WhiskPro';
     const path = '/api/User';
     return API.get(apiName, path);
@@ -86,9 +87,7 @@ const UserState = (props) => {
   //=======================
   //     Choose Whisk
   //=======================
-  //push whisk to user's chosenWhisks array
-  //send updated user object to DB
-  //ensure user state is up to date
+
   const chooseWhisk = async (user, whisk) => {
     try {
       user.chosenWhisks.unshift(whisk.ID);
@@ -136,63 +135,42 @@ const UserState = (props) => {
   };
 
   //=======================
-  //  Create New Match
+  //  Get Matches
   //=======================
 
-  const FemaleUsers = [
-    '52bb9ed8-2297-4996-89db-01383c09e51f',
-    '59490f6f-5eba-405a-a4e1-770efb15794a',
-  ];
+  const saveMatchDataToContext = async (user) => {
+    //query db for match info using each matchId in matches array
+    let matchInfo = [];
 
-  const MaleUsers = [
-    '5dd02c42-3024-4c57-bf3a-e1cdd239502c',
-    '5eb24c36-6192-4108-bdff-cf7c1d376526',
-  ];
+    user.matches.map(async (matchId) => {
+      function getData() {
+        const apiName = 'WhiskPro';
+        const path = `/api/object/Match/${matchId}`;
+        const myInit = {
+          headers: {},
+        };
+        return API.get(apiName, path, myInit);
+      }
 
-  const createMatch = async (user, whiskId) => {
-    //Assemble possible matches
-    let possibleMatches = [];
-    switch (user.preference) {
-      case 'females':
-        possibleMatches = FemaleUsers;
-        break;
-      case 'males':
-        possibleMatches = MaleUsers;
-        break;
-      case 'other':
-        possibleMatches = FemaleUsers;
-        possibleMatches.push(...MaleUsers);
-        break;
-      default:
-        possibleMatches = FemaleUsers;
-        possibleMatches.push(...MaleUsers);
-        break;
-    }
+      try {
+        const item = await getData();
+        console.log('Get Match Obj>>>', item);
+        matchInfo.push(item);
+      } catch (e) {
+        console.log('Error: ', e);
+      }
+    });
 
-    //Pick a random person
-    console.log('Your possible matches are: ', possibleMatches);
-    const randomIndex = Math.floor(Math.random() * possibleMatches.length);
-    const matchId = possibleMatches[randomIndex];
-    possibleMatches = []; //reset
+    console.log('MatchInfo Array', matchInfo);
+    dispatch({
+      type: GET_MATCHES,
+      payload: matchInfo,
+    });
 
-    console.log('Congrats, your match is: ', matchId);
+    //for each match in context, query db for matched user info
 
-    //Create match object
-    const newMatch = {
-      ID: uuid(),
-      isConfirmed: true,
-      status: 'pending',
-      Type: 'Match',
-      userIds: [user.ID, matchId],
-      whiskId: whiskId,
-    };
-
-    console.log('A match made in heaven!!', newMatch);
+    //for each match in context, query context for whisk info
   };
-
-  //=======================
-  //  Populate all Matches
-  //=======================
 
   return (
     <UserContext.Provider
@@ -212,6 +190,7 @@ const UserState = (props) => {
         setLoadingFalse,
         setLoadingTrue,
         createMatch,
+        saveMatchDataToContext,
       }}
     >
       {props.children}
