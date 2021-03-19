@@ -5,31 +5,53 @@ import {
   LOGOUT_USER,
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,
+  GET_MATCHES,
+  GET_USERS,
 } from '../types';
 import UserReducer from './userReducer';
 import UserContext from './userContext';
 import { Auth, API } from 'aws-amplify';
+import createMatch from './createMatch';
 
 const UserState = (props) => {
   const initialState = {
     user: null,
-    matches: [],
+    matches: null,
     isAuthenticated: false,
     loading: false,
+    users: null,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  // useEffect(() => {
-  //   //getAuthenticatedUser();
-  //   (async () => {
-  //     await getAuthenticatedUser();
-  //     return;
-  //   })();
-  // }, []);
-
   const setLoadingTrue = () => dispatch({ type: SET_LOADING_TRUE });
   const setLoadingFalse = () => dispatch({ type: SET_LOADING_FALSE });
+
+  //============================
+  //        Scan Users
+  //============================
+
+  const scanUsers = async () => {
+    const apiName = 'WhiskPro';
+    const path = '/api/User';
+    const userArray = await API.get(apiName, path);
+    console.log('userarray in context', userArray);
+
+    dispatch({
+      type: GET_USERS,
+      payload: userArray,
+    });
+  };
+
+  //============================
+  //  Get Current User Info
+  //============================
+
+  const getUserFromDB = (id) => {
+    const apiName = 'WhiskPro';
+    const path = `/api/object/User/${id}`;
+    return API.get(apiName, path);
+  };
 
   const getAuthenticatedUser = async () => {
     var info = await Auth.currentUserInfo();
@@ -42,18 +64,6 @@ const UserState = (props) => {
       type: fullUser ? CURRENT_USER : LOGOUT_USER,
       payload: fullUser,
     });
-  };
-
-  const getAllUsers = (myInit) => {
-    const apiName = 'WhiskPro';
-    const path = '/api/User';
-    return API.get(apiName, path);
-  };
-
-  const getUserFromDB = (id) => {
-    const apiName = 'WhiskPro';
-    const path = `/api/object/User/${id}`;
-    return API.get(apiName, path);
   };
 
   // ======================================
@@ -85,9 +95,7 @@ const UserState = (props) => {
   //=======================
   //     Choose Whisk
   //=======================
-  //push whisk to user's chosenWhisks array
-  //send updated user object to DB
-  //ensure user state is up to date
+
   const chooseWhisk = async (user, whisk) => {
     try {
       user.chosenWhisks.unshift(whisk.ID);
@@ -134,23 +142,65 @@ const UserState = (props) => {
     dispatch({ type: CURRENT_USER, payload: updateUser });
   };
 
+  //===================================
+  //  Get Match Docs for Current User
+  //===================================
+
+  const saveMatchDataToContext = async (users, user, whisks) => {
+    let matchInfo = [];
+
+    user.matches?.map(async (matchId) => {
+      function getData() {
+        const apiName = 'WhiskPro';
+        const path = `/api/object/Match/${matchId}`;
+        const myInit = {
+          headers: {},
+        };
+        return API.get(apiName, path, myInit);
+      }
+
+      let matchDoc = null;
+      try {
+        matchDoc = await getData();
+        matchDoc.whisk = whisks.filter((w) => w.ID === matchDoc.whiskId);
+        matchDoc.matchedUser = users.filter(
+          (u) => u.ID === matchDoc.userIds[1]
+        );
+        console.log('😱 matchDoc', matchDoc);
+      } catch (e) {
+        console.log('Error: ', e);
+      }
+      matchInfo.push(matchDoc);
+    });
+
+    dispatch({
+      type: GET_MATCHES,
+      payload: matchInfo,
+    });
+
+    return matchInfo;
+  };
+
   return (
     <UserContext.Provider
       value={{
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
-        getAuthenticatedUser,
+        users: state.users,
+        setLoadingFalse,
+        setLoadingTrue,
         loginUser,
         logoutUser,
-        getAllUsers,
+        scanUsers,
         getUserFromDB,
+        getAuthenticatedUser,
         postUser,
         chooseWhisk,
         cancelChooseWhisk,
         updateProfile,
-        setLoadingFalse,
-        setLoadingTrue,
+        createMatch,
+        saveMatchDataToContext,
       }}
     >
       {props.children}

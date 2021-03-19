@@ -2,21 +2,32 @@ import React, { useContext, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import UserContext from '../context/user/userContext';
 import Spinner from './Spinner';
+import WhiskContext from '../context/whisk/whiskContext';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const userContext = useContext(UserContext);
+  const whiskContext = useContext(WhiskContext);
   const {
     getAuthenticatedUser,
     user,
+    users,
     loading,
+    scanUsers,
     setLoadingTrue,
     setLoadingFalse,
   } = userContext;
+  const { whisks, scanWhisks } = whiskContext;
 
   useEffect(() => {
     (async () => {
       setLoadingTrue();
       await getAuthenticatedUser();
+      if (!users) {
+        await scanUsers();
+      }
+      if (!whisks) {
+        await scanWhisks();
+      }
       setLoadingFalse();
       return;
     })();
