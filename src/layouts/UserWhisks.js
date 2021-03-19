@@ -12,7 +12,6 @@ const UserWhisks = () => {
   const {
     user,
     users,
-    matches,
     scanUsers,
     cancelChooseWhisk,
     saveMatchDataToContext,
@@ -25,6 +24,7 @@ const UserWhisks = () => {
     loading,
   } = whiskContext;
   const [chosenWhisks, setChosenWhisks] = useState(null);
+  const [matchInfo, setMatchInfo] = useState(null);
 
   const handleCancelWhisk = async (whiskId) => {
     await cancelChooseWhisk(user, whiskId);
@@ -50,12 +50,13 @@ const UserWhisks = () => {
     (async () => {
       setLoadingTrue();
       await scanUsers();
-      await saveMatchDataToContext(users, user, whisks);
+      const matches = await saveMatchDataToContext(users, user, whisks);
+      setMatchInfo(matches);
       await checkContextForWhisks();
       await getChosenWhiskDetails();
       setLoadingFalse();
     })();
-    //eslint-disable-next-linea
+    //eslint-disable-next-line
   }, [whisks]);
 
   if (loading === true) return <Spinner />;
@@ -69,11 +70,9 @@ const UserWhisks = () => {
               handleCancelWhisk={handleCancelWhisk}
             />
           </Grid>
-          {user && (
-            <Grid item xs={12} sm={6} md={6}>
-              <UserMatches matches={matches} />
-            </Grid>
-          )}
+          <Grid item xs={12} sm={6} md={6}>
+            <UserMatches matches={matchInfo} />
+          </Grid>
         </Grid>
       </Container>
     );

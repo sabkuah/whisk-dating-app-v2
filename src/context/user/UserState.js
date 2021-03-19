@@ -16,7 +16,7 @@ import createMatch from './createMatch';
 const UserState = (props) => {
   const initialState = {
     user: null,
-    matches: [],
+    matches: null,
     isAuthenticated: false,
     loading: false,
     users: [],
@@ -149,7 +149,7 @@ const UserState = (props) => {
   const saveMatchDataToContext = async (users, user, whisks) => {
     let matchInfo = [];
 
-    user?.matches?.map(async (matchId) => {
+    user.matches?.map(async (matchId) => {
       function getData() {
         const apiName = 'WhiskPro';
         const path = `/api/object/Match/${matchId}`;
@@ -159,24 +159,28 @@ const UserState = (props) => {
         return API.get(apiName, path, myInit);
       }
 
+      let matchDoc = null;
       try {
-        const matchDoc = await getData();
-
+        matchDoc = await getData();
         matchDoc.whisk = whisks.filter((w) => w.ID === matchDoc.whiskId);
         matchDoc.matchedUser = users.filter(
           (u) => u.ID === matchDoc.userIds[1]
         );
-
-        matchInfo.push(matchDoc);
+        console.log('😱 matchDoc', matchDoc);
       } catch (e) {
         console.log('Error: ', e);
       }
+      matchInfo.push(matchDoc);
     });
+
+    console.log('🥁 matchinfo', matchInfo);
 
     dispatch({
       type: GET_MATCHES,
       payload: matchInfo,
     });
+
+    return matchInfo;
   };
 
   return (
