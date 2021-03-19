@@ -44,20 +44,20 @@ const Login = () => {
           sub: user.userSub,
         });
         var newUser = {
-          Bio: '',
-          ChosenWhisks: [],
-          DateJoined: new Date().toISOString(),
-          Fname: '',
-          Lname: '',
+          bio: '',
+          chosenWhisks: [],
+          dateJoined: new Date().toISOString(),
+          fName: '',
+          lName: '',
           ID: user.userSub,
           Type: 'User',
-          Images: [],
-          Interests: [],
-          Matches: [],
-          Phone: '',
-          Preference: [],
-          ProfileImage: '',
-          ProfileQuestionnaire: [],
+          images: [],
+          interests: [],
+          matches: [],
+          phone: '',
+          preference: [],
+          profileImage: '',
+          profileQuestionnaire: [],
         };
         console.log('new user obj', newUser);
         userContext.postUser(newUser);

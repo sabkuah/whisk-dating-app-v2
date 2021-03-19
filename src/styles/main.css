@@ -302,9 +302,6 @@ amplify-authenticator {
   margin: 0.5em 0 !important;
 }
 
-form {
-  text-align: center;
-}
 form .submit-btn {
   background: #00d1ff;
   color: white;
@@ -315,6 +312,12 @@ form .submit-btn {
   display: block;
   margin: 0 auto;
   margin-top: 3em;
+}
+
+#profile-form {
+  max-height: 75vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
@@ -669,12 +672,29 @@ form .submit-btn {
   }
 }
 #Q-container {
-  max-height: 90vh;
+  max-height: 70vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-#Q-container form {
+
+form {
   text-align: left;
+}
+form h5 {
+  text-align: center;
+}
+form .completed-Q {
+  background: #c1e6ef;
+}
+
+#whiskSnackBar div {
+  background-color: #00d1ff;
+  font-weight: bold;
+}
+#whiskSnackBar button {
+  background: transparent;
+  margin: 0.5em;
+  padding: 0;
 }
 
 body {

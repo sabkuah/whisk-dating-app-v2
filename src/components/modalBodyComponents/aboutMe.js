@@ -1,7 +1,11 @@
-import React from 'react';
-import {Button, Typography, TextField } from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Button, Typography, TextField } from '@material-ui/core';
+import UserContext from '../../context/user/userContext';
 
-const AboutMe = ({submit, handleChange, user}) => {
+const AboutMe = ({submit, handleChange }) => {
+  const userContext = useContext(UserContext);
+  const { user } = userContext
+
   return (
     <form onSubmit={submit} id="profile-form">
       <Typography variant="h5" style={{paddingBottom: "1em"}}>Complete My Profile</Typography>

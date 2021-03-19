@@ -5,6 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 export default function UserModal({ body, open, handleClose }) {
   const classes = useStyles();
+
   const [modalStyle] = useState(getModalStyle);
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="user-modal">
