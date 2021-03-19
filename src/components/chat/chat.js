@@ -5,14 +5,15 @@ import UserContext from '../../context/user/userContext'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { Paper, InputBase, IconButton, Avatar } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
+import { API_KEY, AUTH_DOMAIN, MESSAGING_ID, APPID } from './firebaseConfig.json'
 
 firebase.initializeApp({
-    apiKey: "AIzaSyBeZSRll5aeHstYFDqG5bM1fqy4jMW21TI",
-    authDomain: "whiskchat.firebaseapp.com",
+    apiKey: API_KEY,
+    authDomain: AUTH_DOMAIN,
     projectId: "whiskchat",
     storageBucket: "whiskchat.appspot.com",
-    messagingSenderId: "389547048403",
-    appId: "1:389547048403:web:9e9b07f6e64990fe428326"
+    messagingSenderId: MESSAGING_ID,
+    appId: APPID
 })
 
 export function ChatRoom() {

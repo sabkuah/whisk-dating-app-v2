@@ -12,7 +12,7 @@ const UserProfileController = () => {
   const [notify, setNotify] = useState(null)
   const userContext = useContext(UserContext);
   const { user, updateProfile } = userContext;
-  
+
   useEffect(() => {
     (async () => {
       const response = await getData();
@@ -21,7 +21,7 @@ const UserProfileController = () => {
       console.log("is there a user?", user)
       setNotify(user?.profileQuestionnaire.length < response.length) // user fields being saved as PascalCase :(
     })();
-    
+
     // setUserResponses(user.profileQuestionnaire)
   }, [])
 
@@ -92,14 +92,14 @@ const UserProfileController = () => {
     setDPOpen(false)
     setPrefOpen(false)
   };
-  
+
   return (
-    !!notify &&
-    <UserProfile 
-      handleClose={handleClose} 
+    notify !== null &&
+    <UserProfile
+      handleClose={handleClose}
       handleOpen={handleOpen}
       handleChange={handleChange}
-      profileOpen={profileOpen} 
+      profileOpen={profileOpen}
       preferencesOpen={preferencesOpen}
       profileImg={profileImg}
       questions={questions}
