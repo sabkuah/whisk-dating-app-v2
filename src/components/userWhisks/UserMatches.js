@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import {
   List,
   ListItem,
@@ -11,24 +10,23 @@ import {
 import { Link } from 'react-router-dom';
 
 const UserMatches = ({ matches }) => {
-  useEffect(() => {
-    console.log('🥇', matches);
-  }, [matches]);
-
   return (
     <div className='user-matches'>
       <h1>Your Matches</h1>
       <div className='chosen-list-item'>
         <List>
           {matches?.map((match) => (
-            <ListItem alignItems='center'>
+            <ListItem alignItems='center' key={match.ID}>
               <ListItemAvatar>
-                <Avatar src={match.matchedUser[0].profileImage} />
+                <Avatar
+                  src={match.matchedUser[0]?.profileImage}
+                  alt='https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png'
+                />
               </ListItemAvatar>
-              <ListItemText primary={match.whisk[0].title} />
+              <ListItemText primary={match.whisk[0]?.title} />
               <br />
               <ListItemText
-                secondary={`${match.matchedUser[0].fName} ${match.matchedUser[0].lName}`}
+                secondary={`${match.matchedUser[0]?.fName} ${match.matchedUser[0]?.lName}`}
               />
               <Button>
                 <Link to='/user/match/333'>View Match</Link>

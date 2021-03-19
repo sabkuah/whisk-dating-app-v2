@@ -19,7 +19,7 @@ const UserState = (props) => {
     matches: null,
     isAuthenticated: false,
     loading: false,
-    users: [],
+    users: null,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -172,8 +172,6 @@ const UserState = (props) => {
       }
       matchInfo.push(matchDoc);
     });
-
-    console.log('🥁 matchinfo', matchInfo);
 
     dispatch({
       type: GET_MATCHES,
