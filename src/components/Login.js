@@ -11,7 +11,7 @@ const Login = () => {
   const location = useLocation();
 
   const [tab, setTab] = useState(location.state ? location.state.tab : 0);
-  const [username, setUsername] = useState('');
+  const [fullName, setName] = useState({});
   const [password, setPW] = useState('');
   const [confirm, setConfirm] = useState('');
   const [email, setEmail] = useState('');
@@ -23,6 +23,10 @@ const Login = () => {
     setTab(newValue);
     setErrorMsg("");
   };
+
+  const setFullName = (field, value) => {
+    setName({ ...fullName, [field]: value })
+  }
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -47,8 +51,8 @@ const Login = () => {
           bio: '',
           chosenWhisks: [],
           dateJoined: new Date().toISOString(),
-          fName: '',
-          lName: '',
+          fName: fullName.fName,
+          lName: fullName.lName,
           ID: user.userSub,
           Type: 'User',
           images: [],
@@ -61,7 +65,7 @@ const Login = () => {
         };
         console.log('new user obj', newUser);
         userContext.postUser(newUser);
-        history.push('/user');
+        history.push('/confirmAccount');
       } catch (err) {
         console.log(err);
         setErrorMsg(err.message);
@@ -93,6 +97,7 @@ const Login = () => {
       setErrorMsg('');
     }
   };
+  
   return (
     <Card id='card-root' elevation={0}>
       <CardContent style={{ maxWidth: '400px' }}>
@@ -143,8 +148,13 @@ const Login = () => {
           {/* ---------- REGISTER ---------- */}
           <TabPanel value={tab} index={1}>
             <TextField
-              label='Username'
-              onChange={(e) => setUsername(e.target.value)}
+              label='First Name'
+              onChange={(e) => setFullName('fName', e.target.value)}
+              className='text-field'
+            />
+            <TextField
+              label='Last Name'
+              onChange={(e) => setFullName('lName',e.target.value)}
               className='text-field'
             />
             <TextField

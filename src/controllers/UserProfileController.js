@@ -19,10 +19,8 @@ const UserProfileController = () => {
       setQuestions(response)
       setInfo(user)
       console.log("is there a user?", user)
-      setNotify(user?.profileQuestionnaire.length < response.length) // user fields being saved as PascalCase :(
+      setNotify(user?.profileQuestionnaire.length < response.length)
     })();
-    
-    // setUserResponses(user.profileQuestionnaire)
   }, [])
 
 

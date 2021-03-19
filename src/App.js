@@ -16,6 +16,7 @@ import About from './layouts/About';
 import Navigation from './components/Navigation';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import ConfirmAccount from './layouts/ConfirmAccount';
 
 Amplify.configure(config);
 
@@ -32,6 +33,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={Welcome} />
             <Route path='/login' component={Login} />
+            <Route path="/confirmAccount" component={ConfirmAccount}/>
             {/* TEMP ABOUT PAGE */}
             <ProtectedRoute path='/about' component={About} />
             <ProtectedRoute path='/user/whisks' component={UserWhisks} />
