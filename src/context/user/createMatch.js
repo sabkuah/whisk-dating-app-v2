@@ -11,33 +11,49 @@ const MaleUsers = [
   '5eb24c36-6192-4108-bdff-cf7c1d376526',
 ];
 
-const createMatch = async (user, whiskId) => {
-  //Assemble possible matches
+const createMatch = async (users, user, whiskId) => {
+  //group users by preference
+
+  let femaleUsers = [];
+  let maleUsers = [];
+  console.log('users', users);
+  users.filter((u) => {
+    if (u.preference === 'females') {
+      femaleUsers.push(u);
+    } else {
+      maleUsers.push(u);
+    }
+  });
+
+  //Assemble possible matches for current user
   let possibleMatches = [];
   switch (user.preference) {
     case 'females':
-      possibleMatches = FemaleUsers;
+      possibleMatches = femaleUsers;
       break;
     case 'males':
-      possibleMatches = MaleUsers;
+      possibleMatches = maleUsers;
       break;
     case 'other':
-      possibleMatches = FemaleUsers;
-      possibleMatches.push(...MaleUsers);
+      possibleMatches = femaleUsers;
+      possibleMatches.push(...maleUsers);
       break;
     default:
-      possibleMatches = FemaleUsers;
-      possibleMatches.push(...MaleUsers);
+      possibleMatches = femaleUsers;
+      possibleMatches.push(...maleUsers);
       break;
   }
 
   //Pick a random person
   console.log('Your possible matches are: ', possibleMatches);
   const randomIndex = Math.floor(Math.random() * possibleMatches.length);
-  const matchedUserId = possibleMatches[randomIndex];
+  const matchedUser = possibleMatches[randomIndex];
   possibleMatches = []; //reset
 
-  console.log('Congrats, your match is: ', matchedUserId);
+  console.log(
+    `Congrats, your match is: ${matchedUser.fName} ${matchedUser.lName}`,
+    matchedUser
+  );
 
   //Create match object
   const newMatch = {
@@ -45,7 +61,7 @@ const createMatch = async (user, whiskId) => {
     isConfirmed: true,
     status: 'pending',
     Type: 'Match',
-    userIds: [user.ID, matchedUserId],
+    userIds: [user.ID, matchedUser.ID],
     whiskId: whiskId,
   };
 
@@ -64,25 +80,28 @@ const createMatch = async (user, whiskId) => {
 
   await postMatchToDB();
 
-  //Add matchID to both user objects --> append to user's matches array
+  //Add matchID current user's matches array
 
-  const postMatchToUser = async (userId, matchId) => {
+  const postMatchToUser = async (user, matchId) => {
+    const updatedMatches = [...user.matches, matchId];
+
     const apiName = 'WhiskPro';
     const path = `/api/Match`;
     const myInit = {
       body: {
-        userId: userId,
-        matchId: matchId,
+        userId: user.ID,
+        matches: updatedMatches,
       },
     };
-
-    console.log('myInit>>', myInit);
+    console.log('🌹 Posting Matches to DB', myInit);
 
     await API.put(apiName, path, myInit);
   };
 
-  await postMatchToUser(user.ID, newMatch.ID); //add match to user
-  //await postMatchToUser(matchedUserId, newMatch.ID); //add match to matchedUser
+  //Post update match arrays to both users
+
+  await postMatchToUser(user, newMatch.ID);
+  await postMatchToUser(matchedUser, newMatch.ID);
 };
 
 export default createMatch;

@@ -27,20 +27,11 @@ const UserState = (props) => {
   const setLoadingTrue = () => dispatch({ type: SET_LOADING_TRUE });
   const setLoadingFalse = () => dispatch({ type: SET_LOADING_FALSE });
 
-  const getAuthenticatedUser = async () => {
-    var info = await Auth.currentUserInfo();
-    //console.log('user State', 'current user info:\n', info);
-    var findUser = await getUserFromDB(info?.attributes.sub);
-    const fullUser = Object.keys(findUser).length !== 0 ? findUser : null;
+  //============================
+  //        Scan Users
+  //============================
 
-    console.log('fulluser>>', fullUser);
-    dispatch({
-      type: fullUser ? CURRENT_USER : LOGOUT_USER,
-      payload: fullUser,
-    });
-  };
-
-  const getAllUsers = async () => {
+  const scanUsers = async () => {
     const apiName = 'WhiskPro';
     const path = '/api/User';
     const userArray = await API.get(apiName, path);
@@ -52,10 +43,27 @@ const UserState = (props) => {
     });
   };
 
+  //============================
+  //  Get Current User Info
+  //============================
+
   const getUserFromDB = (id) => {
     const apiName = 'WhiskPro';
     const path = `/api/object/User/${id}`;
     return API.get(apiName, path);
+  };
+
+  const getAuthenticatedUser = async () => {
+    var info = await Auth.currentUserInfo();
+    //console.log('user State', 'current user info:\n', info);
+    var findUser = await getUserFromDB(info?.attributes.sub);
+    const fullUser = Object.keys(findUser).length !== 0 ? findUser : null;
+
+    console.log('fulluser>>', fullUser);
+    dispatch({
+      type: fullUser ? CURRENT_USER : LOGOUT_USER,
+      payload: fullUser,
+    });
   };
 
   // ======================================
@@ -182,17 +190,17 @@ const UserState = (props) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         users: state.users,
-        getAuthenticatedUser,
+        setLoadingFalse,
+        setLoadingTrue,
         loginUser,
         logoutUser,
-        getAllUsers,
+        scanUsers,
         getUserFromDB,
+        getAuthenticatedUser,
         postUser,
         chooseWhisk,
         cancelChooseWhisk,
         updateProfile,
-        setLoadingFalse,
-        setLoadingTrue,
         createMatch,
         saveMatchDataToContext,
       }}

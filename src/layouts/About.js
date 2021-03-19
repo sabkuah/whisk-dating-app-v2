@@ -10,8 +10,8 @@ const About = () => {
   useEffect(() => {
     (async () => {
       //await userContext.saveMatchDataToContext(user);
-      await userContext.getAllUsers();
-      console.log('matches in context 3️⃣', userContext.matches);
+      //await userContext.getAllUsers();
+      //console.log('matches in context 3️⃣', userContext.matches);
     })();
   }, []);
   return <div>This is a page for testing</div>;
