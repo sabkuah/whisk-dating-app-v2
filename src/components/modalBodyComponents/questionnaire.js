@@ -1,107 +1,100 @@
-import React, { useState, useEffect } from 'react';
-import { API } from 'aws-amplify';
-import {
-    Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails,
-} from '@material-ui/core';
+import React, { useState } from 'react';
+import { Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const Questionnaire = () => {
-    const [questions, setQuestions] = useState([]);
-    const [answers, setAnswers] = useState([]);
-
-    const handleChange = (event) => {
-        console.log(event.target.value);
-    };
+const Questionnaire = ({questions, submit, user, setInfo}) => {
+  const [userQs, setUserResponses] = useState(user.profileQuestionnaire);
 
 
-    function getData() {
-        const apiName = 'WhiskPro';
-        const path = '/api/Question';
-        const myInit = { // OPTIONAL
-            headers: {}, // OPTIONAL
-        };
-
-        // const response = await 
-        return API.get(apiName, path, myInit)
-        // setQuestion(response)
+  const handleChange = (q, a, mc) => {
+    var qObj = new Array(...userQs)
+    var findCurrentQ = qObj.find(question => question.ID === q.ID)
+    
+    if (mc) {
+      if (findCurrentQ) {
+        findCurrentQ.answer.includes(a) ? findCurrentQ.answer.splice(a, 1) : findCurrentQ.answer.push(a)
+      } else {
+        let question = { ID: q.ID, answer: [a] }
+        qObj.push(question)
+      }
+    } else {
+      let question = { ID: q.ID, answer: a }
+      if (findCurrentQ) {
+        qObj.splice(findCurrentQ, 1)
+        qObj.push(question)
+      } else {
+        qObj.push(question)
+      }
     }
+    setUserResponses(qObj)
+    var newUserObj =  Object.assign(user)
+    newUserObj.profileQuestionnaire = qObj
+    console.log("newUserObj", newUserObj)
+    setInfo(newUserObj)
+  };
 
-    useEffect(() => {
-        (async function () {
-            const response = await getData();
-            setQuestions(response)
-        })();
-    }, [])
-
-
-    return (
-        <div>
-            <form>
+  return (
+    <form onSubmit={submit}>
+      <Typography variant="h5" style={{paddingBottom: "1em"}}>Profile Questionnaire</Typography>
+      <div id="Q-container">
+        {
+          questions.map((q, i) => (
+            <div key={i}>
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <h4 key={i}>{`${i + 1}. ${q.question}`}</h4>
+                </AccordionSummary>
                 {
-                    questions.map((x, i) => {
-                        //Need to add question id and answer into object
-                        return (
-                            <div>
-                                <Accordion>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        <h2 key={i}>{i + 1 + ". "}{x.question}</h2>
-                                    </AccordionSummary>
-                                    {x.answers.map((j, p) => {
-
-                                        if (x.category === "radio") {
-                                            return (
-                                                <AccordionDetails>
-                                                    <FormGroup style={{ flexDirection: "row" }}>
-                                                        <FormControlLabel key={p}
-                                                            value={j}
-                                                            control={<Radio />}
-                                                            label={j}
-                                                            onChange={handleChange} />
-                                                    </FormGroup>
-                                                </AccordionDetails>
-                                            )
-                                        } else if (x.category === "multiple choice") {
-                                            return (
-                                                <AccordionDetails>
-                                                    <FormGroup row>
-                                                        <FormControlLabel key={p} value={j} control={<Checkbox />} label={j} />
-                                                    </FormGroup>
-                                                </AccordionDetails>
-                                            )
-
-                                        } else if (x.category === "text") {
-                                            return (
-                                                <AccordionDetails>
-                                                    <TextField id="outlined-full-width"
-
-                                                        style={{ margin: 8 }}
-                                                        placeholder="Answer Here!"
-                                                        fullWidth
-                                                        margin="normal"
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                        variant="outlined" />
-                                                    {/* <FormControlLabel key={p} value={j} control={<Checkbox />} label={j} /> */}
-
-                                                </AccordionDetails>
-                                            )
-
-                                        }
-
-
-                                    })}
-                                </Accordion>
-                            </div>
-                        )
-                    })
+                  q.category === "radio" ?
+                    <AccordionDetails>
+                      <RadioGroup aria-label="gender" name="gender1" onChange={(e) => handleChange(q, e.target.value)}>
+                        {q.answers.map(opt => {
+                          var findCurrentA = userQs.find(question => question.ID === q.ID)
+                          let checked = findCurrentA ? findCurrentA.answer === opt  : false
+                          return <FormControlLabel key={opt} value={opt} control={<Radio checked={checked}/>} label={opt} />
+                        }
+                        )}
+                      </RadioGroup>
+                    </AccordionDetails>
+                    :
+                    q.category === "multiple choice" ?
+                      <AccordionDetails>
+                        <FormGroup>
+                          {q.answers.map(opt => {
+                            var findCurrentA = userQs.find(question => question.ID === q.ID)
+                            let checked = findCurrentA ? findCurrentA.answer.includes(opt) : false
+                            return <FormControlLabel key={`${q.question}-${opt}`}
+                              control={<Checkbox checked={checked} onChange={() => handleChange(q, opt, 'mc')} name={opt} />}
+                              label={opt}
+                            />
+                          }
+                          )}
+                        </FormGroup>
+                      </AccordionDetails>
+                      :
+                      q.category === "text" ?
+                        <AccordionDetails>
+                          <TextField id={`${q.question}-textfield`}
+                            placeholder="Answer Here!"
+                            fullWidth
+                            InputLabelProps={{ shrink: true }}
+                            variant="outlined"
+                            onChange={(e) => handleChange(q, e.target.value)}
+                            style={{textAlign: "left"}}
+                          />
+                        </AccordionDetails>
+                        : ""
                 }
-                <Button className='submit-btn' type='submit'>
-                    Save
-        </Button>
-            </form>
-        </div>
-    )
+              </Accordion>
+            </div>
+          ))
+        }
+      </div>
+      <Button className='submit-btn' type='submit' style={{marginTop: "1em"}}>
+        Save
+      </Button>
+    </form>
+  )
 }
 
 export default Questionnaire
