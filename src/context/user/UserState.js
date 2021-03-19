@@ -146,8 +146,7 @@ const UserState = (props) => {
   //  Get Match Docs for Current User
   //===================================
 
-  const saveMatchDataToContext = async (user) => {
-    //query db for match info using each matchId in matches array
+  const saveMatchDataToContext = async (users, user, whisks) => {
     let matchInfo = [];
 
     user?.matches?.map(async (matchId) => {
@@ -162,9 +161,11 @@ const UserState = (props) => {
 
       try {
         const matchDoc = await getData();
-        console.log('Get Match Doc from DB>>>1️⃣', matchDoc);
 
-        //Use MatchDoc to get user info from matchId
+        matchDoc.whisk = whisks.filter((w) => w.ID === matchDoc.whiskId);
+        matchDoc.matchedUser = users.filter(
+          (u) => u.ID === matchDoc.userIds[1]
+        );
 
         matchInfo.push(matchDoc);
       } catch (e) {
@@ -172,15 +173,10 @@ const UserState = (props) => {
       }
     });
 
-    console.log('MatchInfo Array2️⃣', matchInfo);
     dispatch({
       type: GET_MATCHES,
       payload: matchInfo,
     });
-
-    //for each match in context, query db for matched user info
-
-    //for each match in context, query context for whisk info
   };
 
   return (

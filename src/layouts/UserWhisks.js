@@ -12,9 +12,10 @@ const UserWhisks = () => {
   const {
     user,
     users,
+    matches,
     scanUsers,
     cancelChooseWhisk,
-    createMatch,
+    saveMatchDataToContext,
   } = userContext;
   const {
     whisks,
@@ -49,6 +50,7 @@ const UserWhisks = () => {
     (async () => {
       setLoadingTrue();
       await scanUsers();
+      await saveMatchDataToContext(users, user, whisks);
       await checkContextForWhisks();
       await getChosenWhiskDetails();
       setLoadingFalse();
@@ -69,7 +71,7 @@ const UserWhisks = () => {
           </Grid>
           {user && (
             <Grid item xs={12} sm={6} md={6}>
-              <UserMatches whisks={user.matches} />
+              <UserMatches matches={matches} />
             </Grid>
           )}
         </Grid>

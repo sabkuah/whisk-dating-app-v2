@@ -33,6 +33,8 @@ const createMatch = async (users, user, whiskId) => {
       break;
   }
 
+  possibleMatches.filter((m) => m !== user.ID);
+
   //Pick a random person
   console.log('Your possible matches are: ', possibleMatches);
   const randomIndex = Math.floor(Math.random() * possibleMatches.length);
