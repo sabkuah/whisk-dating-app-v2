@@ -9,7 +9,13 @@ import Spinner from '../components/Spinner';
 const UserWhisks = () => {
   const userContext = useContext(UserContext);
   const whiskContext = useContext(WhiskContext);
-  const { user, cancelChooseWhisk } = userContext;
+  const {
+    user,
+    users,
+    scanUsers,
+    cancelChooseWhisk,
+    saveMatchDataToContext,
+  } = userContext;
   const {
     whisks,
     scanWhisks,
@@ -18,6 +24,7 @@ const UserWhisks = () => {
     loading,
   } = whiskContext;
   const [chosenWhisks, setChosenWhisks] = useState(null);
+  const [matchInfo, setMatchInfo] = useState(null);
 
   const handleCancelWhisk = async (whiskId) => {
     await cancelChooseWhisk(user, whiskId);
@@ -42,6 +49,9 @@ const UserWhisks = () => {
   useEffect(() => {
     (async () => {
       setLoadingTrue();
+      await scanUsers();
+      const matches = await saveMatchDataToContext(users, user, whisks);
+      setMatchInfo(matches);
       await checkContextForWhisks();
       await getChosenWhiskDetails();
       setLoadingFalse();
@@ -60,11 +70,9 @@ const UserWhisks = () => {
               handleCancelWhisk={handleCancelWhisk}
             />
           </Grid>
-          {user && (
-            <Grid item xs={12} sm={6} md={6}>
-              <UserMatches whisks={user.matches} />
-            </Grid>
-          )}
+          <Grid item xs={12} sm={6} md={6}>
+            <UserMatches matches={matchInfo} />
+          </Grid>
         </Grid>
       </Container>
     );
