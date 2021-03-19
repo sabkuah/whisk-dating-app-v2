@@ -16,6 +16,7 @@ import { Match } from './layouts/Match';
 import BurgerNav from './components/welcome/BurgerNav';
 import BottomNav from './components/welcome/BottomNav';
 import { isIOS, isAndroid } from 'react-device-detect';
+import UserProfileController from './controllers/UserProfileController';
 
 Amplify.configure(config);
 
@@ -34,11 +35,7 @@ function App() {
             <Route path='/login' component={Login} />
             <ProtectedRoute path='/user/whisks' component={UserWhisks} />
             <ProtectedRoute path='/user/match/:id' component={Match} />
-            <ProtectedRoute
-              path='/user'
-              component={UserProfile}
-              questionnaire={<div>Q modal</div>}
-            />
+            <ProtectedRoute path='/user' component={UserProfileController}/>
             <ProtectedRoute path='/whisks/search' component={SearchResults} />
             <ProtectedRoute path='/whisks/:id' component={WhiskDetails} />
           </Switch>

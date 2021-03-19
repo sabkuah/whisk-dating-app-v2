@@ -1,0 +1,11 @@
+#whiskSnackBar {
+  div {
+    background-color: $brand-color;
+    font-weight: bold;
+  }
+  button {
+    background: transparent;
+    margin: 0.5em;
+    padding: 0;
+  }
+}
