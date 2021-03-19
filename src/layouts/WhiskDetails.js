@@ -11,12 +11,13 @@ import { Link } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import WhiskContext from '../context/whisk/whiskContext';
 import UserContext from '../context/user/userContext';
+import createMatch from '../context/user/createMatch';
 
 const WhiskDetails = () => {
   const whiskContext = useContext(WhiskContext);
   const userContext = useContext(UserContext);
   const { whisks, getWhisk, loading, setLoadingFalse } = whiskContext;
-  const { user, chooseWhisk } = userContext;
+  const { user, users, chooseWhisk, scanUsers, createMatch } = userContext;
   const { id } = useParams();
   const history = useHistory();
   const [liked, setLiked] = useState(false);
@@ -28,17 +29,22 @@ const WhiskDetails = () => {
 
   const handleChooseWhisk = async () => {
     if (user.chosenWhisks.includes(whisk.ID)) {
-      alert('You have already chosen this Whisk!'); //replace this alert
-    } else {
-      await chooseWhisk(user, whisk);
-      history.push('/user/whisks');
+      return alert('You have already chosen this Whisk!'); //replace this alert
     }
+
+    if (users.length === 0) {
+      await scanUsers();
+    }
+
+    await chooseWhisk(user, whisk);
+    const matchName = await createMatch(users, user, whisk.ID);
+    alert(`You have a new match with ${matchName} 🌹!`);
+    //history.push('/user/whisks');
   };
 
   useEffect(() => {
     //if whisks in context
     if (whisks.length) {
-      console.log('calling Context for this whisk');
       const items = whisks.filter((w) => {
         return w.ID === id;
       });
@@ -47,7 +53,6 @@ const WhiskDetails = () => {
     }
     //else, get whisks from API
     else {
-      console.log('calling API for this whisk');
       (async () => {
         const item = await getWhisk(id);
         setWhisk(item);

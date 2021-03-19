@@ -27,6 +27,7 @@ const Welcome = () => {
     } else {
       setLoadingTrue();
       scanWhisks();
+      userContext.scanUsers();
     }
     // eslint-disable-next-line
   }, [whisks]);
