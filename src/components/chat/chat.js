@@ -28,7 +28,6 @@ export function ChatRoom() {
     const sendMessage = async (e) => {
         e.preventDefault();
         const uid = user.ID
-        console.log(uid)
 
         await messagesRef.add({
             text: formValue,
@@ -64,8 +63,10 @@ export function ChatRoom() {
 }
 
 function ChatMessage(props) {
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
     const { text, uid } = props.message;
-    const messageClass = uid === uid.ID ? 'msg-sent' : 'msg-received';
+    const messageClass = uid === user.ID ? 'msg-received' : 'msg-sent';
 
     return (<>
         <div className={`${messageClass}`} >
