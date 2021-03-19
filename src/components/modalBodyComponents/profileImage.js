@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useContext } from 'react';
 import {Button, Typography, TextField } from '@material-ui/core';
+import UserContext from '../../context/user/userContext';
 
-const DP = ({submit, handleChange, user}) => {
+const DP = ({submit, handleChange }) => {
+  const userContext = useContext(UserContext);
+  const { user } = userContext
+
   return (
     <form onSubmit={submit}>
       <Typography variant="h5" style={{paddingBottom: "1em"}}>Update Profile Image</Typography>

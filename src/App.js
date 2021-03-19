@@ -6,12 +6,12 @@ import BottomNav from './components/welcome/BottomNav';
 import { isIOS, isAndroid, BrowserView } from 'react-device-detect';
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
-import UserProfile from './layouts/UserProfile';
 import Welcome from './layouts/Welcome';
 import WhiskDetails from './layouts/WhiskDetails';
 import SearchResults from './layouts/SearchResults';
 import UserWhisks from './layouts/UserWhisks';
 import { Match } from './layouts/Match';
+import UserProfileController from './controllers/UserProfileController';
 import About from './layouts/About';
 import Navigation from './components/Navigation';
 import Login from './components/Login';
@@ -36,11 +36,7 @@ function App() {
             <ProtectedRoute path='/about' component={About} />
             <ProtectedRoute path='/user/whisks' component={UserWhisks} />
             <ProtectedRoute path='/user/match/:id' component={Match} />
-            <ProtectedRoute
-              path='/user'
-              component={UserProfile}
-              questionnaire={<div>Q modal</div>}
-            />
+            <ProtectedRoute path='/user' component={UserProfileController}/>
             <ProtectedRoute path='/whisks/search' component={SearchResults} />
             <ProtectedRoute path='/whisks/:id' component={WhiskDetails} />
           </Switch>

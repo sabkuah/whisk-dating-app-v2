@@ -9,7 +9,6 @@ import {
 } from '../types';
 
 const UserReducer = (state, action) => {
-  console.log('user reducer', action);
   switch (action.type) {
     case LOGIN_USER:
       return {

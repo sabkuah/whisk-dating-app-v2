@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, TextField, Accordion, AccordionSummary, FormControlLabel, FormGroup, Radio, RadioGroup, Checkbox, AccordionDetails, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import UserContext from '../../context/user/userContext';
 
-const Questionnaire = ({questions, submit, user, setInfo}) => {
+const Questionnaire = ({questions, submit, setInfo}) => {
+  const userContext = useContext(UserContext);
+  const { user } = userContext
   const [userQs, setUserResponses] = useState(user.profileQuestionnaire);
-
+ 
 
   const handleChange = (q, a, mc) => {
     var qObj = new Array(...userQs)
@@ -38,9 +41,11 @@ const Questionnaire = ({questions, submit, user, setInfo}) => {
       <Typography variant="h5" style={{paddingBottom: "1em"}}>Profile Questionnaire</Typography>
       <div id="Q-container">
         {
-          questions.map((q, i) => (
+          questions.map((q, i) => {
+            var answeredQ = userQs.find(question => question.ID === q.ID)
+            return (
             <div key={i}>
-              <Accordion>
+              <Accordion className={answeredQ?.answer ? 'completed-Q' : ""}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                   <h4 key={i}>{`${i + 1}. ${q.question}`}</h4>
                 </AccordionSummary>
@@ -49,8 +54,7 @@ const Questionnaire = ({questions, submit, user, setInfo}) => {
                     <AccordionDetails>
                       <RadioGroup aria-label="gender" name="gender1" onChange={(e) => handleChange(q, e.target.value)}>
                         {q.answers.map(opt => {
-                          var findCurrentA = userQs.find(question => question.ID === q.ID)
-                          let checked = findCurrentA ? findCurrentA.answer === opt  : false
+                          let checked = answeredQ ? answeredQ.answer === opt  : false
                           return <FormControlLabel key={opt} value={opt} control={<Radio checked={checked}/>} label={opt} />
                         }
                         )}
@@ -61,8 +65,7 @@ const Questionnaire = ({questions, submit, user, setInfo}) => {
                       <AccordionDetails>
                         <FormGroup>
                           {q.answers.map(opt => {
-                            var findCurrentA = userQs.find(question => question.ID === q.ID)
-                            let checked = findCurrentA ? findCurrentA.answer.includes(opt) : false
+                            let checked = answeredQ ? answeredQ.answer.includes(opt) : false
                             return <FormControlLabel key={`${q.question}-${opt}`}
                               control={<Checkbox checked={checked} onChange={() => handleChange(q, opt, 'mc')} name={opt} />}
                               label={opt}
@@ -87,7 +90,7 @@ const Questionnaire = ({questions, submit, user, setInfo}) => {
                 }
               </Accordion>
             </div>
-          ))
+          )})
         }
       </div>
       <Button className='submit-btn' type='submit' style={{marginTop: "1em"}}>
