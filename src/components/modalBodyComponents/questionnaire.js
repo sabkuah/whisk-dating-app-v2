@@ -13,13 +13,19 @@ const Questionnaire = ({questions, submit, setInfo}) => {
     var qObj = new Array(...userQs)
     var findCurrentQ = qObj.find(question => question.ID === q.ID)
     
+    // --- multiple choice questions
     if (mc) {
       if (findCurrentQ) {
         findCurrentQ.answer.includes(a) ? findCurrentQ.answer.splice(a, 1) : findCurrentQ.answer.push(a)
+        if (findCurrentQ.answer.length === 0) {
+          qObj.splice(findCurrentQ, 1)
+        }
+        
       } else {
         let question = { ID: q.ID, answer: [a] }
         qObj.push(question)
       }
+    // --- radio and checkbox questiona
     } else {
       let question = { ID: q.ID, answer: a }
       if (findCurrentQ) {
@@ -32,7 +38,6 @@ const Questionnaire = ({questions, submit, setInfo}) => {
     setUserResponses(qObj)
     var newUserObj =  Object.assign(user)
     newUserObj.profileQuestionnaire = qObj
-    console.log("newUserObj", newUserObj)
     setInfo(newUserObj)
   };
 
@@ -54,7 +59,7 @@ const Questionnaire = ({questions, submit, setInfo}) => {
                     <AccordionDetails>
                       <RadioGroup aria-label="gender" name="gender1" onChange={(e) => handleChange(q, e.target.value)}>
                         {q.answers.map(opt => {
-                          let checked = answeredQ ? answeredQ.answer === opt  : false
+                          let checked = answeredQ ? answeredQ.answer === opt : false
                           return <FormControlLabel key={opt} value={opt} control={<Radio checked={checked}/>} label={opt} />
                         }
                         )}
