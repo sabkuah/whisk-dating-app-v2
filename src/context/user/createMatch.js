@@ -68,19 +68,21 @@ const createMatch = async (user, whiskId) => {
 
   const postMatchToUser = async (userId, matchId) => {
     const apiName = 'WhiskPro';
-    const path = `/api/Object/match`;
+    const path = `/api/Match`;
     const myInit = {
       body: {
-        matchId: matchId,
         userId: userId,
+        matchId: matchId,
       },
-    }; //user.matches.push(matchId)
+    };
 
-    await API.post(apiName, path, myInit);
+    console.log('myInit>>', myInit);
+
+    await API.put(apiName, path, myInit);
   };
 
   await postMatchToUser(user.ID, newMatch.ID); //add match to user
-  await postMatchToUser(matchedUserId, newMatch.ID); //add match to matchedUser
+  //await postMatchToUser(matchedUserId, newMatch.ID); //add match to matchedUser
 };
 
 export default createMatch;

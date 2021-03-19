@@ -5,6 +5,7 @@ import {
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,
   GET_MATCHES,
+  GET_USERS,
 } from '../types';
 
 const UserReducer = (state, action) => {
@@ -44,6 +45,11 @@ const UserReducer = (state, action) => {
       return {
         ...state,
         matches: action.payload,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import {
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,
   GET_MATCHES,
+  GET_USERS,
 } from '../types';
 import UserReducer from './userReducer';
 import UserContext from './userContext';
@@ -18,17 +19,10 @@ const UserState = (props) => {
     matches: [],
     isAuthenticated: false,
     loading: false,
+    users: [],
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
-
-  // useEffect(() => {
-  //   //getAuthenticatedUser();
-  //   (async () => {
-  //     await getAuthenticatedUser();
-  //     return;
-  //   })();
-  // }, []);
 
   const setLoadingTrue = () => dispatch({ type: SET_LOADING_TRUE });
   const setLoadingFalse = () => dispatch({ type: SET_LOADING_FALSE });
@@ -46,10 +40,16 @@ const UserState = (props) => {
     });
   };
 
-  const getAllUsers = () => {
+  const getAllUsers = async () => {
     const apiName = 'WhiskPro';
     const path = '/api/User';
-    return API.get(apiName, path);
+    const userArray = await API.get(apiName, path);
+    console.log('userarray in context', userArray);
+
+    dispatch({
+      type: GET_USERS,
+      payload: userArray,
+    });
   };
 
   const getUserFromDB = (id) => {
@@ -134,9 +134,9 @@ const UserState = (props) => {
     dispatch({ type: CURRENT_USER, payload: updateUser });
   };
 
-  //=======================
-  //  Get Matches
-  //=======================
+  //===================================
+  //  Get Match Docs for Current User
+  //===================================
 
   const saveMatchDataToContext = async (user) => {
     //query db for match info using each matchId in matches array
@@ -181,6 +181,7 @@ const UserState = (props) => {
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
+        users: state.users,
         getAuthenticatedUser,
         loginUser,
         logoutUser,

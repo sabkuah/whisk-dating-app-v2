@@ -9,7 +9,8 @@ const About = () => {
 
   useEffect(() => {
     (async () => {
-      await userContext.saveMatchDataToContext(user);
+      //await userContext.saveMatchDataToContext(user);
+      await userContext.getAllUsers();
       console.log('matches in context 3️⃣', userContext.matches);
     })();
   }, []);
