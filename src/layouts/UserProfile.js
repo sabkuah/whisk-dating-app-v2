@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { API } from 'aws-amplify';
 import { Avatar, Button } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserContext from '../context/user/userContext';
@@ -8,13 +9,41 @@ import DP from '../components/modalBodyComponents/profileImage';
 import AboutMe from '../components/modalBodyComponents/aboutMe';
 import Questionnaire from '../components/modalBodyComponents/questionnaire';
 
-const UserProfile = ({ questionnaire }) => {
-  const userContext = useContext(UserContext);
+const UserProfile = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [preferencesOpen, setPrefOpen] = useState(false);
   const [profileImg, setDPOpen] = useState(false);
   const [userInfo, setInfo] = useState({});
+  const [questions, setQuestions] = useState([]);
+  // const [userQs, setUserResponses] = useState(null);
+  
+  const userContext = useContext(UserContext);
   const { user, updateProfile } = userContext;
+
+  useEffect(() => {
+    (async () => {
+      const response = await getData();
+      console.log("grabbing questions", response)
+      setQuestions(response)
+    })();
+    console.log("user from context", user)
+    setInfo(user)
+    // setUserResponses(user.profileQuestionnaire)
+  }, [])
+
+
+  const getData = () => {
+    const apiName = 'WhiskPro';
+    const path = '/api/Question';
+    const myInit = { // OPTIONAL
+      headers: {}, // OPTIONAL
+    };
+
+    // const response = await 
+    return API.get(apiName, path, myInit)
+    // setQuestion(response)
+  }
+
 
   const handleOpen = (modal) => {
     switch (modal) {
@@ -51,42 +80,22 @@ const UserProfile = ({ questionnaire }) => {
   };
 
   const handleChange = (field, value) => {
-    switch (field) {
-      case 'fName':
-        userInfo[field] = value;
-        break;
-      case 'lName':
-        userInfo[field] = value;
-        break;
-      case 'phone':
-        userInfo[field] = value;
-        break;
-      case 'bio':
-        userInfo[field] = value;
-        break;
-      case 'interests':
-        userInfo[field] = value;
-        break;
-      case 'age':
-        userInfo[field] = +value;
-        break;
-      case 'profileImage':
-        userInfo[field] = value;
-        break;
-      default:
-        console.log('form field does not exist');
-        break;
+    if (field === 'age') {
+      userInfo[field] = +value
+    } else {
+      userInfo[field] = value
     }
     setInfo(userInfo);
   };
 
   const submitUserProfile = (e) => {
     e.preventDefault();
-    var userObject = { ...user, ...userInfo };
-    console.log('submitUserProfile', userObject);
-    updateProfile(userObject);
-    setProfileOpen(false);
-    setDPOpen(false);
+    var userObject = { ...user, ...userInfo }
+    console.log('submitUserProfile', userObject)
+    updateProfile(userObject)
+    setProfileOpen(false)
+    setDPOpen(false)
+    setPrefOpen(false)
   };
 
   return (
@@ -156,7 +165,13 @@ const UserProfile = ({ questionnaire }) => {
         handleClose={() => handleClose('profileOpen')}
       />
       <UserModal
-        body={<Questionnaire />}
+        body={
+        <Questionnaire 
+          submit={submitUserProfile}
+          setInfo={setInfo}
+          user={userInfo}
+          questions={questions}
+        />}
         open={preferencesOpen}
         handleClose={() => handleClose('preferencesOpen')}
       />

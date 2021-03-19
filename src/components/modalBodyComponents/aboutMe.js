@@ -3,7 +3,7 @@ import {Button, Typography, TextField } from '@material-ui/core';
 
 const AboutMe = ({submit, handleChange, user}) => {
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} id="profile-form">
       <Typography variant="h5" style={{paddingBottom: "1em"}}>Complete My Profile</Typography>
       <TextField
         label='First Name'

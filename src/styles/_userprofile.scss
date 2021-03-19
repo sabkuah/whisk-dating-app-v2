@@ -48,8 +48,6 @@
 }
 
 form {
-  text-align: center;
-  
   .submit-btn {
     @include brand-button-lg;
     width: 50%;
@@ -59,9 +57,17 @@ form {
   }
 }
 
+
+#profile-form {
+  max-height: 75vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 @media (max-width: 768px) {
   #display-photo {
     width: 5em;
     height: 5em;
   }
 }
+
