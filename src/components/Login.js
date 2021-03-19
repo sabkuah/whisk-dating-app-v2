@@ -54,7 +54,7 @@ const Login = () => {
           images: [],
           interests: [],
           matches: [],
-          hone: '',
+          phone: '',
           preference: [],
           profileImage: '',
           profileQuestionnaire: [],

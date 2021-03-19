@@ -87,7 +87,7 @@ const UserProfile = (props) => {
         open={preferencesOpen}
         handleClose={() => handleClose('preferencesOpen')}
       />
-      <WhiskSnackbar open={notify} />
+      <WhiskSnackbar open={notify} message="COMPLETE YOUR PROFILE!"/>
     </div>
   );
 };

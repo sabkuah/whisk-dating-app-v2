@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
-export default function WhiskSnackbar({ open }) {
+export default function WhiskSnackbar({ open, message }) {
   const [state, setState] = useState(open)
 
   const handleClose = () => {
@@ -16,7 +16,7 @@ export default function WhiskSnackbar({ open }) {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={state}
         onClose={handleClose}
-        message="COMPLETE YOUR PROFILE!"
+        message={message}
         action={
           <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
             <CloseIcon fontSize="small" />
