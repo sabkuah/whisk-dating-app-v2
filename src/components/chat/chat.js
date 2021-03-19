@@ -18,7 +18,7 @@ firebase.initializeApp({
 
 export function ChatRoom() {
     const userContext = useContext(UserContext);
-    const { user } = userContext;
+    const { user, profileImg } = userContext;
     const dummy = useRef();
     const messagesRef = firestore.collection('messages');
     const query = messagesRef.orderBy('createdAt').limit(25);
@@ -28,12 +28,13 @@ export function ChatRoom() {
     const sendMessage = async (e) => {
         e.preventDefault();
         const uid = user.ID
-        console.log(uid)
+        const photoURL = user.profileImg
 
         await messagesRef.add({
             text: formValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             uid,
+            photoURL,
         })
         setFormValue('')
         dummy.current.scrollIntoView({ behavior: 'smooth' })
@@ -64,8 +65,10 @@ export function ChatRoom() {
 }
 
 function ChatMessage(props) {
+    const userContext = useContext(UserContext);
+    const { user } = userContext;
     const { text, uid } = props.message;
-    const messageClass = uid === uid.ID ? 'msg-sent' : 'msg-received';
+    const messageClass = uid === user.ID ? 'msg-received' : 'msg-sent';
 
     return (<>
         <div className={`${messageClass}`} >
