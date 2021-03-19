@@ -1,19 +1,8 @@
 import { API } from 'aws-amplify';
 import { v4 as uuid } from 'uuid';
 
-const FemaleUsers = [
-  '52bb9ed8-2297-4996-89db-01383c09e51f',
-  '59490f6f-5eba-405a-a4e1-770efb15794a',
-];
-
-const MaleUsers = [
-  '5dd02c42-3024-4c57-bf3a-e1cdd239502c',
-  '5eb24c36-6192-4108-bdff-cf7c1d376526',
-];
-
 const createMatch = async (users, user, whiskId) => {
   //group users by preference
-
   let femaleUsers = [];
   let maleUsers = [];
   console.log('users', users);
@@ -74,14 +63,11 @@ const createMatch = async (users, user, whiskId) => {
     const myInit = {
       body: newMatch,
     };
-
     await API.post(apiName, path, myInit);
   };
-
   await postMatchToDB();
 
   //Add matchID current user's matches array
-
   const postMatchToUser = async (user, matchId) => {
     const updatedMatches = [...user.matches, matchId];
 
@@ -94,14 +80,14 @@ const createMatch = async (users, user, whiskId) => {
       },
     };
     console.log('🌹 Posting Matches to DB', myInit);
-
     await API.put(apiName, path, myInit);
   };
 
   //Post update match arrays to both users
-
   await postMatchToUser(user, newMatch.ID);
   await postMatchToUser(matchedUser, newMatch.ID);
+
+  return matchedUser.fName;
 };
 
 export default createMatch;
