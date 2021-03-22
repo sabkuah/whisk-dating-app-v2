@@ -1,25 +1,26 @@
 import React from 'react';
 import { Paper, Avatar, Grid, Button } from '@material-ui/core';
 
-const MatchInfo = ({ user, open }) => {
+const MatchInfo = ({ matchedUser, open }) => {
   return (
     <Paper className='match-info'>
       <Grid container justify='center' spacing={1} style={{ width: '100%' }}>
         <Grid sm={12} md={6} className='img-grid-container' item>
-          <Avatar variant='rounded' src={user?.ProfileImage} id='match-pic' />
+          <Avatar
+            variant='rounded'
+            src={matchedUser?.profileImage}
+            id='match-pic'
+          />
         </Grid>
         <Grid sm={12} md={6} item>
           <div style={{ padding: '0 10px', width: '100%' }}>
             <h3>
-              {user?.Fname} {user?.Lname} Marvis Ighedosa
+              {matchedUser?.fName} {matchedUser?.lName}
             </h3>
             <hr />
-            {user?.interests.join(', ')} Photography, Music, Dance
+            {matchedUser?.interests.join(', ')}
             <hr />
-            <p>
-              {user?.Bio}My top 3 guilty pleasures: reality TV dating shows,
-              cheesy thrillers, my mom's chocolate chip cookies.
-            </p>
+            <p>{matchedUser?.bio}</p>
           </div>
         </Grid>
       </Grid>

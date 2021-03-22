@@ -16,7 +16,7 @@ import createMatch from './createMatch';
 const UserState = (props) => {
   const initialState = {
     user: null,
-    matches: null,
+    matches: [],
     isAuthenticated: false,
     loading: false,
     users: null,
@@ -35,7 +35,6 @@ const UserState = (props) => {
     const apiName = 'WhiskPro';
     const path = '/api/User';
     const userArray = await API.get(apiName, path);
-    console.log('userarray in context', userArray);
 
     dispatch({
       type: GET_USERS,
@@ -162,11 +161,9 @@ const UserState = (props) => {
       let matchDoc = null;
       try {
         matchDoc = await getData();
-        matchDoc.whisk = whisks.filter((w) => w.ID === matchDoc.whiskId);
-        matchDoc.matchedUser = users.filter(
-          (u) => u.ID === matchDoc.userIds[1]
-        );
-        console.log('😱 matchDoc', matchDoc);
+        matchDoc.whisk = whisks.find((w) => w.ID === matchDoc.whiskId);
+        matchDoc.matchedUser = users.find((u) => u.ID === matchDoc.userIds[1]);
+        //console.log('💙 matchDoc', matchDoc);
       } catch (e) {
         console.log('Error: ', e);
       }
@@ -177,8 +174,8 @@ const UserState = (props) => {
       type: GET_MATCHES,
       payload: matchInfo,
     });
-
-    return matchInfo;
+    // console.log('💙 matchInfo dispatched to state', matchInfo);
+    // return matchInfo;
   };
 
   return (
@@ -188,6 +185,7 @@ const UserState = (props) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         users: state.users,
+        matches: state.matches,
         setLoadingFalse,
         setLoadingTrue,
         loginUser,

@@ -1,6 +1,6 @@
 import { Grid, Container } from '@material-ui/core';
 import ChosenWhisks from '../components/userWhisks/ChosenWhisks';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useLayoutEffect } from 'react';
 import UserContext from '../context/user/userContext';
 import UserMatches from '../components/userWhisks/UserMatches';
 import WhiskContext from '../context/whisk/whiskContext';
@@ -15,6 +15,7 @@ const UserWhisks = () => {
     scanUsers,
     cancelChooseWhisk,
     saveMatchDataToContext,
+    getAuthenticatedUser,
   } = userContext;
   const {
     whisks,
@@ -24,7 +25,7 @@ const UserWhisks = () => {
     loading,
   } = whiskContext;
   const [chosenWhisks, setChosenWhisks] = useState(null);
-  const [matchInfo, setMatchInfo] = useState(null);
+  const [matchInfo, setMatchInfo] = useState([]);
 
   const handleCancelWhisk = async (whiskId) => {
     await cancelChooseWhisk(user, whiskId);
@@ -40,6 +41,18 @@ const UserWhisks = () => {
     }
   };
 
+  const checkContextForInfo = async () => {
+    if (whisks.length === 0) {
+      await scanWhisks();
+    }
+    if (users.length === 0) {
+      await scanUsers();
+    }
+    if (!user) {
+      await getAuthenticatedUser();
+    }
+  };
+
   const checkContextForWhisks = async () => {
     if (whisks.length === 0) {
       await scanWhisks();
@@ -49,15 +62,18 @@ const UserWhisks = () => {
   useEffect(() => {
     (async () => {
       setLoadingTrue();
-      await scanUsers();
+      await checkContextForInfo();
+      console.log('users', users);
+      console.log('user', user);
+      console.log('whisks', whisks);
+      await getChosenWhiskDetails();
       const matches = await saveMatchDataToContext(users, user, whisks);
       setMatchInfo(matches);
-      await checkContextForWhisks();
-      await getChosenWhiskDetails();
+      console.log('matchInfo', matchInfo);
       setLoadingFalse();
     })();
     //eslint-disable-next-line
-  }, [whisks]);
+  }, []);
 
   if (loading === true) return <Spinner />;
   else
