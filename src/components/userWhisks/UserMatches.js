@@ -7,7 +7,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const UserMatches = ({ matches }) => {
   return (
@@ -35,7 +35,6 @@ const UserMatches = ({ matches }) => {
           ) : (
             <p>error</p>
           )}
-          {}
           {/* <Divider variant='inset' component='li' /> */}
         </List>
       </div>

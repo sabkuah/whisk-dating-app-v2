@@ -12,6 +12,7 @@ const UserWhisks = () => {
   const {
     user,
     users,
+    matches,
     scanUsers,
     cancelChooseWhisk,
     saveMatchDataToContext,
@@ -25,7 +26,7 @@ const UserWhisks = () => {
     loading,
   } = whiskContext;
   const [chosenWhisks, setChosenWhisks] = useState(null);
-  const [matchInfo, setMatchInfo] = useState([]);
+  //const [matchInfo, setMatchInfo] = useState([]);
 
   const handleCancelWhisk = async (whiskId) => {
     await cancelChooseWhisk(user, whiskId);
@@ -42,20 +43,14 @@ const UserWhisks = () => {
   };
 
   const checkContextForInfo = async () => {
-    if (whisks.length === 0) {
+    if (!whisks || whisks.length === 0) {
       await scanWhisks();
     }
-    if (users.length === 0) {
+    if (!users || users.length === 0) {
       await scanUsers();
     }
     if (!user) {
       await getAuthenticatedUser();
-    }
-  };
-
-  const checkContextForWhisks = async () => {
-    if (whisks.length === 0) {
-      await scanWhisks();
     }
   };
 
@@ -66,10 +61,11 @@ const UserWhisks = () => {
       console.log('users', users);
       console.log('user', user);
       console.log('whisks', whisks);
-      await getChosenWhiskDetails();
-      const matches = await saveMatchDataToContext(users, user, whisks);
-      setMatchInfo(matches);
-      console.log('matchInfo', matchInfo);
+      var userWhisks = await getChosenWhiskDetails();
+      await saveMatchDataToContext(users, user, whisks);
+      //setMatchInfo(returnedMatches);
+      //console.log('matches from local state', matchInfo);
+      console.log('matches from context', matches);
       setLoadingFalse();
     })();
     //eslint-disable-next-line
@@ -87,7 +83,7 @@ const UserWhisks = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <UserMatches matches={matchInfo} />
+            <UserMatches matches={matches} />
           </Grid>
         </Grid>
       </Container>

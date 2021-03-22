@@ -15,30 +15,52 @@ export const Match = () => {
   const { id: matchId } = useParams();
   const userContext = useContext(UserContext);
   const whiskContext = useContext(WhiskContext);
-  const { users, user, matches, saveMatchDataToContext } = userContext;
-  const { whisks, loading, setLoadingTrue, setLoadingFalse } = whiskContext;
+  const {
+    users,
+    user,
+    matches,
+    scanUsers,
+    getAuthenticatedUser,
+    saveMatchDataToContext,
+  } = userContext;
+  const {
+    whisks,
+    scanWhisks,
+    loading,
+    setLoadingTrue,
+    setLoadingFalse,
+  } = whiskContext;
 
   const handleOpen = () => {
     setOpen(true);
   };
 
-  const checkContextForMatches = async () => {
+  const checkContextForInfo = async () => {
+    if (whisks.length === 0) {
+      await scanWhisks();
+    }
+    if (users.length === 0) {
+      await scanUsers();
+    }
+    if (!user) {
+      await getAuthenticatedUser();
+    }
     if (!matches || !matches.length) {
       await saveMatchDataToContext(users, user, whisks);
     }
   };
 
   useEffect(() => {
-    setLoadingTrue();
-    console.log('matchId', matchId);
-    console.log('matches', matches);
-    checkContextForMatches();
-    const foundMatch = matches?.find((m) => m.ID === matchId);
-    console.log('matchdoc', foundMatch);
-    setMatchDoc(foundMatch);
-    if (foundMatch) {
+    (async () => {
+      setLoadingTrue();
+      console.log('matchId', matchId);
+      console.log('matches', matches);
+      checkContextForInfo();
+      const foundMatch = matches?.find((m) => m.ID === matchId);
+      console.log('matchdoc', foundMatch);
+      setMatchDoc(foundMatch);
       setLoadingFalse();
-    }
+    })();
   }, []);
 
   const confirmMatch = (

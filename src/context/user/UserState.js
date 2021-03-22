@@ -174,8 +174,8 @@ const UserState = (props) => {
       type: GET_MATCHES,
       payload: matchInfo,
     });
-    // console.log('💙 matchInfo dispatched to state', matchInfo);
-    // return matchInfo;
+    console.log('💙 matchInfo dispatched to state', matchInfo);
+    return matchInfo;
   };
 
   return (

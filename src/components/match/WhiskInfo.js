@@ -6,11 +6,11 @@ const WhiskInfo = ({ whisk }) => {
     <Paper className='whisk-info'>
       <Grid container justify='center' spacing={1} style={{ width: '100%' }}>
         <Grid sm={12} md={6} item className='img-grid-container'>
-          <Avatar src={whisk?.Images[0]} id='whisk-pic' />
+          <Avatar src={whisk?.images[0]} id='whisk-pic' />
         </Grid>
         <Grid sm={12} md={6} item>
           <div style={{ padding: '0 10px', width: '100%' }}>
-            <h3>{whisk?.title}Coffee in Mt.Pleasant</h3>
+            <h3>{whisk?.title}</h3>
             <hr />
             <p>Sophie’s Tavern</p>
             <p>Platform 7 Roasters</p>
