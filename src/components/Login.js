@@ -83,7 +83,7 @@ const Login = () => {
         console.log('user', user.attributes);
         userContext.loginUser(user.attributes);
         setErrorMsg('');
-        history.push('/');
+        history.push('/user');
       } catch (err) {
         console.log(err);
         setErrorMsg(err.message);

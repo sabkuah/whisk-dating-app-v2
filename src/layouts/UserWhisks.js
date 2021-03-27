@@ -34,12 +34,12 @@ const UserWhisks = () => {
   };
 
   const getChosenWhiskDetails = () => {
+    var items
     if (user.chosenWhisks?.length) {
-      const items = user.chosenWhisks.map((id) => {
-        return whisks.find((w) => w.ID === id);
-      });
+      items = user.chosenWhisks.map(id => whisks.find(w => w.ID === id));
       setChosenWhisks(items);
     }
+    return items
   };
 
   const checkContextForInfo = async () => {
@@ -58,14 +58,8 @@ const UserWhisks = () => {
     (async () => {
       setLoadingTrue();
       await checkContextForInfo();
-      console.log('users', users);
-      console.log('user', user);
-      console.log('whisks', whisks);
       var userWhisks = await getChosenWhiskDetails();
-      await saveMatchDataToContext(users, user, whisks);
-      //setMatchInfo(returnedMatches);
-      //console.log('matches from local state', matchInfo);
-      console.log('matches from context', matches);
+      var matches = await saveMatchDataToContext(users, user, whisks);
       setLoadingFalse();
     })();
     //eslint-disable-next-line

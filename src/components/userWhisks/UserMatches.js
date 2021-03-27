@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 
 const UserMatches = ({ matches }) => {
+  console.log("matches from UserMatches", matches)
   return (
     <div className='user-matches'>
       <h1>Your Matches</h1>
@@ -33,7 +34,7 @@ const UserMatches = ({ matches }) => {
               </ListItem>
             ))
           ) : (
-            <p>error</p>
+            <p>You have no matches</p>
           )}
           {/* <Divider variant='inset' component='li' /> */}
         </List>

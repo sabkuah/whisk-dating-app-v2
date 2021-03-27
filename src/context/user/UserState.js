@@ -145,38 +145,41 @@ const UserState = (props) => {
   //  Get Match Docs for Current User
   //===================================
 
+  const getData = async (matchId) => {
+    const apiName = 'WhiskPro';
+    const path = `/api/object/Match/${matchId}`;
+    const myInit = {
+      headers: {},
+    };
+    var result = await API.get(apiName, path, myInit);
+    return Promise.resolve(result)
+  }
+
   const saveMatchDataToContext = async (users, user, whisks) => {
-    let matchInfo = [];
-
-    user.matches?.map(async (matchId) => {
-      function getData() {
-        const apiName = 'WhiskPro';
-        const path = `/api/object/Match/${matchId}`;
-        const myInit = {
-          headers: {},
-        };
-        return API.get(apiName, path, myInit);
-      }
-
+    const allMatches = user.matches?.map(async (matchId) => {
       let matchDoc = null;
       try {
-        matchDoc = await getData();
+        matchDoc = await getData(matchId);
         matchDoc.whisk = whisks.find((w) => w.ID === matchDoc.whiskId);
         matchDoc.matchedUser = users.find((u) => u.ID === matchDoc.userIds[1]);
-        //console.log('💙 matchDoc', matchDoc);
       } catch (e) {
         console.log('Error: ', e);
       }
-      matchInfo.push(matchDoc);
-    });
+      return matchDoc
+    })
 
-    dispatch({
-      type: GET_MATCHES,
-      payload: matchInfo,
-    });
-    console.log('💙 matchInfo dispatched to state', matchInfo);
-    return matchInfo;
+    Promise.all(allMatches).then(matchInfo => {
+      dispatch({
+        type: GET_MATCHES,
+        payload: matchInfo,
+      });
+      return matchInfo;
+    })
+
+    // https://medium.com/@ian.mundy/async-map-in-javascript-b19439f0099
+    // https://flaviocopes.com/javascript-async-await-array-map/
   };
+
 
   return (
     <UserContext.Provider
