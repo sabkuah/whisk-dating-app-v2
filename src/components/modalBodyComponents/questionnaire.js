@@ -12,31 +12,52 @@ const Questionnaire = ({questions, submit, setInfo}) => {
   const handleChange = (q, a, mc) => {
     var qObj = new Array(...userQs)
     var findCurrentQ = qObj.find(question => question.ID === q.ID)
-    
+    var index = qObj.indexOf(findCurrentQ)
+    var newUserObj =  Object.assign(user)
     // --- multiple choice questions
     if (mc) {
       if (findCurrentQ) {
-        findCurrentQ.answer.includes(a) ? findCurrentQ.answer.splice(a, 1) : findCurrentQ.answer.push(a)
+        if(findCurrentQ.answer.includes(a)) {
+          var i = findCurrentQ.answer.indexOf(a)
+          findCurrentQ.answer.splice(i, 1)
+        } else {
+          findCurrentQ.answer.push(a)
+        } 
         if (findCurrentQ.answer.length === 0) {
-          qObj.splice(findCurrentQ, 1)
+          qObj.splice(index, 1)
         }
-        
       } else {
         let question = { ID: q.ID, answer: [a] }
         qObj.push(question)
       }
-    // --- radio and checkbox questiona
+    // --- radio and checkbox questions
     } else {
       let question = { ID: q.ID, answer: a }
       if (findCurrentQ) {
-        qObj.splice(findCurrentQ, 1)
+        qObj.splice(index, 1)
         qObj.push(question)
       } else {
         qObj.push(question)
       }
+
+      if (q.ID === '6') { // update user preferences
+        switch (a) {
+          case 'Women':
+            newUserObj.preference = 'females'
+            break;
+          case 'Men':
+            newUserObj.preference = 'males'
+            break;
+          case 'Other':
+            newUserObj.preference = 'other'
+            break;
+          default:
+            break;
+        }
+      }
     }
     setUserResponses(qObj)
-    var newUserObj =  Object.assign(user)
+    
     newUserObj.profileQuestionnaire = qObj
     setInfo(newUserObj)
   };
