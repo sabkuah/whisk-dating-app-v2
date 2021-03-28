@@ -20,13 +20,13 @@ const createMatch = async (users, user, whiskId) => {
   });
 
   //Assemble possible matches for current user
-  let possibleMatches = [];
+  let potentialMatches = [];
   switch (user.preference) {
     case 'females':
-      possibleMatches = femaleUsers;
+      potentialMatches = femaleUsers;
       break;
     case 'males':
-      possibleMatches = maleUsers;
+      potentialMatches = maleUsers;
       break;
     case 'other':
       possibleMatches = users;
@@ -36,7 +36,7 @@ const createMatch = async (users, user, whiskId) => {
       break;
   }
 
-  possibleMatches.filter((m) => m !== user.ID);
+  let possibleMatches = potentialMatches.filter((m) => m.ID !== user.ID);
 
   //Pick a random person
   console.log('Your possible matches are: ', possibleMatches);
@@ -44,7 +44,10 @@ const createMatch = async (users, user, whiskId) => {
   const matchedUser = possibleMatches[randomIndex];
   possibleMatches = []; //reset
 
-  console.log(`Congrats, your match is: ${matchedUser.fName} ${matchedUser.lName}`,matchedUser);
+  console.log(
+    `Congrats, your match is: ${matchedUser.fName} ${matchedUser.lName}`,
+    matchedUser
+  );
 
   //Create match object
   const newMatch = {
