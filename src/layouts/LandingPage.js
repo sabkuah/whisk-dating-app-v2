@@ -1,5 +1,6 @@
 import { Button, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router';
+import LandingDetails from '../components/LandingDetails';
 
 const LandingPage = () => {
   const history = useHistory();
@@ -27,9 +28,10 @@ const LandingPage = () => {
         </div>
       </div>
       <div className='main-container'>
-        <Typography variant='h5'>How it works</Typography>
+        <Typography variant='h4'>How the app works</Typography>
         <hr />
       </div>
+      <LandingDetails />
     </>
   );
 };
