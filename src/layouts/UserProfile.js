@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { API } from 'aws-amplify';
 import { Avatar, Button } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { withAuthenticator } from 'aws-amplify-react'
 import UserContext from '../context/user/userContext';
 import { Link } from 'react-router-dom';
 import UserModal from '../components/Modal';
@@ -92,4 +93,4 @@ const UserProfile = (props) => {
   );
 };
 
-export default UserProfile;
+export default withAuthenticator(UserProfile);

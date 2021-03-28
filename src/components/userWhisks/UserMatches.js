@@ -3,37 +3,39 @@ import {
   ListItem,
   ListItemText,
   ListItemAvatar,
-  Divider,
   Avatar,
   Button,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import React from 'react';
 
 const UserMatches = ({ matches }) => {
+  console.log("matches from UserMatches", matches)
   return (
     <div className='user-matches'>
       <h1>Your Matches</h1>
       <div className='chosen-list-item'>
         <List>
-          {matches?.map((match) => (
-            <ListItem alignItems='center' key={match.ID}>
-              <ListItemAvatar>
-                <Avatar
-                  src={match.matchedUser[0]?.profileImage}
-                  alt='https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png'
+          {matches?.length ? (
+            matches.map((match) => (
+              <ListItem alignItems='center' key={match.ID}>
+                <ListItemAvatar>
+                  <Avatar src={match.matchedUser?.profileImage} />
+                </ListItemAvatar>
+                <ListItemText primary={match.whisk?.title} />
+                <br />
+                <ListItemText
+                  secondary={`${match.matchedUser?.fName} ${match.matchedUser?.lName}`}
                 />
-              </ListItemAvatar>
-              <ListItemText primary={match.whisk[0]?.title} />
-              <br />
-              <ListItemText
-                secondary={`${match.matchedUser[0]?.fName} ${match.matchedUser[0]?.lName}`}
-              />
-              <Button>
-                <Link to='/user/match/333'>View Match</Link>
-              </Button>
-              <hr />
-            </ListItem>
-          ))}
+                <Button>
+                  <Link to={`/user/match/${match.ID}`}>View Match</Link>
+                </Button>
+                <hr />
+              </ListItem>
+            ))
+          ) : (
+            <p>You have no matches</p>
+          )}
           {/* <Divider variant='inset' component='li' /> */}
         </List>
       </div>

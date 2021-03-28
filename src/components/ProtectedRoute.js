@@ -53,3 +53,21 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 export default ProtectedRoute;
 
 // https://dev.to/mychal/protected-routes-with-react-function-components-dh#:~:text=Protected%20routes%20allow%20us%20to,may%20contain%20private%20user%20information.
+
+
+// const ProtectedRoute = ({ component: Component, ...rest }) => {
+//   const history = useHistory();
+//   async function checkAuthState() {
+//     try {
+//       await Auth.currentAuthenticatedUser()
+//     } catch (err) {
+//       history.push("/login")
+//     }
+//   }
+//   useEffect(() => {
+//     checkAuthState()
+//   })
+//   return <Component {...rest} />
+// };
+
+// export default ProtectedRoute;

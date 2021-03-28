@@ -1,6 +1,6 @@
 import { Grid, Container } from '@material-ui/core';
 import ChosenWhisks from '../components/userWhisks/ChosenWhisks';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useLayoutEffect } from 'react';
 import UserContext from '../context/user/userContext';
 import UserMatches from '../components/userWhisks/UserMatches';
 import WhiskContext from '../context/whisk/whiskContext';
@@ -12,9 +12,11 @@ const UserWhisks = () => {
   const {
     user,
     users,
+    matches,
     scanUsers,
     cancelChooseWhisk,
     saveMatchDataToContext,
+    getAuthenticatedUser,
   } = userContext;
   const {
     whisks,
@@ -24,7 +26,7 @@ const UserWhisks = () => {
     loading,
   } = whiskContext;
   const [chosenWhisks, setChosenWhisks] = useState(null);
-  const [matchInfo, setMatchInfo] = useState(null);
+  //const [matchInfo, setMatchInfo] = useState([]);
 
   const handleCancelWhisk = async (whiskId) => {
     await cancelChooseWhisk(user, whiskId);
@@ -32,32 +34,36 @@ const UserWhisks = () => {
   };
 
   const getChosenWhiskDetails = () => {
+    var items
     if (user.chosenWhisks?.length) {
-      const items = user.chosenWhisks.map((id) => {
-        return whisks.find((w) => w.ID === id);
-      });
+      items = user.chosenWhisks.map(id => whisks.find(w => w.ID === id));
       setChosenWhisks(items);
     }
+    return items
   };
 
-  const checkContextForWhisks = async () => {
-    if (whisks.length === 0) {
+  const checkContextForInfo = async () => {
+    if (!whisks || whisks.length === 0) {
       await scanWhisks();
+    }
+    if (!users || users.length === 0) {
+      await scanUsers();
+    }
+    if (!user) {
+      await getAuthenticatedUser();
     }
   };
 
   useEffect(() => {
     (async () => {
       setLoadingTrue();
-      await scanUsers();
-      const matches = await saveMatchDataToContext(users, user, whisks);
-      setMatchInfo(matches);
-      await checkContextForWhisks();
-      await getChosenWhiskDetails();
+      await checkContextForInfo();
+      var userWhisks = await getChosenWhiskDetails();
+      var matches = await saveMatchDataToContext(users, user, whisks);
       setLoadingFalse();
     })();
     //eslint-disable-next-line
-  }, [whisks]);
+  }, []);
 
   if (loading === true) return <Spinner />;
   else
@@ -71,7 +77,7 @@ const UserWhisks = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <UserMatches matches={matchInfo} />
+            <UserMatches matches={matches} />
           </Grid>
         </Grid>
       </Container>

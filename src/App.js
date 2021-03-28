@@ -38,7 +38,8 @@ function App() {
             <ProtectedRoute path='/about' component={About} />
             <ProtectedRoute path='/user/whisks' component={UserWhisks} />
             <ProtectedRoute path='/user/match/:id' component={Match} />
-            <ProtectedRoute path='/user' component={UserProfileController}/>
+            <ProtectedRoute path='/user' component={UserProfileController}/>  
+            {/* <Route path='/user' component={UserProfileController}/> */}
             <ProtectedRoute path='/whisks/search' component={SearchResults} />
             <ProtectedRoute path='/whisks/:id' component={WhiskDetails} />
           </Switch>
