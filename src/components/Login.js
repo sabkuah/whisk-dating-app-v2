@@ -55,6 +55,7 @@ const Login = () => {
           lName: fullName.lName,
           ID: user.userSub,
           Type: 'User',
+          gender: "",
           images: [],
           interests: [],
           matches: [],
