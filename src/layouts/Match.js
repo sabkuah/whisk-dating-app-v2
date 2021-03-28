@@ -79,14 +79,26 @@ export const Match = () => {
           </h3>
           <hr />
           {/* add user images here */}
-          {matchDoc?.matchedUser?.interests?.join(', ')}
-          <hr />
+          {/* {matchDoc?.matchedUser?.interests?.join(', ')} */}
+          {/* <hr /> */}
           <p>{matchDoc?.matchedUser?.bio}</p>
         </div>
         {/* if already accepted, do not render accept button*/}
         <form>
-          <Button>Decline</Button>
-          <Button>Accept</Button>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Decline
+          </Button>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Accept
+          </Button>
         </form>
       </Grid>
     </Grid>
@@ -103,10 +115,13 @@ export const Match = () => {
             </h2>
             <div className='center'>
               <Button onClick={handleOpen}>
-                <Avatar alt='Match Details' />
+                <Avatar
+                  src={matchDoc?.matchedUser?.profileImage}
+                  alt='Match Details'
+                />
               </Button>
               <Button>
-                <Avatar alt='Whisk Details' />
+                <Avatar src={matchDoc?.whisk?.images[0]} alt='Whisk Details' />
               </Button>
             </div>
           </Grid>
