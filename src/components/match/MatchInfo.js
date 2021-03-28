@@ -18,7 +18,7 @@ const MatchInfo = ({ matchedUser, open }) => {
               {matchedUser?.fName} {matchedUser?.lName}
             </h3>
             <hr />
-            {matchedUser?.interests.join(', ')}
+            {matchedUser?.interests}
             <hr />
             <p>{matchedUser?.bio}</p>
           </div>

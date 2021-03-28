@@ -34,16 +34,15 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     //eslint-disable-next-line
   }, []);
 
-  if (loading === true || !user) return <Spinner />;
-  else
     return (
+      loading === true ? <Spinner /> :
       <Route
         {...rest}
-        render={(props) => {
+        render={props => {
           if (user) {
-            return <Component {...rest} {...props} />;
+            return <Component {...rest} {...props} />
           } else {
-            return <Redirect to='/' />; // could redirect to an unauthorized component if we like *stretch*
+            return <Redirect to='/' /> // can't be '/login' for redirect for some reason // can add redirect page *stretch*
           }
         }}
       />

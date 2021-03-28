@@ -79,7 +79,7 @@ export const Match = () => {
           </h3>
           <hr />
           {/* add user images here */}
-          {matchDoc?.matchedUser?.interests?.join(', ')}
+          {matchDoc?.matchedUser?.interests}
           <hr />
           <p>{matchDoc?.matchedUser?.bio}</p>
         </div>
