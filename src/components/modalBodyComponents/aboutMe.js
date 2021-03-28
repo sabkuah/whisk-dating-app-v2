@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Typography, TextField } from '@material-ui/core';
+import { Button, FormControl, InputLabel, MenuItem, Typography, TextField, Select } from '@material-ui/core';
 import UserContext from '../../context/user/userContext';
 
 const AboutMe = ({submit, handleChange }) => {
@@ -28,6 +28,17 @@ const AboutMe = ({submit, handleChange }) => {
         type="number"
         defaultValue={user?.age}
       />
+      <FormControl className='text-field'>
+        <InputLabel id="select-label">Gender</InputLabel>
+        <Select labelId="demo-simple-select-label "id="demo-simple-select"
+          value={user?.gender}
+          onChange={(e) => handleChange('gender', e.target.value)}
+        >
+          <MenuItem value="female">Female</MenuItem>
+          <MenuItem value="male">Male</MenuItem>
+          <MenuItem value="other">Other</MenuItem>
+        </Select>
+      </FormControl>
       <TextField
         label='Phone'
         onChange={(e) => handleChange('phone', e.target.value)}

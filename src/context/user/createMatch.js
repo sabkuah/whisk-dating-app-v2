@@ -6,11 +6,16 @@ const createMatch = async (users, user, whiskId) => {
   let femaleUsers = [];
   let maleUsers = [];
   console.log('users', users);
-  users.filter((u) => {
-    if (u.preference === 'females') {
-      femaleUsers.push(u);
-    } else {
-      maleUsers.push(u);
+  users.filter(u => {
+    switch (u.gender) {
+      case 'female':
+        femaleUsers.push(u);
+        break;
+      case 'male':
+        maleUsers.push(u);
+        break;
+      default: // other - gender
+        break;
     }
   });
 
@@ -24,12 +29,10 @@ const createMatch = async (users, user, whiskId) => {
       possibleMatches = maleUsers;
       break;
     case 'other':
-      possibleMatches = femaleUsers;
-      possibleMatches.push(...maleUsers);
+      possibleMatches = users;
       break;
     default:
-      possibleMatches = femaleUsers;
-      possibleMatches.push(...maleUsers);
+      possibleMatches = users;
       break;
   }
 

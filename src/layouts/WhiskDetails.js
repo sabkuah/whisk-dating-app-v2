@@ -28,6 +28,9 @@ const WhiskDetails = () => {
   };
 
   const handleChooseWhisk = async () => {
+    if (!user.gender || !user.preferences || !user.preferences.length < 1) {
+      return alert('Please complete your profile before you select Whisks');
+    }
     if (user.chosenWhisks.includes(whisk.ID)) {
       return alert('You have already chosen this Whisk!'); //replace this alert
     }

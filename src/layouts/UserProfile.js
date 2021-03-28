@@ -37,7 +37,7 @@ const UserProfile = (props) => {
           </div>
         </div>
       </div>
-      <Button>
+      <Button onClick={() => handleOpen('profileOpen')}>
         <span>About You</span> <ChevronRightIcon />
       </Button>
       <Button onClick={() => handleOpen('preferencesOpen')}>
@@ -50,10 +50,6 @@ const UserProfile = (props) => {
           <ChevronRightIcon />
         </Button>
       </Link>
-      <Button>
-        <span>Help</span>
-        <ChevronRightIcon />
-      </Button>
       <Button id='action-btn'>Update</Button>
       <UserModal
         body={
