@@ -65,6 +65,12 @@ const UserState = (props) => {
     });
   };
 
+
+  const updateUserContext = async (id) => {
+    var updatedUserDetails = await getUserFromDB(id);
+    dispatch({ type: CURRENT_USER, payload: updatedUserDetails });
+  }
+
   // ======================================
   //  User Authentication / Authorization
   // =======================================
@@ -137,8 +143,8 @@ const UserState = (props) => {
       body: userInfo,
     };
     await API.post(apiName, path, myInit);
-    var updateUser = await getUserFromDB(userInfo.ID);
-    dispatch({ type: CURRENT_USER, payload: updateUser });
+    updateUserContext(userInfo.ID);
+    
   };
 
   //===================================
@@ -202,6 +208,7 @@ const UserState = (props) => {
         updateProfile,
         createMatch,
         saveMatchDataToContext,
+        updateUserContext
       }}
     >
       {props.children}

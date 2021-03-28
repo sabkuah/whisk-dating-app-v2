@@ -17,7 +17,7 @@ const WhiskDetails = () => {
   const whiskContext = useContext(WhiskContext);
   const userContext = useContext(UserContext);
   const { whisks, getWhisk, loading, setLoadingFalse } = whiskContext;
-  const { user, users, chooseWhisk, scanUsers, createMatch } = userContext;
+  const { user, users, chooseWhisk, scanUsers, createMatch, updateUserContext } = userContext;
   const { id } = useParams();
   const history = useHistory();
   const [liked, setLiked] = useState(false);
@@ -38,6 +38,9 @@ const WhiskDetails = () => {
 
     await chooseWhisk(user, whisk);
     const matchName = await createMatch(users, user, whisk.ID);
+    // update user and save to context so match page shows user with new match
+    const updateUser = await updateUserContext(user.ID)
+    console.log("updated user context?", updateUser)
     alert(`You have a new match with ${matchName} 🌹!`);
     //history.push('/user/whisks');
   };

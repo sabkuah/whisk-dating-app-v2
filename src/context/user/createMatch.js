@@ -41,10 +41,7 @@ const createMatch = async (users, user, whiskId) => {
   const matchedUser = possibleMatches[randomIndex];
   possibleMatches = []; //reset
 
-  console.log(
-    `Congrats, your match is: ${matchedUser.fName} ${matchedUser.lName}`,
-    matchedUser
-  );
+  console.log(`Congrats, your match is: ${matchedUser.fName} ${matchedUser.lName}`,matchedUser);
 
   //Create match object
   const newMatch = {
