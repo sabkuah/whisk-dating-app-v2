@@ -2,6 +2,9 @@
   .cancel-icon {
     display: none;
   }
+
+  overflow-y: scroll;
+  max-height: 40vh;
 }
 
 .chosen-list-item:hover {

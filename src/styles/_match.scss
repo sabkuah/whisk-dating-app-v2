@@ -143,12 +143,12 @@
 @media (max-width: 768px) {
   #match-page {
     height: 100vh;
-  }
-  .MuiGrid-container {
-    height: 100%;
-  }
-  .MuiGrid-item {
-    width: 100%;
+    .MuiGrid-container {
+      height: 100%;
+    }
+    .MuiGrid-item {
+      width: 100%;
+    }
   }
   #match-avatars {
     display: block;
