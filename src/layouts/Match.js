@@ -53,14 +53,13 @@ export const Match = () => {
   useEffect(() => {
     (async () => {
       setLoadingTrue();
-      console.log('matchId', matchId);
-      console.log('matches', matches);
       checkContextForInfo();
       const foundMatch = matches?.find((m) => m.ID === matchId);
       console.log('matchdoc', foundMatch);
       setMatchDoc(foundMatch);
       setLoadingFalse();
     })();
+    //eslint-disable-next-line
   }, []);
 
   const confirmMatch = (

@@ -21,7 +21,7 @@ const UserProfileController = () => {
       console.log('is there a user?', user);
       setNotify(user?.profileQuestionnaire.length < response.length);
     })();
-  }, []);
+  }, [user]);
 
   const getData = () => {
     const apiName = 'whiskamplify';

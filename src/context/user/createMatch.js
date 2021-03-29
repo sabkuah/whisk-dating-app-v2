@@ -6,7 +6,7 @@ const createMatch = async (users, user, whiskId) => {
   let femaleUsers = [];
   let maleUsers = [];
   console.log('users', users);
-  users.filter((u) => {
+  users.forEach((u) => {
     switch (u.gender) {
       case 'female':
         femaleUsers.push(u);
@@ -15,7 +15,7 @@ const createMatch = async (users, user, whiskId) => {
         maleUsers.push(u);
         break;
       default:
-        // other - gender
+        // 'other' --> return all users
         break;
     }
   });

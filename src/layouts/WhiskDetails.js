@@ -5,21 +5,26 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 //import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import Carousel from 'react-material-ui-carousel';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import WhiskContext from '../context/whisk/whiskContext';
 import UserContext from '../context/user/userContext';
-import createMatch from '../context/user/createMatch';
 
 const WhiskDetails = () => {
   const whiskContext = useContext(WhiskContext);
   const userContext = useContext(UserContext);
   const { whisks, getWhisk, loading, setLoadingFalse } = whiskContext;
-  const { user, users, chooseWhisk, scanUsers, createMatch, updateUserContext } = userContext;
+  const {
+    user,
+    users,
+    chooseWhisk,
+    scanUsers,
+    createMatch,
+    updateUserContext,
+  } = userContext;
   const { id } = useParams();
-  const history = useHistory();
   const [liked, setLiked] = useState(false);
   const [whisk, setWhisk] = useState();
 
@@ -42,8 +47,8 @@ const WhiskDetails = () => {
     await chooseWhisk(user, whisk);
     const matchName = await createMatch(users, user, whisk.ID);
     // update user and save to context so match page shows user with new match
-    const updateUser = await updateUserContext(user.ID)
-    console.log("updated user context?", updateUser)
+    const updateUser = await updateUserContext(user.ID);
+    console.log('updated user context?', updateUser);
     alert(`You have a new match with ${matchName} 🌹!`);
     //history.push('/user/whisks');
   };
