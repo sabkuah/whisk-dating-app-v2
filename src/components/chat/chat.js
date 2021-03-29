@@ -75,12 +75,17 @@ function ChatMessage(props) {
   const { user } = userContext;
   const { text, uid } = props.message;
   const messageClass = uid === user.ID ? 'msg-sent' : 'msg-received';
+  let userImage = '';
+
+  if (messageClass === 'msg-sent') {
+    userImage = user.profileImage;
+  }
 
   return (
     <>
       <div className={`${messageClass}`}>
         <div className='wrapper'>
-          <Avatar />
+          <Avatar src={userImage} />
           <Paper className='msg-text'>{text}</Paper>
         </div>
       </div>

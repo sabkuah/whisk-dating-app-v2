@@ -31,7 +31,7 @@ const AboutMe = ({submit, handleChange }) => {
       <FormControl className='text-field'>
         <InputLabel id="select-label">Gender</InputLabel>
         <Select labelId="demo-simple-select-label "id="demo-simple-select"
-          value={user?.gender}
+          defaultValue={user?.gender}
           onChange={(e) => handleChange('gender', e.target.value)}
         >
           <MenuItem value="female">Female</MenuItem>

@@ -30,10 +30,10 @@ const createMatch = async (users, user, whiskId) => {
       potentialMatches = maleUsers;
       break;
     case 'other':
-      possibleMatches = users;
+      potentialMatches = users;
       break;
     default:
-      possibleMatches = users;
+      potentialMatches = users;
       break;
   }
 
