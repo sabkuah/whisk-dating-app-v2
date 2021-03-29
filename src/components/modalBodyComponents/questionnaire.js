@@ -40,7 +40,7 @@ const Questionnaire = ({questions, submit, setInfo}) => {
         qObj.push(question)
       }
 
-      if (q.ID === '6') { // update user preferences
+      if (q.ID === '2') { // update user preferences
         switch (a) {
           case 'Women':
             newUserObj.preference = 'females'
