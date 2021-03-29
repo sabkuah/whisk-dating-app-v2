@@ -1,4 +1,4 @@
-import { Container, Grid, Avatar, Button } from '@material-ui/core';
+import { Container, Grid, Avatar, Button, IconButton } from '@material-ui/core';
 import React, { useState, useContext, useEffect } from 'react';
 import MatchInfo from '../components/match/MatchInfo';
 import Messaging from '../components/match/Messaging';
@@ -6,8 +6,9 @@ import WhiskInfo from '../components/match/WhiskInfo';
 import UserModal from '../components/Modal';
 import UserContext from '../context/user/userContext';
 import WhiskContext from '../context/whisk/whiskContext';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Spinner from '../components/Spinner';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 export const Match = () => {
   const [open, setOpen] = useState(true);
@@ -125,6 +126,11 @@ export const Match = () => {
             </div>
           </Grid>
           <Grid xs={12} sm={4} item id='match-cards'>
+            <IconButton aria-label='back'>
+              <Link to='/user/whisks'>
+                <ArrowBackIosIcon />
+              </Link>
+            </IconButton>
             <div className='match'>
               <h2 className='heading'>Match Details</h2>
               <MatchInfo
