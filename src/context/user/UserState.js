@@ -32,7 +32,7 @@ const UserState = (props) => {
   //============================
 
   const scanUsers = async () => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = '/api/User';
     const userArray = await API.get(apiName, path);
 
@@ -47,7 +47,7 @@ const UserState = (props) => {
   //============================
 
   const getUserFromDB = (id) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api/object/User/${id}`;
     return API.get(apiName, path);
   };
@@ -75,7 +75,7 @@ const UserState = (props) => {
   //  User Authentication / Authorization
   // =======================================
   const postUser = (user) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: user, // replace this with attributes you need
@@ -104,7 +104,7 @@ const UserState = (props) => {
   const chooseWhisk = async (user, whisk) => {
     try {
       user.chosenWhisks.unshift(whisk.ID);
-      const apiName = 'WhiskPro';
+      const apiName = 'whiskamplify';
       const path = `/api`;
       const myInit = {
         body: user,
@@ -124,7 +124,7 @@ const UserState = (props) => {
   const cancelChooseWhisk = async (user, whiskId) => {
     const filtered = user.chosenWhisks.filter((w) => w !== whiskId);
     user.chosenWhisks = filtered;
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: user,
@@ -137,7 +137,7 @@ const UserState = (props) => {
   //  Update User Profile
   //=======================
   const updateProfile = async (userInfo) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: userInfo,
@@ -152,7 +152,7 @@ const UserState = (props) => {
   //===================================
 
   const getData = async (matchId) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api/object/Match/${matchId}`;
     const myInit = {
       headers: {},
