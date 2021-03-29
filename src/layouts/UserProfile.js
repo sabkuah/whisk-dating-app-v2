@@ -9,16 +9,32 @@ import Questionnaire from '../components/modalBodyComponents/questionnaire';
 import WhiskSnackbar from '../components/SnackBar';
 
 const UserProfile = (props) => {
-  const { handleOpen, handleClose, profileOpen, preferencesOpen, profileImg, questions, userInfo, handleChange, setInfo, notify, submit} = props
+  const {
+    handleOpen,
+    handleClose,
+    profileOpen,
+    preferencesOpen,
+    profileImg,
+    questions,
+    userInfo,
+    handleChange,
+    setInfo,
+    notify,
+    submit,
+  } = props;
 
   return (
     <div className='profile-page'>
       <h1>My Profile</h1>
       <div className='card-title'>
         <span>Personal details</span>
-        <a className='blue-font' onClick={() => handleOpen('profileOpen')}>
+        <p
+          className='blue-font'
+          onClick={() => handleOpen('profileOpen')}
+          style={{ cursor: 'pointer' }}
+        >
           change
-        </a>
+        </p>
       </div>
       <div className='about-card'>
         <div className='wrapper'>
@@ -52,36 +68,27 @@ const UserProfile = (props) => {
       </Link>
       <Button id='action-btn'>Update</Button>
       <UserModal
-        body={
-          <DP
-            submit={submit}
-            handleChange={handleChange}
-          />
-        }
+        body={<DP submit={submit} handleChange={handleChange} />}
         open={profileImg}
         handleClose={() => handleClose('profileImg')}
       />
       <UserModal
-        body={
-          <AboutMe
-            submit={submit}
-            handleChange={handleChange}
-          />
-        }
+        body={<AboutMe submit={submit} handleChange={handleChange} />}
         open={profileOpen}
         handleClose={() => handleClose('profileOpen')}
       />
       <UserModal
         body={
-        <Questionnaire 
-          submit={submit}
-          setInfo={setInfo}
-          questions={questions}
-        />}
+          <Questionnaire
+            submit={submit}
+            setInfo={setInfo}
+            questions={questions}
+          />
+        }
         open={preferencesOpen}
         handleClose={() => handleClose('preferencesOpen')}
       />
-      <WhiskSnackbar open={notify} message="COMPLETE YOUR PROFILE!"/>
+      <WhiskSnackbar open={notify} message='COMPLETE YOUR PROFILE!' />
     </div>
   );
 };

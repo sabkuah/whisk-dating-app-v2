@@ -1,4 +1,4 @@
-import { Container, Grid, Avatar, Button } from '@material-ui/core';
+import { Container, Grid, Avatar, Button, IconButton } from '@material-ui/core';
 import React, { useState, useContext, useEffect } from 'react';
 import MatchInfo from '../components/match/MatchInfo';
 import Messaging from '../components/match/Messaging';
@@ -6,8 +6,9 @@ import WhiskInfo from '../components/match/WhiskInfo';
 import UserModal from '../components/Modal';
 import UserContext from '../context/user/userContext';
 import WhiskContext from '../context/whisk/whiskContext';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Spinner from '../components/Spinner';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 export const Match = () => {
   const [open, setOpen] = useState(true);
@@ -53,14 +54,13 @@ export const Match = () => {
   useEffect(() => {
     (async () => {
       setLoadingTrue();
-      console.log('matchId', matchId);
-      console.log('matches', matches);
       checkContextForInfo();
       const foundMatch = matches?.find((m) => m.ID === matchId);
       console.log('matchdoc', foundMatch);
       setMatchDoc(foundMatch);
       setLoadingFalse();
     })();
+    //eslint-disable-next-line
   }, []);
 
   const confirmMatch = (
@@ -85,8 +85,20 @@ export const Match = () => {
         </div>
         {/* if already accepted, do not render accept button*/}
         <form>
-          <Button>Decline</Button>
-          <Button>Accept</Button>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Decline
+          </Button>
+          <Button
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Accept
+          </Button>
         </form>
       </Grid>
     </Grid>
@@ -103,14 +115,22 @@ export const Match = () => {
             </h2>
             <div className='center'>
               <Button onClick={handleOpen}>
-                <Avatar alt='Match Details' />
+                <Avatar
+                  src={matchDoc?.matchedUser?.profileImage}
+                  alt='Match Details'
+                />
               </Button>
               <Button>
-                <Avatar alt='Whisk Details' />
+                <Avatar src={matchDoc?.whisk?.images[0]} alt='Whisk Details' />
               </Button>
             </div>
           </Grid>
           <Grid xs={12} sm={4} item id='match-cards'>
+            <IconButton aria-label='back'>
+              <Link to='/user/whisks'>
+                <ArrowBackIosIcon />
+              </Link>
+            </IconButton>
             <div className='match'>
               <h2 className='heading'>Match Details</h2>
               <MatchInfo

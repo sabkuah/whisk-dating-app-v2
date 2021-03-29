@@ -51,7 +51,7 @@ const SearchResults = () => {
         <Grid container spacing={3}>
           {results.length ? (
             results.map((whisk) => (
-              <Grid item xs={12} sm={6} md={4} key={whisk.id}>
+              <Grid item xs={12} sm={6} md={4} key={whisk.ID}>
                 <CardHorizontal whisk={whisk} />
               </Grid>
             ))

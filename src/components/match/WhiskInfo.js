@@ -12,8 +12,10 @@ const WhiskInfo = ({ whisk }) => {
           <div style={{ padding: '0 10px', width: '100%' }}>
             <h3>{whisk?.title}</h3>
             <hr />
-            <p>Sophie’s Tavern</p>
-            <p>Platform 7 Roasters</p>
+            <p>
+              {whisk?.neighborhood && whisk?.neighborhood + ', '}
+              {whisk?.city}
+            </p>
             <p>+1 604 123 4567</p>
             <hr />
             <p>Date: March, 27, 2021</p>

@@ -65,11 +65,10 @@ const UserState = (props) => {
     });
   };
 
-
   const updateUserContext = async (id) => {
     var updatedUserDetails = await getUserFromDB(id);
     dispatch({ type: CURRENT_USER, payload: updatedUserDetails });
-  }
+  };
 
   // ======================================
   //  User Authentication / Authorization
@@ -144,7 +143,6 @@ const UserState = (props) => {
     };
     await API.post(apiName, path, myInit);
     updateUserContext(userInfo.ID);
-    
   };
 
   //===================================
@@ -158,8 +156,8 @@ const UserState = (props) => {
       headers: {},
     };
     var result = await API.get(apiName, path, myInit);
-    return Promise.resolve(result)
-  }
+    return Promise.resolve(result);
+  };
 
   const saveMatchDataToContext = async (users, user, whisks) => {
     const allMatches = user.matches?.map(async (matchId) => {
@@ -171,21 +169,20 @@ const UserState = (props) => {
       } catch (e) {
         console.log('Error: ', e);
       }
-      return matchDoc
-    })
+      return matchDoc;
+    });
 
-    Promise.all(allMatches).then(matchInfo => {
+    Promise.all(allMatches).then((matchInfo) => {
       dispatch({
         type: GET_MATCHES,
         payload: matchInfo,
       });
       return matchInfo;
-    })
+    });
 
     // https://medium.com/@ian.mundy/async-map-in-javascript-b19439f0099
     // https://flaviocopes.com/javascript-async-await-array-map/
   };
-
 
   return (
     <UserContext.Provider
@@ -208,7 +205,7 @@ const UserState = (props) => {
         updateProfile,
         createMatch,
         saveMatchDataToContext,
-        updateUserContext
+        updateUserContext,
       }}
     >
       {props.children}

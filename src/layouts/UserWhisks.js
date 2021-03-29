@@ -1,6 +1,6 @@
 import { Grid, Container } from '@material-ui/core';
 import ChosenWhisks from '../components/userWhisks/ChosenWhisks';
-import React, { useContext, useEffect, useState, useLayoutEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../context/user/userContext';
 import UserMatches from '../components/userWhisks/UserMatches';
 import WhiskContext from '../context/whisk/whiskContext';
@@ -34,12 +34,12 @@ const UserWhisks = () => {
   };
 
   const getChosenWhiskDetails = () => {
-    var items
+    var items;
     if (user.chosenWhisks?.length) {
-      items = user.chosenWhisks.map(id => whisks.find(w => w.ID === id));
+      items = user.chosenWhisks.map((id) => whisks.find((w) => w.ID === id));
       setChosenWhisks(items);
     }
-    return items
+    return items;
   };
 
   const checkContextForInfo = async () => {
@@ -58,8 +58,8 @@ const UserWhisks = () => {
     (async () => {
       setLoadingTrue();
       await checkContextForInfo();
-      var userWhisks = await getChosenWhiskDetails();
-      var matches = await saveMatchDataToContext(users, user, whisks);
+      await getChosenWhiskDetails();
+      await saveMatchDataToContext(users, user, whisks);
       setLoadingFalse();
     })();
     //eslint-disable-next-line

@@ -28,7 +28,7 @@ const BottomNav = () => {
       default:
         history.push('/');
     }
-  }, [value]);
+  }, [value, history]);
 
   return (
     <BottomNavigation
