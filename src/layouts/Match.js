@@ -79,8 +79,8 @@ export const Match = () => {
           </h3>
           <hr />
           {/* add user images here */}
-          {/* {matchDoc?.matchedUser?.interests?.join(', ')} */}
-          {/* <hr /> */}
+          {matchDoc?.matchedUser?.interests}
+          <hr />
           <p>{matchDoc?.matchedUser?.bio}</p>
         </div>
         {/* if already accepted, do not render accept button*/}

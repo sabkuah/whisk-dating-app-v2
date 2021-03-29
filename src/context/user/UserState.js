@@ -32,7 +32,7 @@ const UserState = (props) => {
   //============================
 
   const scanUsers = async () => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = '/api/User';
     const userArray = await API.get(apiName, path);
 
@@ -47,7 +47,7 @@ const UserState = (props) => {
   //============================
 
   const getUserFromDB = (id) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api/object/User/${id}`;
     return API.get(apiName, path);
   };
@@ -65,17 +65,16 @@ const UserState = (props) => {
     });
   };
 
-
   const updateUserContext = async (id) => {
     var updatedUserDetails = await getUserFromDB(id);
     dispatch({ type: CURRENT_USER, payload: updatedUserDetails });
-  }
+  };
 
   // ======================================
   //  User Authentication / Authorization
   // =======================================
   const postUser = (user) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: user, // replace this with attributes you need
@@ -104,7 +103,7 @@ const UserState = (props) => {
   const chooseWhisk = async (user, whisk) => {
     try {
       user.chosenWhisks.unshift(whisk.ID);
-      const apiName = 'WhiskPro';
+      const apiName = 'whiskamplify';
       const path = `/api`;
       const myInit = {
         body: user,
@@ -124,7 +123,7 @@ const UserState = (props) => {
   const cancelChooseWhisk = async (user, whiskId) => {
     const filtered = user.chosenWhisks.filter((w) => w !== whiskId);
     user.chosenWhisks = filtered;
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: user,
@@ -137,14 +136,13 @@ const UserState = (props) => {
   //  Update User Profile
   //=======================
   const updateProfile = async (userInfo) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: userInfo,
     };
     await API.post(apiName, path, myInit);
     updateUserContext(userInfo.ID);
-    
   };
 
   //===================================
@@ -152,14 +150,14 @@ const UserState = (props) => {
   //===================================
 
   const getData = async (matchId) => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api/object/Match/${matchId}`;
     const myInit = {
       headers: {},
     };
     var result = await API.get(apiName, path, myInit);
-    return Promise.resolve(result)
-  }
+    return Promise.resolve(result);
+  };
 
   const saveMatchDataToContext = async (users, user, whisks) => {
     const allMatches = user.matches?.map(async (matchId) => {
@@ -171,21 +169,20 @@ const UserState = (props) => {
       } catch (e) {
         console.log('Error: ', e);
       }
-      return matchDoc
-    })
+      return matchDoc;
+    });
 
-    Promise.all(allMatches).then(matchInfo => {
+    Promise.all(allMatches).then((matchInfo) => {
       dispatch({
         type: GET_MATCHES,
         payload: matchInfo,
       });
       return matchInfo;
-    })
+    });
 
     // https://medium.com/@ian.mundy/async-map-in-javascript-b19439f0099
     // https://flaviocopes.com/javascript-async-await-array-map/
   };
-
 
   return (
     <UserContext.Provider
@@ -208,7 +205,7 @@ const UserState = (props) => {
         updateProfile,
         createMatch,
         saveMatchDataToContext,
-        updateUserContext
+        updateUserContext,
       }}
     >
       {props.children}

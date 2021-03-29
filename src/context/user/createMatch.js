@@ -6,7 +6,7 @@ const createMatch = async (users, user, whiskId) => {
   let femaleUsers = [];
   let maleUsers = [];
   console.log('users', users);
-  users.filter(u => {
+  users.filter((u) => {
     switch (u.gender) {
       case 'female':
         femaleUsers.push(u);
@@ -14,7 +14,8 @@ const createMatch = async (users, user, whiskId) => {
       case 'male':
         maleUsers.push(u);
         break;
-      default: // other - gender
+      default:
+        // other - gender
         break;
     }
   });
@@ -63,7 +64,7 @@ const createMatch = async (users, user, whiskId) => {
 
   //Add match object to DB
   const postMatchToDB = async () => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: newMatch,
@@ -76,7 +77,7 @@ const createMatch = async (users, user, whiskId) => {
   const postMatchToUser = async (user, matchId) => {
     const updatedMatches = [...user.matches, matchId];
 
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api/Match`;
     const myInit = {
       body: {

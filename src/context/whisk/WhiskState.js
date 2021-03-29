@@ -24,7 +24,7 @@ const WhiskState = (props) => {
 
   const scanWhisks = async () => {
     function getData() {
-      const apiName = 'WhiskPro';
+      const apiName = 'whiskamplify';
       const path = '/api/Whisk';
       const myInit = {
         headers: {},
@@ -53,7 +53,7 @@ const WhiskState = (props) => {
 
   const getWhisk = async (id) => {
     function getData() {
-      const apiName = 'WhiskPro';
+      const apiName = 'whiskamplify';
       const path = `/api/object/Whisk/${id}`;
       const myInit = {
         headers: {},

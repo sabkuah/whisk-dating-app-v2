@@ -17,6 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const userContext = useContext(UserContext);
+  const { loginUser, postUser } = userContext
   const history = useHistory();
 
   const handleChange = (event, newValue) => {
@@ -42,7 +43,7 @@ const Login = () => {
         });
         console.log('registered user', user);
         setErrorMsg('');
-        userContext.loginUser({
+        loginUser({
           email: email,
           username: user.user.username,
           sub: user.userSub,
@@ -57,15 +58,15 @@ const Login = () => {
           Type: 'User',
           gender: "",
           images: [],
-          interests: [],
+          interests: "",
           matches: [],
           phone: '',
-          preference: [],
+          preference: "",
           profileImage: '',
           profileQuestionnaire: [],
         };
         console.log('new user obj', newUser);
-        userContext.postUser(newUser);
+        postUser(newUser);
         history.push('/confirmAccount');
       } catch (err) {
         console.log(err);
@@ -82,7 +83,7 @@ const Login = () => {
           },
         });
         console.log('user', user.attributes);
-        userContext.loginUser(user.attributes);
+        loginUser(user.attributes);
         setErrorMsg('');
         history.push('/user');
       } catch (err) {
