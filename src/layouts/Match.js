@@ -85,18 +85,10 @@ export const Match = () => {
         </div>
         {/* if already accepted, do not render accept button*/}
         <form>
-          <Button
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
+          <Button onClick={() => setOpen(false)}>
             Decline
           </Button>
-          <Button
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
+          <Button onClick={() => setOpen(false)}>
             Accept
           </Button>
         </form>
@@ -108,7 +100,7 @@ export const Match = () => {
   else
     return (
       <Container id='match-page'>
-        <Grid container spacing={3} style={{ paddingBottom: '5%' }}>
+        <Grid container spacing={3} style={{marginTop: "1em"}}>
           <Grid xs={12} item id='match-avatars'>
             <h2>
               {matchDoc?.matchedUser?.fName} {matchDoc?.matchedUser?.lName}
@@ -125,6 +117,7 @@ export const Match = () => {
               </Button>
             </div>
           </Grid>
+
           <Grid xs={12} sm={4} item id='match-cards'>
             <IconButton aria-label='back'>
               <Link to='/user/whisks'>
@@ -141,6 +134,7 @@ export const Match = () => {
               <WhiskInfo whisk={matchDoc?.whisk} />
             </div>
           </Grid>
+
           <Grid xs={12} sm={8} item>
             <Messaging />
           </Grid>
