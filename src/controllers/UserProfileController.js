@@ -25,7 +25,7 @@ const UserProfileController = () => {
 
 
   const getData = () => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = '/api/Question';
     const myInit = { // OPTIONAL
       headers: {}, // OPTIONAL

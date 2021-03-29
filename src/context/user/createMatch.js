@@ -63,7 +63,7 @@ const createMatch = async (users, user, whiskId) => {
 
   //Add match object to DB
   const postMatchToDB = async () => {
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api`;
     const myInit = {
       body: newMatch,
@@ -76,7 +76,7 @@ const createMatch = async (users, user, whiskId) => {
   const postMatchToUser = async (user, matchId) => {
     const updatedMatches = [...user.matches, matchId];
 
-    const apiName = 'WhiskPro';
+    const apiName = 'whiskamplify';
     const path = `/api/Match`;
     const myInit = {
       body: {
