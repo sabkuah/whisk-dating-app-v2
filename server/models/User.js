@@ -1,6 +1,12 @@
+//==========================================
+// REQUIRE
+//==========================================
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//==========================================
+// SCHEMA
+//==========================================
 const userSchema = new Schema({
   fName: {
     type: String,
@@ -45,6 +51,10 @@ const userSchema = new Schema({
   profileQuestionnaire: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
   matches: [{ type: Schema.Types.ObjectId, ref: 'Match' }],
 });
+
+//==========================================
+// SET UP MODEL
+//==========================================
 
 const User = mongoose.model('User', userSchema);
 
