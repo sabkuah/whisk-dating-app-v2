@@ -12,7 +12,6 @@ const seederWhisks = require('./whiskSeeds');
 const seedDB = async () => {
   try {
     await Whisk.deleteMany({});
-    console.log('deleted!');
 
     // Create Whisks
     seederWhisks.forEach(async (w) => {
@@ -43,5 +42,6 @@ const seedDB = async () => {
 (async () => {
   connectDb();
   await seedDB();
+  console.log('Database seeded successfully!');
   mongoose.connection.close();
 })();
