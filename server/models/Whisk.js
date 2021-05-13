@@ -15,7 +15,8 @@ const whiskSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ['Outdoors', 'Adventure', 'Food'],
+    enum: ['outdoors', 'adventure', 'food'],
+    required: true,
   },
   city: {
     type: String,
