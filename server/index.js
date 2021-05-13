@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { connectDb } = require('./utils/db');
-const Whisk = require('./models/Whisk');
-const catchAsync = require('./utils/catchAsync');
+
+const whiskRoutes = require('./routes/whisks');
 
 const app = express();
 
@@ -16,32 +16,21 @@ app.get('/', (req, res) => {
 });
 
 //========================================
-//                Whisks
+//                Routers
 //========================================
-
-app.get(
-  '/api/whisks',
-  catchAsync(async (req, res) => {
-    const whisks = await Whisk.find({});
-    res.send(whisks);
-  })
-);
-
-app.get(
-  '/api/whisks/:id',
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const whisk = await Whisk.findById(id);
-    res.send(whisk);
-  })
-);
+app.use('/api/whisks', whiskRoutes);
 
 //========================================
-//                Users
+//            Error-Handling
 //========================================
+
+app.all('*', (req, res, next) => {
+  next(new ExpressError('Page not found', 404));
+});
 
 app.use((err, req, res, next) => {
-  res.send('Something went wrong!');
+  const { statusCode = 500, message = 'Something went wrong!' } = err;
+  res.status(statusCode).send(message);
 });
 
 app.listen(port, (req, res) => {
