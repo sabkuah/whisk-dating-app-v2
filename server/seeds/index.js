@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const { connectDb } = require('../utils/db');
 
-// === Models === //
 const Whisk = require('../models/Whisk');
 
-// === Seeder Files === //
 const seederWhisks = require('./whiskSeeds');
+
+//=============================
+//      Seeder Functions
+//=============================
 
 const seedDB = async () => {
   try {
@@ -33,6 +35,10 @@ const seedDB = async () => {
     console.log(`Error: ${e}`);
   }
 };
+
+//=============================
+//        Seed Database
+//=============================
 
 (async () => {
   connectDb();
