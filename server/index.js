@@ -5,6 +5,7 @@ const { connectDb } = require('./utils/db');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const whiskRoutes = require('./routes/whisks');
+const userRoutes = require('./routes/users');
 const User = require('./models/User');
 const ExpressError = require('./utils/ExpressError');
 
@@ -25,24 +26,7 @@ passport.deserializeUser(User.deserializeUser());
 //                Routers
 //========================================
 app.use('/api/whisks', whiskRoutes);
-
-app.get('/fakeUser', async (req, res) => {
-  const user = new User({
-    email: 'sab@sab.com',
-    fName: 'sabrina',
-    lName: 'kuah',
-    username: 'sab@sab.com',
-  });
-  const newUser = await User.register(user, 'chicken');
-  res.send(newUser);
-});
-
-app.post('/user/register', async (req, res) => {
-  const { email, username, password } = req.body;
-  const newUser = new User({ email, username });
-  const registeredUser = await User.register({ newUser, password });
-  console.log(registeredUser);
-});
+app.use('/api/user', userRoutes);
 
 //========================================
 //            Error-Handling

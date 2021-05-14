@@ -76,10 +76,15 @@ An "Experience First" approach to meeting new people. Experience ideas are liste
 - Users can receive notifications from the app
 - Users can select the dates they are available
 
-
-
 ##### SASS
+
 ```
 $ sass src/styles/App.scss src/styles/main.css
 $ sass --watch scss:css
 ```
+
+## Whisk V2
+
+- PassportJS for authentication -
+  - chose not to do authentication from scratch because it has been bullet tested
+  - from scratch - hash the passwords
