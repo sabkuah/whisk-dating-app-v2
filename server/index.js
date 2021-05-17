@@ -22,6 +22,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Parsing Middlewares
+app.use(express.urlencoded({ extended: true })); // application/x-www-form-urlencoded
+app.use(express.json()); // JSON
+
 //========================================
 //                Routers
 //========================================
